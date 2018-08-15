@@ -1,4 +1,4 @@
-package com.academic.as.demo.Models;
+package com.academic.as.demo.models;
 
 import javax.persistence.*;
 import java.util.Objects;

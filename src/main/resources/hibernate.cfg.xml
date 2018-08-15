@@ -6,12 +6,12 @@
   <session-factory>
     <property name="connection.url">jdbc:mariadb://localhost:3306/acadmic_as</property>
     <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-      <mapping class="com.academic.as.demo.Models.AdminEntity"/>
-      <mapping class="com.academic.as.demo.Models.AssistantEntity"/>
-      <mapping class="com.academic.as.demo.Models.DoctorEntity"/>
-      <mapping class="com.academic.as.demo.Models.StudentEntity"/>
-      <mapping class="com.academic.as.demo.Models.SupervisorEntity"/>
-      <mapping class="com.academic.as.demo.Models.UserEntity"/>
+      <mapping class="com.academic.as.demo.models.AdminEntity"/>
+      <mapping class="com.academic.as.demo.models.AssistantEntity"/>
+      <mapping class="com.academic.as.demo.models.DoctorEntity"/>
+      <mapping class="com.academic.as.demo.models.StudentEntity"/>
+      <mapping class="com.academic.as.demo.models.SupervisorEntity"/>
+      <mapping class="com.academic.as.demo.models.UserEntity"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

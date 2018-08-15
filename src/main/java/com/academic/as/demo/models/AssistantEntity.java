@@ -1,4 +1,4 @@
-package com.academic.as.demo.Models;
+package com.academic.as.demo.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "admin", schema = "acadmic_as", catalog = "")
-public class AdminEntity {
+@Table(name = "assistant", schema = "acadmic_as", catalog = "")
+public class AssistantEntity {
     private int id;
 
     @Id
@@ -25,7 +25,7 @@ public class AdminEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AdminEntity that = (AdminEntity) o;
+        AssistantEntity that = (AssistantEntity) o;
         return id == that.id;
     }
 
