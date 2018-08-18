@@ -1,30 +1,55 @@
 package com.academic.as.demo.services;
 
 import com.academic.as.demo.api.responses.RegisterResponse;
-import com.academic.as.demo.models.UserEntity;
-import com.academic.as.demo.repositories.RegisterRepository;
+import com.academic.as.demo.enums.UserRole;
+import com.academic.as.demo.models.Admin;
+import com.academic.as.demo.models.User;
+import com.academic.as.demo.repositories.AdminRepository;
+import com.academic.as.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 
 @Service
 public class RegisterService {
 
-    @Autowired
-    RegisterRepository registerRepository;
 
-    public RegisterResponse addUser(UserEntity user) {
+    @Autowired
+    AdminRepository adminRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+
+    public RegisterResponse addAdmin(Admin admin) {
         RegisterResponse response = new RegisterResponse();
-        if (registerRepository.existsById(user.getId())) {
-            response.setCode("400");
-            response.setMessage("something went wrong , this id is related to another record");
-        } else {
-            registerRepository.save(user);
+        response.setUserRole(UserRole.ADMIN);
+        try {
+            adminRepository.save(admin);
             response.setCode("200");
-            response.setMessage("Success");
+            response.setMessage("SUCCESS");
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
         }
         return response;
+    }
 
+
+    public RegisterResponse addUser(User user) {
+        RegisterResponse response = new RegisterResponse();
+        try {
+            user.setCreateDate(new Date());
+            userRepository.save(user);
+            response.setCode("200");
+            response.setMessage("SUCCESS");
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
 }
