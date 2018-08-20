@@ -1,14 +1,12 @@
 package com.academic.as.demo.controllers;
 
 import com.academic.as.demo.api.responses.RegisterResponse;
-import com.academic.as.demo.models.UserEntity;
+import com.academic.as.demo.models.*;
 import com.academic.as.demo.services.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("/register")
 @RestController
 public class RegisterController {
 
@@ -16,8 +14,34 @@ public class RegisterController {
     RegisterService registerService;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/register")
-    public RegisterResponse registerUser(@RequestBody UserEntity user) {
+    @PostMapping(value = "/admin")
+    public RegisterResponse registerAdmin(@RequestBody Admin admin) {
+        return registerService.addAdmin(admin);
+    }
+
+    @PostMapping(value = "/student")
+    public RegisterResponse registerStudent(@RequestBody Student student) {
+        return registerService.addStudent(student);
+    }
+
+    @PostMapping(value = "/supervisor")
+    public RegisterResponse registerSupervisor(@RequestBody Supervisor supervisor) {
+        return registerService.addSupervisor(supervisor);
+    }
+
+    @PostMapping(value = "/assistant")
+    public RegisterResponse registerAssistant(@RequestBody Assistant assistant) {
+        return registerService.addAssistant(assistant);
+    }
+
+    @PostMapping(value = "/professor")
+    public RegisterResponse registerProfessor(@RequestBody Professor professor) {
+        return registerService.addProfessor(professor);
+    }
+
+    @PostMapping(value = "/user")
+    public RegisterResponse registerUser(@RequestBody User user) {
         return registerService.addUser(user);
     }
 }
+
