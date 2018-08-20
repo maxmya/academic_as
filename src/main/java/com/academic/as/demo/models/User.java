@@ -1,18 +1,16 @@
 package com.academic.as.demo.models;
 
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
     @Id
-    @Nullable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
     @Column(name = "fname")
@@ -36,12 +34,11 @@ public class User {
     public User() {
     }
 
-    @Nullable
     public Integer getId() {
         return id;
     }
 
-    public void setId(@Nullable Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -4,10 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "admin")
-public class Admin implements Serializable {
-
-
+@Table(name = "assistant")
+public class Assistant implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +15,7 @@ public class Admin implements Serializable {
     @JoinColumn(name = "user_id")
     public User user;
 
-    public Admin() {
+    public Assistant() {
     }
 
     public Integer getId() {
