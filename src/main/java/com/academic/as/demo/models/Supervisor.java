@@ -4,20 +4,19 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "admin")
-public class Admin implements Serializable {
-
+@Table(name = "supervisor")
+public class Supervisor implements Serializable {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    public User user;
+    private User user;
 
-    public Admin() {
+    public Supervisor() {
+
     }
 
     public Integer getId() {

@@ -23,10 +23,12 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin` (
-  `id` int(11) DEFAULT NULL,
-  UNIQUE KEY `admin_admin_id_uindex` (`id`),
-  CONSTRAINT `admin___fk` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `admin_user_id_fk` (`user_id`),
+  CONSTRAINT `admin_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +37,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (0);
+INSERT INTO `admin` VALUES (1,1);
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,9 +49,11 @@ DROP TABLE IF EXISTS `assistant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `assistant` (
-  `assistant_id` int(11) DEFAULT NULL,
-  UNIQUE KEY `assistant_assistant_id_uindex` (`assistant_id`),
-  CONSTRAINT `assistant_user_id_fk` FOREIGN KEY (`assistant_id`) REFERENCES `user` (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assist_user_id_fk` (`user_id`),
+  CONSTRAINT `assist_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,54 +67,29 @@ LOCK TABLES `assistant` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `doctor`
+-- Table structure for table `professor`
 --
 
-DROP TABLE IF EXISTS `doctor`;
+DROP TABLE IF EXISTS `professor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `doctor` (
-  `doctor_id` int(11) DEFAULT NULL,
-  UNIQUE KEY `doctor_doctor_id_uindex` (`doctor_id`),
-  CONSTRAINT `doctor_user_id_fk` FOREIGN KEY (`doctor_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `professor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `prof_user_id_fk` (`user_id`),
+  CONSTRAINT `prof_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `doctor`
+-- Dumping data for table `professor`
 --
 
-LOCK TABLES `doctor` WRITE;
-/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `student`
---
-
-DROP TABLE IF EXISTS `student`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `student` (
-  `student_id` int(11) DEFAULT NULL,
-  `academic_level` int(11) DEFAULT NULL,
-  `academic_id` int(11) NOT NULL,
-  `gpa` int(11) NOT NULL,
-  PRIMARY KEY (`academic_id`),
-  UNIQUE KEY `student_academic_id_uindex` (`academic_id`),
-  UNIQUE KEY `student_student_id_uindex` (`student_id`),
-  CONSTRAINT `student_user_id_fk` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `student`
---
-
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+LOCK TABLES `professor` WRITE;
+/*!40000 ALTER TABLE `professor` DISABLE KEYS */;
+INSERT INTO `professor` VALUES (1,2);
+/*!40000 ALTER TABLE `professor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -121,9 +100,11 @@ DROP TABLE IF EXISTS `supervisor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `supervisor` (
-  `supervisor_id` int(11) DEFAULT NULL,
-  UNIQUE KEY `supervisor_supervisor_id_uindex` (`supervisor_id`),
-  CONSTRAINT `supervisor_user_id_fk` FOREIGN KEY (`supervisor_id`) REFERENCES `user` (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `supv_user_id_fk` (`user_id`),
+  CONSTRAINT `supv_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -144,16 +125,17 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `fname` varchar(200) NOT NULL,
-  `lname` varchar(200) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fname` varchar(50) DEFAULT NULL,
+  `lname` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `create_date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id_uindex` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `user_email_uindex` (`email`),
+  UNIQUE KEY `user_username_uindex` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +144,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'SUPER','USER','su','root','su@admin.com','2018-08-11');
+INSERT INTO `user` VALUES (1,'super','user','admin@as.com','root','su','2018-08-19'),(2,'ahmed','mohamed','ahmed@as.com','test','ahmed','2018-08-19');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -175,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-13 16:10:37
+-- Dump completed on 2018-08-19 20:22:56
