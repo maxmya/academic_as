@@ -39,21 +39,21 @@ public class RegisterService {
     public RegisterResponse addAdmin(Admin admin) {
         admin.getUser().setCreateDate(new Date());
         admin.getUser().setPassword(encoder.encode(admin.getUser().getPassword()));
-        return add(supervisorRepository, admin, UserRole.ADMIN);
+        return add(adminRepository, admin, UserRole.ADMIN);
     }
 
 
     public RegisterResponse addProfessor(Professor professor) {
         professor.getUser().setCreateDate(new Date());
         professor.getUser().setPassword(encoder.encode(professor.getUser().getPassword()));
-        return add(supervisorRepository, professor, UserRole.PROFESSOR);
+        return add(professorRepository, professor, UserRole.PROFESSOR);
     }
 
 
     public RegisterResponse addAssistant(Assistant assistant) {
         assistant.getUser().setCreateDate(new Date());
         assistant.getUser().setPassword(encoder.encode(assistant.getUser().getPassword()));
-        return add(supervisorRepository, assistant, UserRole.ASSISTANT);
+        return add(assistantRepository, assistant, UserRole.ASSISTANT);
     }
 
 
