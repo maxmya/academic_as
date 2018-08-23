@@ -69,6 +69,7 @@ public class RegisterService {
         return add(studentRepository, student, UserRole.STUDENT);
     }
 
+    // add only root user we can remove it
     public RegisterResponse addUser(User user) {
         user.setCreateDate(new Date());
         user.setPassword(encoder.encode(user.getPassword()));
