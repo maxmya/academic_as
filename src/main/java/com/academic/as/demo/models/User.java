@@ -89,4 +89,15 @@ public class User implements Serializable {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+    public void update(User user) {
+        if (user.getFirstName() != null)
+            this.firstName = user.getFirstName();
+        if (user.getLastName() != null)
+            this.lastName = user.getLastName();
+        if (user.getUsername() != null)
+            this.username = user.getUsername();
+        if (user.getEmail() != null)
+            this.email = user.getEmail();
+    }
 }

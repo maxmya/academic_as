@@ -1,7 +1,6 @@
 package com.academic.as.demo.services;
 
 
-
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.enums.UserRole;
 import com.academic.as.demo.models.*;
@@ -32,23 +31,24 @@ public class UpdateProfileService {
     @Autowired
     private SupervisorRepository supervisorRepository;
 
-    public BaseResponse updateAdmin(Admin admin,int id){
+    public BaseResponse updateAdmin(Admin admin, Integer id) {
         BaseResponse response = new BaseResponse();
         try {
-            Admin selectedAdmin = adminRepository.findById(id);
-            selectedAdmin = admin;
+            Admin selectedAdmin = adminRepository.getOne(id);
+            selectedAdmin.getUser().update(admin.getUser());
             adminRepository.save(selectedAdmin);
             response.setCode("200");
             response.setMessage("Success");
         } catch (Exception e) {
-        response.setCode("400");
-        response.setMessage(e.getMessage());
-    }
+            response.setCode("400");
+            e.printStackTrace();
+            response.setMessage(e.getMessage());
+        }
 
         return response;
     }
 
-    public BaseResponse updateStudent(Student student ,int id){
+    public BaseResponse updateStudent(Student student, int id) {
         BaseResponse response = new BaseResponse();
         try {
             Student selectedStudent = studentRepository.findById(id);
@@ -63,7 +63,8 @@ public class UpdateProfileService {
 
         return response;
     }
-    public BaseResponse updateSupervisor(Supervisor supervisor ,int id){
+
+    public BaseResponse updateSupervisor(Supervisor supervisor, int id) {
         BaseResponse response = new BaseResponse();
         try {
             Supervisor selectedSupervisor = supervisorRepository.findById(id);
@@ -78,7 +79,8 @@ public class UpdateProfileService {
 
         return response;
     }
-    public BaseResponse updateAssistant(Assistant assistant ,int id){
+
+    public BaseResponse updateAssistant(Assistant assistant, int id) {
         BaseResponse response = new BaseResponse();
         try {
             Assistant selectedAssistant = assistantRepository.findById(id);
@@ -94,7 +96,7 @@ public class UpdateProfileService {
         return response;
     }
 
-    public BaseResponse updateProfessor(Professor professor ,int id){
+    public BaseResponse updateProfessor(Professor professor, int id) {
         BaseResponse response = new BaseResponse();
         try {
             Professor selectedprofessor = professorRepository.findById(id);
@@ -110,7 +112,7 @@ public class UpdateProfileService {
         return response;
     }
 
-    public BaseResponse updateUser(User user ,int id){
+    public BaseResponse updateUser(User user, int id) {
         BaseResponse response = new BaseResponse();
         try {
             User selectedUser = userRepository.findById(id);
