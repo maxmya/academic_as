@@ -100,7 +100,7 @@ public class UpdateProfileService {
         BaseResponse response = new BaseResponse();
         try {
             Professor selectedprofessor = professorRepository.findById(id);
-            selectedprofessor = professor;
+            selectedprofessor.getUser().update(professor.getUser());
             professorRepository.save(selectedprofessor);
             response.setCode("200");
             response.setMessage("Success");
