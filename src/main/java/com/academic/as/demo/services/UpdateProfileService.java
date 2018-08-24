@@ -52,7 +52,7 @@ public class UpdateProfileService {
         BaseResponse response = new BaseResponse();
         try {
             Student selectedStudent = studentRepository.findById(id);
-            selectedStudent = student;
+            selectedStudent.getUser().update(student.getUser());
             studentRepository.save(selectedStudent);
             response.setCode("200");
             response.setMessage("Success");
@@ -68,7 +68,7 @@ public class UpdateProfileService {
         BaseResponse response = new BaseResponse();
         try {
             Supervisor selectedSupervisor = supervisorRepository.findById(id);
-            selectedSupervisor = supervisor;
+            selectedSupervisor.getUser().update(supervisor.getUser());
             supervisorRepository.save(selectedSupervisor);
             response.setCode("200");
             response.setMessage("Success");
@@ -84,7 +84,7 @@ public class UpdateProfileService {
         BaseResponse response = new BaseResponse();
         try {
             Assistant selectedAssistant = assistantRepository.findById(id);
-            selectedAssistant = assistant;
+            selectedAssistant.getUser().update(assistant.getUser());
             assistantRepository.save(selectedAssistant);
             response.setCode("200");
             response.setMessage("Success");
@@ -112,21 +112,21 @@ public class UpdateProfileService {
         return response;
     }
 
-    public BaseResponse updateUser(User user, int id) {
-        BaseResponse response = new BaseResponse();
-        try {
-            User selectedUser = userRepository.findById(id);
-            selectedUser = user;
-            userRepository.save(selectedUser);
-            response.setCode("200");
-            response.setMessage("Success");
-        } catch (Exception e) {
-            response.setCode("400");
-            response.setMessage(e.getMessage());
-        }
-
-        return response;
-    }
+//    public BaseResponse updateUser(User user, int id) {
+//        BaseResponse response = new BaseResponse();
+//        try {
+//            User selectedUser = userRepository.findById(id);
+//            selectedUser.get
+//            userRepository.save(selectedUser);
+//            response.setCode("200");
+//            response.setMessage("Success");
+//        } catch (Exception e) {
+//            response.setCode("400");
+//            response.setMessage(e.getMessage());
+//        }
+//
+//        return response;
+//    }
 }
 
 

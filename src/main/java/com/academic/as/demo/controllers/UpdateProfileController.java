@@ -22,29 +22,29 @@ public class UpdateProfileController {
     }
 
     @PutMapping(value = "/student/{id}")
-    public BaseResponse UpdateStudentProfile(@RequestBody Student student, int id) {
+    public BaseResponse UpdateStudentProfile(@RequestBody Student student, @PathVariable("id") Integer id) {
         return updateprofileService.updateStudent(student, id);
     }
 
     @PutMapping(value = "/supervisor/{id}")
-    public BaseResponse UpdateSupervisorProfile(@RequestBody Supervisor supervisor, int id) {
+    public BaseResponse UpdateSupervisorProfile(@RequestBody Supervisor supervisor,@PathVariable("id") Integer id) {
         return updateprofileService.updateSupervisor(supervisor, id);
     }
 
     @PutMapping(value = "/assistant/{id}")
-    public BaseResponse UpdateAssistantProfile(@RequestBody Assistant assistant, int id) {
+    public BaseResponse UpdateAssistantProfile(@RequestBody Assistant assistant,@PathVariable("id") Integer id) {
         return updateprofileService.updateAssistant(assistant, id);
     }
 
     @PutMapping(value = "/professor/{id}")
-    public BaseResponse UpdateProfessorProfile(@RequestBody Professor professor, int id) {
+    public BaseResponse UpdateProfessorProfile(@RequestBody Professor professor, @PathVariable("id") Integer id) {
         return updateprofileService.updateProfessor(professor, id);
     }
 
-    @PutMapping(value = "/user/{id}")
-    public BaseResponse UpdateUserProfile(@RequestBody User user, int id) {
-        return updateprofileService.updateUser(user, id);
-    }
+//    @PutMapping(value = "/user/{id}")
+//    public BaseResponse UpdateUserProfile(@RequestBody User user, int id) {
+//        return updateprofileService.updateUser(user, id);
+//    }
 
 
 }
