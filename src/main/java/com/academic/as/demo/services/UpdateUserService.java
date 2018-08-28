@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 public class UpdateUserService {
-    
+
     @Autowired
     private AdminRepository adminRepository;
     @Autowired
@@ -46,7 +46,7 @@ public class UpdateUserService {
         return response;
     }
 
-    public BaseResponse updateStudent(Student student, int id) {
+    public BaseResponse updateStudent(Student student, Integer id) {
         BaseResponse response = new BaseResponse();
         try {
             Student selectedStudent = studentRepository.getOne(id);
@@ -62,7 +62,7 @@ public class UpdateUserService {
         return response;
     }
 
-    public BaseResponse updateSupervisor(Supervisor supervisor, int id) {
+    public BaseResponse updateSupervisor(Supervisor supervisor, Integer id) {
         BaseResponse response = new BaseResponse();
         try {
             Supervisor selectedSupervisor = supervisorRepository.getOne(id);
@@ -78,7 +78,7 @@ public class UpdateUserService {
         return response;
     }
 
-    public BaseResponse updateAssistant(Assistant assistant, int id) {
+    public BaseResponse updateAssistant(Assistant assistant, Integer id) {
         BaseResponse response = new BaseResponse();
         try {
             Assistant selectedAssistant = assistantRepository.getOne(id);
@@ -94,7 +94,7 @@ public class UpdateUserService {
         return response;
     }
 
-    public BaseResponse updateProfessor(Professor professor, int id) {
+    public BaseResponse updateProfessor(Professor professor, Integer id) {
         BaseResponse response = new BaseResponse();
         try {
             Professor selectedProfessor = professorRepository.getOne(id);
@@ -110,7 +110,7 @@ public class UpdateUserService {
         return response;
     }
 
-    public BaseResponse updateUser(User user, int id) {
+    public BaseResponse updateUser(User user, Integer id) {
         BaseResponse response = new BaseResponse();
         try {
             User selectedUser = userRepository.getOne(id);
