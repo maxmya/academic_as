@@ -15,9 +15,8 @@ import java.util.Date;
 import java.util.Optional;
 
 @Service
-public class UpdateProfileService {
-
-
+public class UpdateUserService {
+    
     @Autowired
     private AdminRepository adminRepository;
     @Autowired
@@ -41,7 +40,6 @@ public class UpdateProfileService {
             response.setMessage("Success");
         } catch (Exception e) {
             response.setCode("400");
-            e.printStackTrace();
             response.setMessage(e.getMessage());
         }
 
@@ -51,7 +49,7 @@ public class UpdateProfileService {
     public BaseResponse updateStudent(Student student, int id) {
         BaseResponse response = new BaseResponse();
         try {
-            Student selectedStudent = studentRepository.findById(id);
+            Student selectedStudent = studentRepository.getOne(id);
             selectedStudent.getUser().update(student.getUser());
             studentRepository.save(selectedStudent);
             response.setCode("200");
@@ -67,7 +65,7 @@ public class UpdateProfileService {
     public BaseResponse updateSupervisor(Supervisor supervisor, int id) {
         BaseResponse response = new BaseResponse();
         try {
-            Supervisor selectedSupervisor = supervisorRepository.findById(id);
+            Supervisor selectedSupervisor = supervisorRepository.getOne(id);
             selectedSupervisor.getUser().update(supervisor.getUser());
             supervisorRepository.save(selectedSupervisor);
             response.setCode("200");
@@ -83,7 +81,7 @@ public class UpdateProfileService {
     public BaseResponse updateAssistant(Assistant assistant, int id) {
         BaseResponse response = new BaseResponse();
         try {
-            Assistant selectedAssistant = assistantRepository.findById(id);
+            Assistant selectedAssistant = assistantRepository.getOne(id);
             selectedAssistant.getUser().update(assistant.getUser());
             assistantRepository.save(selectedAssistant);
             response.setCode("200");
@@ -99,9 +97,9 @@ public class UpdateProfileService {
     public BaseResponse updateProfessor(Professor professor, int id) {
         BaseResponse response = new BaseResponse();
         try {
-            Professor selectedprofessor = professorRepository.findById(id);
-            selectedprofessor.getUser().update(professor.getUser());
-            professorRepository.save(selectedprofessor);
+            Professor selectedProfessor = professorRepository.getOne(id);
+            selectedProfessor.getUser().update(professor.getUser());
+            professorRepository.save(selectedProfessor);
             response.setCode("200");
             response.setMessage("Success");
         } catch (Exception e) {
@@ -112,21 +110,22 @@ public class UpdateProfileService {
         return response;
     }
 
-//    public BaseResponse updateUser(User user, int id) {
-//        BaseResponse response = new BaseResponse();
-//        try {
-//            User selectedUser = userRepository.findById(id);
-//            selectedUser.get
-//            userRepository.save(selectedUser);
-//            response.setCode("200");
-//            response.setMessage("Success");
-//        } catch (Exception e) {
-//            response.setCode("400");
-//            response.setMessage(e.getMessage());
-//        }
-//
-//        return response;
-//    }
+    public BaseResponse updateUser(User user, int id) {
+        BaseResponse response = new BaseResponse();
+        try {
+            User selectedUser = userRepository.getOne(id);
+            selectedUser.update(user);
+            userRepository.save(selectedUser);
+            response.setCode("200");
+            response.setMessage("Success");
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+
 }
 
 
