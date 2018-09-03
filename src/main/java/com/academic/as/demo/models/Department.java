@@ -28,6 +28,13 @@ public class Department implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "speciality_id"))
     private List<Specialization> specializations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "department",
+            cascade = {CascadeType.MERGE,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH,
+                    CascadeType.DETACH})
+    private List<Course> courses = new ArrayList<>();
+
     public Department() {
     }
 
