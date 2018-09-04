@@ -6,6 +6,7 @@ import com.academic.as.demo.models.*;
 import com.academic.as.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -17,49 +18,61 @@ public class RegisterService {
 
 
     @Autowired
-    AdminRepository adminRepository;
+    private AdminRepository adminRepository;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    AssistantRepository assistantRepository;
+    private AssistantRepository assistantRepository;
     @Autowired
-    ProfessorRepository professorRepository;
+    private ProfessorRepository professorRepository;
     @Autowired
-    StudentRepository studentRepository;
+    private StudentRepository studentRepository;
     @Autowired
-    SupervisorRepository supervisorRepository;
+    private SupervisorRepository supervisorRepository;
 
+    private BCryptPasswordEncoder encoder;
+
+    public RegisterService(BCryptPasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
 
     public RegisterResponse addAdmin(Admin admin) {
         admin.getUser().setCreateDate(new Date());
-        return add(supervisorRepository, admin, UserRole.ADMIN);
+        admin.getUser().setPassword(encoder.encode(admin.getUser().getPassword()));
+        return add(adminRepository, admin, UserRole.ADMIN);
     }
 
 
     public RegisterResponse addProfessor(Professor professor) {
         professor.getUser().setCreateDate(new Date());
-        return add(supervisorRepository, professor, UserRole.PROFESSOR);
+        professor.getUser().setPassword(encoder.encode(professor.getUser().getPassword()));
+        return add(professorRepository, professor, UserRole.PROFESSOR);
     }
 
 
     public RegisterResponse addAssistant(Assistant assistant) {
         assistant.getUser().setCreateDate(new Date());
-        return add(supervisorRepository, assistant, UserRole.ASSISTANT);
+        assistant.getUser().setPassword(encoder.encode(assistant.getUser().getPassword()));
+        return add(assistantRepository, assistant, UserRole.ASSISTANT);
     }
 
 
     public RegisterResponse addSupervisor(Supervisor supervisor) {
         supervisor.getUser().setCreateDate(new Date());
+        supervisor.getUser().setPassword(encoder.encode(supervisor.getUser().getPassword()));
         return add(supervisorRepository, supervisor, UserRole.SUPERVISOR);
     }
 
     public RegisterResponse addStudent(Student student) {
         student.getUser().setCreateDate(new Date());
+        student.getUser().setPassword(encoder.encode(student.getUser().getPassword()));
         return add(studentRepository, student, UserRole.STUDENT);
     }
 
+    // add only root user we can remove it
     public RegisterResponse addUser(User user) {
         user.setCreateDate(new Date());
+        user.setPassword(encoder.encode(user.getPassword()));
         return add(userRepository, user, UserRole.SYSTEM);
     }
 
