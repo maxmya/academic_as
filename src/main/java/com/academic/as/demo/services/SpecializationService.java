@@ -2,6 +2,8 @@ package com.academic.as.demo.services;
 
 import com.academic.as.demo.api.requests.SpecializationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.DepartmentResponse;
+import com.academic.as.demo.api.responses.SpecializationResponse;
 import com.academic.as.demo.models.Department;
 import com.academic.as.demo.models.Specialization;
 import com.academic.as.demo.repositories.DepartmentRepository;
@@ -44,13 +46,41 @@ public class SpecializationService {
                     response.setMessage("ERROR , department " + dps.getDepartmentName() + " is not created");
                     return response;
                 }
-                List<Specialization> sp = current.getSpecSializations();
+                List<Specialization> sp = current.getSpecializations();
                 sp.add(specialization.getSpecialization());
                 current.setSpecializations(sp);
             }
             specializationRepository.save(newSp);
             response.setCode("200");
             response.setMessage("Success");
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+    
+    public DepartmentResponse getAllDepartments() {
+        DepartmentResponse response = new DepartmentResponse();
+        try {
+            List<Department> departments = departmentRepository.findAll();
+            response.setCode("200");
+            response.setMessage("SUCCESS");
+            response.setData(departments);
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public SpecializationResponse getAllSpecializations(){
+        SpecializationResponse response = new SpecializationResponse();
+        try {
+            List<Specialization> Specializations = specializationRepository.findAll();
+            response.setCode("200");
+            response.setMessage("SUCCESS");
+            response.setData(Specializations);
         } catch (Exception e) {
             response.setCode("400");
             response.setMessage(e.getMessage());

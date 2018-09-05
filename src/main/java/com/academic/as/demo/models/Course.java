@@ -1,9 +1,11 @@
 package com.academic.as.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.net.URL;
 
 @Entity
 @Table(name = "course")
@@ -33,6 +35,7 @@ public class Course implements Serializable {
     @Column(name = "training_hrs")
     private Float trainingHours;
 
+    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH,
@@ -41,6 +44,7 @@ public class Course implements Serializable {
     Department department;
 
     public Course() {
+
     }
 
     public Integer getId() {
