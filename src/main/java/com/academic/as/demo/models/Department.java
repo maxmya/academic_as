@@ -21,7 +21,7 @@ public class Department implements Serializable {
     @Column(name = "depname")
     private String departmentName;
 
-    @JsonManagedReference
+   // @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -31,7 +31,7 @@ public class Department implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "speciality_id"))
     private List<Specialization> specializations = new ArrayList<>();
 
-    @JsonBackReference
+    //@JsonBackReference
     @OneToMany(mappedBy = "department",
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,

@@ -1,9 +1,12 @@
 package com.academic.as.demo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "hall")
@@ -27,7 +30,28 @@ public class Hall {
     @Column(name = "capacity")
     private Integer capacity;
 
-    public Hall(){}
+    @JsonBackReference
+    @OneToMany(mappedBy = "hall",
+            cascade = {CascadeType.MERGE,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH,
+                    CascadeType.DETACH})
+    private List<CourseInstance> courseInstances = new ArrayList<>();
+
+    public void addCourse(CourseInstance courseInstance) {
+        courseInstances.add(courseInstance);
+    }
+
+    public List<CourseInstance> getCourseInstances() {
+        return courseInstances;
+    }
+
+    public void setCourseInstances(List<CourseInstance> courseInstances) {
+        this.courseInstances = courseInstances;
+    }
+
+    public Hall() {
+    }
 
     public Integer getId() {
         return id;

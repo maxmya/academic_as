@@ -33,6 +33,28 @@ public class Specialization implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "department_id"))
     private List<Department> departments = new ArrayList<>();
 
+
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "specialization",
+            cascade = {CascadeType.MERGE,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH,
+                    CascadeType.DETACH})
+    private List<CourseInstance> courseInstances = new ArrayList<>();
+
+    public void addCourse(CourseInstance courseInstance) {
+        courseInstances.add(courseInstance);
+    }
+
+    public List<CourseInstance> getCourseInstances() {
+        return courseInstances;
+    }
+
+    public void setCourseInstances(List<CourseInstance> courseInstances) {
+        this.courseInstances = courseInstances;
+    }
+
     public Specialization() {
     }
 
