@@ -13,19 +13,19 @@ public class Hall {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "latitude")
-    Float latitude;
+    private Float latitude;
 
     @Column(name = "longitude")
-    Float longitude;
+    private Float longitude;
 
     @Column(name = "capacity")
-    Integer capacity;
+    private Integer capacity;
 
     public Hall(){}
 
