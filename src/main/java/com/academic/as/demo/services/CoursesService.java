@@ -1,6 +1,7 @@
 package com.academic.as.demo.services;
 
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
+import com.academic.as.demo.api.requests.CourseRegistrationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.*;
@@ -34,6 +35,9 @@ public class CoursesService {
 
     @Autowired
     private InstructorRepository instructorRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     public BaseResponse addCourseByDepName(Course course) {
         BaseResponse response = new BaseResponse();
@@ -83,11 +87,16 @@ public class CoursesService {
             for (int instructorId : requestBody.getInstructorsIds()) {
                 instructors.add(instructorRepository.getOne(instructorId));
             }
+            List<Student> students = new ArrayList<>();
+            for (int studentId : requestBody.getStudentsIds()) {
+                students.add(studentRepository.getOne(studentId));
+            }
             newCourseInstance.setHall(courseHall);
             newCourseInstance.setCourse(instanceImage);
             newCourseInstance.setSpecialization(specialization);
             newCourseInstance.setInstructors(instructors);
             newCourseInstance.setSemester(courseSemester);
+            newCourseInstance.setStudents(students);
             courseHall.addCourse(newCourseInstance);
             instanceImage.addCourse(newCourseInstance);
             specialization.addCourse(newCourseInstance);
@@ -102,4 +111,22 @@ public class CoursesService {
         return response;
     }
 
+    public BaseResponse registerCoursesToStudent(CourseRegistrationRequest request) {
+        BaseResponse response = new BaseResponse();
+        try {
+            Student selectedStudent = studentRepository.getOne(request.getStudentId());
+            for (int instanceId : request.getCourseInstancesIds()) {
+                CourseInstance instance = courseInstanceRepository.getOne(instanceId);
+                selectedStudent.registerCourse(instance);
+            }
+            studentRepository.save(selectedStudent);
+            response.setCode("200");
+            response.setMessage("SUCCESS");
+        } catch (Exception e) {
+            response.setCode("400");
+            e.printStackTrace();
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
 }

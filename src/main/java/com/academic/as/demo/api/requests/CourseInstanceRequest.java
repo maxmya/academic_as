@@ -15,6 +15,7 @@ public class CourseInstanceRequest {
     private Integer specializationId;
     private Integer semesterId;
     private List<Integer> instructorsIds;
+    private List<Integer> studentsIds;
 
     CourseInstanceRequest() {
     }
@@ -82,5 +83,14 @@ public class CourseInstanceRequest {
     public void setInstructorsIds(List<Integer> instructorsIds) {
         this.instructorsIds = instructorsIds;
     }
+
+    public List<Integer> getStudentsIds() {
+        return studentsIds;
+    }
+
+    public void setStudentsIds(List<Integer> studentsIds) {
+        this.studentsIds = studentsIds;
+    }
 }
+
 

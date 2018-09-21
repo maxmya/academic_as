@@ -2,6 +2,7 @@ package com.academic.as.demo.controllers;
 
 
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
+import com.academic.as.demo.api.requests.CourseRegistrationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.Course;
@@ -30,6 +31,11 @@ public class CoursesController {
     @PostMapping(value = "/add/instance")
     public BaseResponse addCourseInstance(@RequestBody CourseInstanceRequest request) {
         return coursesService.addCourseInstance(request);
+    }
+
+    @PutMapping(value = "/register")
+    public BaseResponse registerCourses(@RequestBody CourseRegistrationRequest request) {
+        return coursesService.registerCoursesToStudent(request);
     }
 
 }

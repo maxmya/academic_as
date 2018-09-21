@@ -28,7 +28,6 @@ public class CourseInstance {
     private String type;
 
 
-
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -78,6 +77,14 @@ public class CourseInstance {
             inverseJoinColumns = @JoinColumn(name = "instructor_id"))
     private List<Instructor> instructors = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+    })
+    @JoinTable(name = "course_registration",
+            joinColumns = @JoinColumn(name = "course_instance_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    private List<Student> students = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -149,5 +156,13 @@ public class CourseInstance {
 
     public void setInstructors(List<Instructor> instructors) {
         this.instructors = instructors;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

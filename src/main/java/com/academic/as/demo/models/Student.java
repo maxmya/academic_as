@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -18,6 +20,15 @@ public class Student implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     public User user;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+    })
+    @JoinTable(name = "course_registration",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_instance_id"))
+    private List<CourseInstance> courseInstances = new ArrayList<>();
 
     public Student() {
 
@@ -37,5 +48,9 @@ public class Student implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void registerCourse(CourseInstance courseInstance) {
+        courseInstances.add(courseInstance);
     }
 }
