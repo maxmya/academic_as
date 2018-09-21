@@ -25,7 +25,7 @@ public class CourseInstance {
     private Time endTime;
 
     @Column(name = "type")
-    private CourseInstanceType type;
+    private String type;
 
 
 
@@ -103,11 +103,11 @@ public class CourseInstance {
         this.endTime = endTime;
     }
 
-    public CourseInstanceType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(CourseInstanceType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

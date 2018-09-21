@@ -9,7 +9,7 @@ public class CourseInstanceRequest {
 
     private Time startTime;
     private Time endTime;
-    private CourseInstanceType type;
+    private String type;
     private Integer courseId;
     private Integer hallId;
     private Integer specializationId;
@@ -35,11 +35,11 @@ public class CourseInstanceRequest {
         this.endTime = endTime;
     }
 
-    public CourseInstanceType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(CourseInstanceType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
