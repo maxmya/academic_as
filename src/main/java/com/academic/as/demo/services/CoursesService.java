@@ -37,7 +37,7 @@ public class CoursesService {
 
     public BaseResponse addCourseByDepName(Course course) {
         BaseResponse response = new BaseResponse();
-//        try {
+        try {
             Department dp = departmentRepository.
                     findDepartmentByDepartmentName(course.getDepartment().getDepartmentName());
             List<Course> currentCourses = dp.getCourses();
@@ -45,12 +45,12 @@ public class CoursesService {
             dp.setCourses(currentCourses);
             course.setDepartment(dp);
             courseRepository.save(course);
-          //  response.setCode("200");
-           // response.setMessage("SUCCESS");
-//        } catch (Exception e) {
-//            response.setCode("400");
-//            response.setMessage(e.getMessage());
-//        }
+            response.setCode("200");
+            response.setMessage("SUCCESS");
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
         return response;
     }
 
