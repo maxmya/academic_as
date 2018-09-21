@@ -1,6 +1,6 @@
 package com.academic.as.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -24,7 +24,7 @@ public class Instructor {
     @JoinColumn(name = "user_id")
     public User user;
 
-   // @JsonBackReference
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,

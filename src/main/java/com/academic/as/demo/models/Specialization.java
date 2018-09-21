@@ -1,8 +1,8 @@
 package com.academic.as.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,7 +23,7 @@ public class Specialization implements Serializable {
     private String specialityName;
 
 
-    @JsonBackReference
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -35,7 +35,7 @@ public class Specialization implements Serializable {
 
 
 
-    @JsonBackReference
+
     @OneToMany(mappedBy = "specialization",
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,

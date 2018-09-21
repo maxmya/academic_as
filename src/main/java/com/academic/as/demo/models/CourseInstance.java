@@ -1,7 +1,6 @@
 package com.academic.as.demo.models;
 
 import com.academic.as.demo.enums.CourseInstanceType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -29,7 +28,7 @@ public class CourseInstance {
     private CourseInstanceType type;
 
 
-    //@JsonBackReference
+
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -39,7 +38,7 @@ public class CourseInstance {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    //@JsonBackReference
+
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -49,7 +48,7 @@ public class CourseInstance {
     @JoinColumn(name = "hall_id")
     private Hall hall;
 
-    //@JsonBackReference
+
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -59,7 +58,7 @@ public class CourseInstance {
     @JoinColumn(name = "specialization_id")
     private Specialization specialization;
 
-   // @JsonBackReference
+
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -69,7 +68,7 @@ public class CourseInstance {
     @JoinColumn(name = "semester_id")
     private Semester semester;
 
-   // @JsonBackReference
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,

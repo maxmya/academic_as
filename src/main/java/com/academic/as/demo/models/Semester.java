@@ -1,7 +1,7 @@
 package com.academic.as.demo.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -38,7 +38,8 @@ public class Semester {
     public void setId(Integer id) {
         this.id = id;
     }
-    @JsonBackReference
+
+
     @OneToMany(mappedBy = "semester",
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,
