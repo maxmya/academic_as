@@ -1,6 +1,7 @@
 package com.academic.as.demo.models;
 
 import com.academic.as.demo.enums.CourseInstanceType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -27,7 +28,7 @@ public class CourseInstance {
     @Column(name = "type")
     private String type;
 
-
+    @JsonBackReference(value = "course")
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -37,7 +38,7 @@ public class CourseInstance {
     @JoinColumn(name = "course_id")
     private Course course;
 
-
+    @JsonBackReference(value = "hall")
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -47,7 +48,7 @@ public class CourseInstance {
     @JoinColumn(name = "hall_id")
     private Hall hall;
 
-
+    @JsonBackReference(value = "specialization")
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -57,7 +58,7 @@ public class CourseInstance {
     @JoinColumn(name = "specialization_id")
     private Specialization specialization;
 
-
+    @JsonBackReference(value = "semester")
     @ManyToOne(cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -67,7 +68,7 @@ public class CourseInstance {
     @JoinColumn(name = "semester_id")
     private Semester semester;
 
-
+    @JsonBackReference(value = "instructors")
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -77,6 +78,7 @@ public class CourseInstance {
             inverseJoinColumns = @JoinColumn(name = "instructor_id"))
     private List<Instructor> instructors = new ArrayList<>();
 
+    @JsonBackReference(value = "students")
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,

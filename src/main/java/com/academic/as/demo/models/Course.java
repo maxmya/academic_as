@@ -1,6 +1,7 @@
 package com.academic.as.demo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -31,7 +32,7 @@ public class Course implements Serializable {
     private Integer awardedPoints;
 
 
-
+    @JsonBackReference(value = "department")
     @ManyToOne(cascade = {CascadeType.MERGE,
             CascadeType.PERSIST,
             CascadeType.REFRESH,
@@ -40,7 +41,7 @@ public class Course implements Serializable {
     Department department;
 
 
-
+    @JsonBackReference(value = "courseInstances")
     @OneToMany(mappedBy = "course",
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,

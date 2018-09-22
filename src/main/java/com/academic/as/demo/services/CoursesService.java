@@ -3,6 +3,7 @@ package com.academic.as.demo.services;
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
 import com.academic.as.demo.api.requests.CourseRegistrationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.CourseInstanceResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.*;
 import com.academic.as.demo.repositories.*;
@@ -53,6 +54,7 @@ public class CoursesService {
             response.setMessage("SUCCESS");
         } catch (Exception e) {
             response.setCode("400");
+            e.printStackTrace();
             response.setMessage(e.getMessage());
         }
         return response;
@@ -106,6 +108,7 @@ public class CoursesService {
             response.setMessage("SUCCESSES");
         } catch (Exception e) {
             response.setCode("400");
+            e.printStackTrace();
             response.setMessage(e.getMessage());
         }
         return response;
@@ -129,4 +132,21 @@ public class CoursesService {
         }
         return response;
     }
+
+    public CourseInstanceResponse getRegisteredCourses(Integer studentId, Integer semesterId) {
+        CourseInstanceResponse response = new CourseInstanceResponse();
+
+        Student selectedStudent = studentRepository.getOne(studentId);
+        ArrayList<CourseInstance> registeredCourseInstances = new ArrayList<>();
+        for (CourseInstance course : selectedStudent.getCourseInstances()) {
+            if (course.getSemester().getId().equals(semesterId))
+                registeredCourseInstances.add(course);
+        }
+        response.setData(registeredCourseInstances);
+        response.setCode("200");
+        response.setMessage("SUCCESS");
+
+        return response;
+    }
+
 }

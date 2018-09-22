@@ -4,6 +4,7 @@ package com.academic.as.demo.controllers;
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
 import com.academic.as.demo.api.requests.CourseRegistrationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.CourseInstanceResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.services.CoursesService;
@@ -36,6 +37,11 @@ public class CoursesController {
     @PutMapping(value = "/register")
     public BaseResponse registerCourses(@RequestBody CourseRegistrationRequest request) {
         return coursesService.registerCoursesToStudent(request);
+    }
+
+    @GetMapping(value = "/semester/{semester}/registered/{student}")
+    public CourseInstanceResponse getStudentRegisteredCourses(@PathVariable("semester") Integer semester, @PathVariable("student") Integer student) {
+        return coursesService.getRegisteredCourses(student, semester);
     }
 
 }

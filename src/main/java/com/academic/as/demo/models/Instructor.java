@@ -1,6 +1,7 @@
 package com.academic.as.demo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -20,11 +21,12 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     public User user;
 
-
+    @JsonBackReference(value = "courseInstances")
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,

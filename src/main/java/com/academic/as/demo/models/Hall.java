@@ -2,6 +2,7 @@ package com.academic.as.demo.models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class Hall {
     @Column(name = "capacity")
     private Integer capacity;
 
-
+    @JsonBackReference(value = "courseInstances")
     @OneToMany(mappedBy = "hall",
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,

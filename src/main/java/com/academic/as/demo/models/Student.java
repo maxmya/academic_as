@@ -1,5 +1,6 @@
 package com.academic.as.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -17,10 +18,12 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     public User user;
 
+    @JsonBackReference(value = "courseInstances")
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -52,5 +55,13 @@ public class Student implements Serializable {
 
     public void registerCourse(CourseInstance courseInstance) {
         courseInstances.add(courseInstance);
+    }
+
+    public List<CourseInstance> getCourseInstances() {
+        return courseInstances;
+    }
+
+    public void setCourseInstances(List<CourseInstance> courseInstances) {
+        this.courseInstances = courseInstances;
     }
 }
