@@ -1,42 +1,38 @@
 package com.academic.as.demo.models;
 
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "specialization")
+@Table(name = "hall")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Specialization implements Serializable {
+public class Hall {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "specialityname")
-    private String specialityName;
+    @Column(name = "name")
+    private String name;
 
+    @Column(name = "latitude")
+    private Float latitude;
 
-    @JsonBackReference(value = "departments")
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-    })
-    @JoinTable(name = "department_speciality",
-            joinColumns = @JoinColumn(name = "speciality_id"),
-            inverseJoinColumns = @JoinColumn(name = "department_id"))
-    private List<Department> departments = new ArrayList<>();
+    @Column(name = "longitude")
+    private Float longitude;
 
+    @Column(name = "capacity")
+    private Integer capacity;
 
     @JsonBackReference(value = "courseInstances")
-    @OneToMany(mappedBy = "specialization",
+    @OneToMany(mappedBy = "hall",
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,
                     CascadeType.REFRESH,
@@ -55,7 +51,7 @@ public class Specialization implements Serializable {
         this.courseInstances = courseInstances;
     }
 
-    public Specialization() {
+    public Hall() {
     }
 
     public Integer getId() {
@@ -66,19 +62,35 @@ public class Specialization implements Serializable {
         this.id = id;
     }
 
-    public String getSpecialityName() {
-        return specialityName;
+    public String getName() {
+        return name;
     }
 
-    public void setSpecialityName(String specialityName) {
-        this.specialityName = specialityName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Department> getDepartments() {
-        return departments;
+    public Float getLatitude() {
+        return latitude;
     }
 
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 }

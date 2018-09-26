@@ -9,8 +9,6 @@ import java.io.Serializable;
 @Table(name = "admin")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Admin implements Serializable {
-
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

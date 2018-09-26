@@ -8,33 +8,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "professor")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Professor implements Serializable {
+public class Professor extends Instructor implements Serializable {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    public User user;
-
-    public Professor() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

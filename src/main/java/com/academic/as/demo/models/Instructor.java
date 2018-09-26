@@ -1,17 +1,20 @@
 package com.academic.as.demo.models;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "student")
+@Table(name = "instructor")
+@Inheritance(
+        strategy = InheritanceType.JOINED
+)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Student implements Serializable {
+public class Instructor {
 
     @Id
     @Column(name = "id")
@@ -28,13 +31,12 @@ public class Student implements Serializable {
             CascadeType.PERSIST,
             CascadeType.MERGE,
     })
-    @JoinTable(name = "course_registration",
-            joinColumns = @JoinColumn(name = "student_id"),
+    @JoinTable(name = "course_responsibility",
+            joinColumns = @JoinColumn(name = "instructor_id"),
             inverseJoinColumns = @JoinColumn(name = "course_instance_id"))
     private List<CourseInstance> courseInstances = new ArrayList<>();
 
-    public Student() {
-
+    public Instructor() {
     }
 
     public Integer getId() {
@@ -53,15 +55,4 @@ public class Student implements Serializable {
         this.user = user;
     }
 
-    public void registerCourse(CourseInstance courseInstance) {
-        courseInstances.add(courseInstance);
-    }
-
-    public List<CourseInstance> getCourseInstances() {
-        return courseInstances;
-    }
-
-    public void setCourseInstances(List<CourseInstance> courseInstances) {
-        this.courseInstances = courseInstances;
-    }
 }
