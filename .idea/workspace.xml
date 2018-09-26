@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af0cb9a8-9a13-4ae0-9d98-5c7298316a55" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,30 +26,7 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="acadmic_as@localhost" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="acadmic_as@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="acadmic_as@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="acadmic_as: schema" type="c314c289:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="acadmic_as@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="acadmic_as: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="course_dependencies: table" type="98d5ac3d:MysqlImplModel$Table" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -119,7 +96,7 @@
           <entry key="supervisor" value="8" />
           <entry key="table_name_admin_id_uindex" value="1" />
           <entry key="user" value="49" />
-          <entry key="xml" value="12" />
+          <entry key="xml" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -132,7 +109,7 @@
           <entry key="SQL" value="3" />
           <entry key="Scratch" value="28" />
           <entry key="UML" value="1" />
-          <entry key="XML" value="12" />
+          <entry key="XML" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -140,20 +117,20 @@
           <entry key="cell" value="330" />
           <entry key="dummy" value="64" />
           <entry key="java" value="16342" />
-          <entry key="properties" value="16" />
+          <entry key="properties" value="17" />
           <entry key="sql" value="383" />
           <entry key="txt" value="340" />
-          <entry key="xml" value="17" />
+          <entry key="xml" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="16342" />
           <entry key="PLAIN_TEXT" value="404" />
-          <entry key="Properties" value="16" />
+          <entry key="Properties" value="17" />
           <entry key="SQL" value="347" />
           <entry key="Scratch" value="366" />
-          <entry key="XML" value="17" />
+          <entry key="XML" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -167,11 +144,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            <state relative-caret-position="96">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="475">
+              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
         </entry>
@@ -214,7 +200,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/repositories/DepartmentRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/repositories/AdminRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/services/UpdateProfileService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/controllers/UpdateProfileController.java" />
@@ -265,6 +250,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/services/CoursesService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/models/Course.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -318,7 +304,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="PackagesPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <hideEmptyPackages ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
@@ -384,7 +370,7 @@
     <property name="SearchEverywhereHistoryKey" value="Instance&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;stu&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Student.java&#10;instr&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Instructor.java&#10;courseinst&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;course insta&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;course&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Course.java&#10;admin&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Admin.java&#10;stude&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Student.java&#10;spec&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Specialization.java&#10;Department&#9;PSI&#9;JAVA://com.academic.as.demo.models.Department&#10;register&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/services/RegisterService.java&#10;user&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/User.java&#10;use&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/User.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537996331688" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537997031548" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MariaDB" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/academic/as/demo" />
@@ -491,12 +477,12 @@
       <workItem from="1537645751032" duration="5434000" />
       <workItem from="1537714205242" duration="1392000" />
       <workItem from="1537821484889" duration="983000" />
-      <workItem from="1537995600114" duration="507000" />
+      <workItem from="1537995600114" duration="1419000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135611000" />
+    <option name="totallyTimeSpent" value="136523000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -511,7 +497,7 @@
     <frame x="-2" y="0" width="1370" height="746" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4909091" weight="0.3542296" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4909091" visible="true" weight="0.3542296" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -541,7 +527,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.19486405" />
+      <window_info anchor="right" id="Database" order="6" weight="0.19486405" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Bean Validation" order="9" weight="0.32875606" />
@@ -608,7 +594,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://4fa74f52-7a7e-4da8-a156-cc178e99e0cc/schema/acadmic_as/table/course_regestration" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/academic/as/demo/enums/CourseInstanceType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -957,8 +942,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        <state relative-caret-position="96">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>
