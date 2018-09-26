@@ -120,7 +120,7 @@
           <entry key="properties" value="17" />
           <entry key="sql" value="383" />
           <entry key="txt" value="340" />
-          <entry key="xml" value="20" />
+          <entry key="xml" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -130,7 +130,7 @@
           <entry key="Properties" value="17" />
           <entry key="SQL" value="347" />
           <entry key="Scratch" value="366" />
-          <entry key="XML" value="20" />
+          <entry key="XML" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -156,7 +156,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
+            <state relative-caret-position="437">
               <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
@@ -370,7 +370,7 @@
     <property name="SearchEverywhereHistoryKey" value="Instance&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;stu&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Student.java&#10;instr&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Instructor.java&#10;courseinst&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;course insta&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;course&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Course.java&#10;admin&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Admin.java&#10;stude&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Student.java&#10;spec&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Specialization.java&#10;Department&#9;PSI&#9;JAVA://com.academic.as.demo.models.Department&#10;register&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/services/RegisterService.java&#10;user&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/User.java&#10;use&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/User.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537997031548" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537997406416" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MariaDB" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/academic/as/demo" />
@@ -477,12 +477,12 @@
       <workItem from="1537645751032" duration="5434000" />
       <workItem from="1537714205242" duration="1392000" />
       <workItem from="1537821484889" duration="983000" />
-      <workItem from="1537995600114" duration="1419000" />
+      <workItem from="1537995600114" duration="1794000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136523000" />
+    <option name="totallyTimeSpent" value="136898000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -949,7 +949,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
+        <state relative-caret-position="437">
           <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
