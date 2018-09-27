@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af0cb9a8-9a13-4ae0-9d98-5c7298316a55" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/academic_as.iml" beforeDir="false" afterPath="$PROJECT_DIR$/academic_as.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,7 +37,7 @@
     <session id="1017901481">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="24" />
+          <entry key="project.closed" value="25" />
           <entry key="project.open.time.105" value="1" />
           <entry key="project.open.time.111" value="1" />
           <entry key="project.open.time.117" value="1" />
@@ -45,7 +49,7 @@
           <entry key="project.open.time.20" value="2" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.31" value="1" />
-          <entry key="project.open.time.38" value="1" />
+          <entry key="project.open.time.38" value="2" />
           <entry key="project.open.time.60" value="1" />
           <entry key="project.open.time.65" value="1" />
           <entry key="project.open.time.66" value="2" />
@@ -63,7 +67,7 @@
           <entry key="project.open.time.87" value="1" />
           <entry key="project.open.time.88" value="1" />
           <entry key="project.open.time.95" value="1" />
-          <entry key="project.opened" value="34" />
+          <entry key="project.opened" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -120,7 +124,7 @@
           <entry key="properties" value="17" />
           <entry key="sql" value="383" />
           <entry key="txt" value="340" />
-          <entry key="xml" value="21" />
+          <entry key="xml" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -130,7 +134,7 @@
           <entry key="Properties" value="17" />
           <entry key="SQL" value="347" />
           <entry key="Scratch" value="366" />
-          <entry key="XML" value="21" />
+          <entry key="XML" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -144,20 +148,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="24">
+              <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+            <state relative-caret-position="125">
+              <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="40" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -249,8 +253,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/models/Student.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/services/CoursesService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/academic/as/demo/models/Course.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
       </list>
     </option>
   </component>
@@ -309,6 +313,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="academic_as" type="b2602c69:ProjectViewProjectNode" />
+              <item name="academic_as" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="academic_as" type="b2602c69:ProjectViewProjectNode" />
+              <item name="academic_as" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="academic_as" type="b2602c69:ProjectViewProjectNode" />
+              <item name="academic_as" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -336,28 +362,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="academic_as" type="b2602c69:ProjectViewProjectNode" />
-              <item name="academic_as" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="academic_as" type="b2602c69:ProjectViewProjectNode" />
-              <item name="academic_as" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="academic_as" type="b2602c69:ProjectViewProjectNode" />
-              <item name="academic_as" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -370,7 +374,7 @@
     <property name="SearchEverywhereHistoryKey" value="Instance&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;stu&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Student.java&#10;instr&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Instructor.java&#10;courseinst&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;course insta&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/CourseInstance.java&#10;course&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Course.java&#10;admin&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Admin.java&#10;stude&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Student.java&#10;spec&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/Specialization.java&#10;Department&#9;PSI&#9;JAVA://com.academic.as.demo.models.Department&#10;register&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/services/RegisterService.java&#10;user&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/User.java&#10;use&#9;FILE&#9;file:///home/maxmya/gitpro/academic_as/src/main/java/com/academic/as/demo/models/User.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537997406416" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538006889157" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MariaDB" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/academic/as/demo" />
@@ -477,12 +481,13 @@
       <workItem from="1537645751032" duration="5434000" />
       <workItem from="1537714205242" duration="1392000" />
       <workItem from="1537821484889" duration="983000" />
-      <workItem from="1537995600114" duration="1794000" />
+      <workItem from="1537995600114" duration="2399000" />
+      <workItem from="1538009157866" duration="213000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136898000" />
+    <option name="totallyTimeSpent" value="137716000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -497,7 +502,7 @@
     <frame x="-2" y="0" width="1370" height="746" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4909091" visible="true" weight="0.3542296" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4909091" weight="0.35951662" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -907,12 +912,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1920">
           <caret line="92" selection-start-line="92" selection-end-line="92" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getAllCourses#0;class#CoursesService#0" />
-            <element signature="method#registerCoursesToStudent#0;class#CoursesService#0" />
-            <element signature="method#getRegisteredCourses#0;class#CoursesService#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -934,23 +933,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-331">
           <caret line="66" selection-start-line="66" selection-end-line="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+        <state relative-caret-position="125">
+          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="40" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
         </state>
       </provider>
     </entry>

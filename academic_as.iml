@@ -77,6 +77,7 @@
     <orderEntry type="library" name="Maven: org.mariadb.jdbc:mariadb-java-client:1.1.7" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:4.5.2" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:platform:3.3.0" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.0.4.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:2.0.4.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.0.4.RELEASE" level="project" />
