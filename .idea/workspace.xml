@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af0cb9a8-9a13-4ae0-9d98-5c7298316a55" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/academic_as.iml" beforeDir="false" afterPath="$PROJECT_DIR$/academic_as.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -121,7 +117,7 @@
           <entry key="cell" value="330" />
           <entry key="dummy" value="64" />
           <entry key="java" value="16342" />
-          <entry key="properties" value="17" />
+          <entry key="properties" value="19" />
           <entry key="sql" value="383" />
           <entry key="txt" value="340" />
           <entry key="xml" value="23" />
@@ -131,7 +127,7 @@
         <counts>
           <entry key="JAVA" value="16342" />
           <entry key="PLAIN_TEXT" value="404" />
-          <entry key="Properties" value="17" />
+          <entry key="Properties" value="19" />
           <entry key="SQL" value="347" />
           <entry key="Scratch" value="366" />
           <entry key="XML" value="23" />
@@ -151,8 +147,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+            <state relative-caret-position="72">
+              <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -482,12 +478,12 @@
       <workItem from="1537714205242" duration="1392000" />
       <workItem from="1537821484889" duration="983000" />
       <workItem from="1537995600114" duration="2399000" />
-      <workItem from="1538009157866" duration="213000" />
+      <workItem from="1538009157866" duration="1320000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137716000" />
+    <option name="totallyTimeSpent" value="138823000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -945,8 +941,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+        <state relative-caret-position="72">
+          <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
         </state>
       </provider>
     </entry>
