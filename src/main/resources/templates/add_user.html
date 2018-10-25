@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add User</title>
-    <link th:href="@{/resources/css/bootstrap-3.3.2-dist/bootstrap.min.css}" rel="stylesheet" />
+    <!--<link th:href="@{/resources/css/bootstrap-3.3.2-dist/bootstrap.min.css}" rel="stylesheet" />-->
 
 </head>
 <body>
@@ -12,26 +12,26 @@
     <form action="#" th:action="@{/register}" th:object="${user}"  method="post">
         <div class="form-group">
             <label for="fname">First Name</label>
-            <input type="text" class="form-control" th:text="*{firstName}" id="fname"
+            <input type="text" class="form-control" th:field="*{firstName}" id="fname"
                    placeholder="Enter First Name">
         </div>
         <div class="form-group">
             <label for="lname">Second Name</label>
-            <input type="text" class="form-control" th:text="*{lastName}" id="lname"
+            <input type="text" class="form-control" th:field="*{lastName}" id="lname"
                    placeholder="Enter Second Name">
         </div>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" th:text="*{username}" id="username"
+            <input type="text" class="form-control" th:field="*{username}" id="username"
                    placeholder="Enter Username">
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" th:text="*{email}" id="email" placeholder="Enter email">
+            <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Enter email">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" th:text="*{password}" id="password" placeholder="Password">
+            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Password">
         </div>
         <!--<div class="form-group">-->
             <!--<label for="cnfpassword">Confirm Password</label>-->
