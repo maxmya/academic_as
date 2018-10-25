@@ -54,7 +54,12 @@
             <artifactId>spring-security-core</artifactId>
             <version>5.0.3.RELEASE</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.6</version>
+        </dependency>
     </dependencies>
 
     <build>

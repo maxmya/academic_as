@@ -5,6 +5,8 @@ import com.academic.as.demo.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RegisterViewController {
@@ -15,8 +17,15 @@ public class RegisterViewController {
     }
 
     @GetMapping("/register")
-    public String registerUser(Model model) {
+    public String registerUserView(Model model) {
         model.addAttribute("user", new User());
         return "add_user";
     }
+
+    @PostMapping("/register")
+    public String registerUser(Model model,@ModelAttribute("user") User user) {
+        System.out.println(user.getEmail());
+        return "index";
+    }
+
 }
