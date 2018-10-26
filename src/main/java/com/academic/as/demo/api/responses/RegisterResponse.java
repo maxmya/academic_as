@@ -1,19 +1,19 @@
 package com.academic.as.demo.api.responses;
 
-import com.academic.as.demo.enums.UserRole;
+import com.academic.as.demo.enums.UserRoles;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ResponseBody
 public class RegisterResponse extends BaseResponse {
 
-    private UserRole userRole;
+    private UserRoles userRoles;
 
-    public UserRole getUserRole() {
-        return userRole;
+    public UserRoles getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(UserRoles userRoles) {
+        this.userRoles = userRoles;
     }
 }
 

@@ -2,17 +2,10 @@ package com.academic.as.demo.services;
 
 
 import com.academic.as.demo.api.responses.BaseResponse;
-import com.academic.as.demo.enums.UserRole;
 import com.academic.as.demo.models.*;
 import com.academic.as.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class UpdateUserService {
