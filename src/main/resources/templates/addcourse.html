@@ -14,31 +14,33 @@
     <h2>Add Course</h2>
     <form action="#" th:action="@{/addcoursee}" th:object="${course} " method="post">
         <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="name">Course Name</label>
-            <input type="text" class="form-control" th:field="*{name}" id="name"
-                   placeholder="Enter Course Name" >
-        </div>
-        <div class="form-group col-md-6">
-            <label for="code">Course Code:</label>
-            <input type="text" class="form-control" th:field="*{code}" id="code"
-                   placeholder="Enter Code" >
-        </div>
-        <div class="form-group col-md-6">
-            <label for="required_points">Required Point:</label>
-            <input type="text" class="form-control" th:field="*{requiredPoints}" id="required_points"
-                   placeholder="Enter Required Point" >
-        </div>
-        <div class="form-group col-md-6">
-            <label for="awarded_points">Awarded Point:</label>
-            <input type="text" class="form-control" th:field="*{awardedPoints}" id="awarded_points"
-                   placeholder="Enter Awarded Point" >
-        </div>
+            <div class="form-group col-md-6">
+                <label for="name">Course Name</label>
+                <input type="text" class="form-control" th:field="*{name}" id="name"
+                       placeholder="Enter Course Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="code">Course Code:</label>
+                <input type="text" class="form-control" th:field="*{code}" id="code"
+                       placeholder="Enter Code">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="required_points">Required Point:</label>
+                <input type="text" class="form-control" th:field="*{requiredPoints}" id="required_points"
+                       placeholder="Enter Required Point">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="awarded_points">Awarded Point:</label>
+                <input type="text" class="form-control" th:field="*{awardedPoints}" id="awarded_points"
+                       placeholder="Enter Awarded Point">
+            </div>
             <div class="form-row align-items-center">
                 <div class="col-auto my-1 col-md-3 table-row-cell">
                     <label class="mr-sm-2" for="department_id">Department ID:</label>
-                    <select th:field="*{department}" class="custom-select mr-sm-1"  id="department_id">
-                        <option th:each="i : ${#numbers.sequence(0,15)}" th:value="${i}" th:text="${i}"></option>
+                    <select th:field="*{department}" class="custom-select mr-sm-1" id="department_id">
+                        <div th:each=" dep : ${departments} ">
+                            <option th:value="${dep.getId()}" th:text="${dep.getDepartmentName()}"></option>
+                        </div>
                     </select>
                 </div>
                 <div class="col-auto my-1 table-row-cell">
