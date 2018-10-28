@@ -8,15 +8,28 @@ import com.academic.as.demo.services.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+
+import javax.validation.Valid;
 
 @Controller
-public class RegisterViewController {
+public class RegisterViewController implements WebMvcConfigurer {
+
+
 
     @Autowired
     RegisterService registerService;
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("home");
+    }
 
     @GetMapping("/")
     public String index(Model model) {
@@ -32,13 +45,16 @@ public class RegisterViewController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user,
-                               @ModelAttribute("role") UserRole role
+    public String registerUser(@ModelAttribute("user") @Valid User user,
+                               @ModelAttribute("role") UserRole role , BindingResult bindingResult
             , Model model) {
-        /*
-        todo : this code should not be in the controller class , it should be hold by another service
-         */
 
+        //todo : this code should not be in the controller class , it should be hold by another service
+
+        System.out.print(bindingResult.hasErrors());
+        if (bindingResult.hasErrors()) {
+            return "add_user";
+        }
         switch (role.getRole()) {
             case "SYSTEM":
                 model.addAttribute("response", registerService.addUser(user));
