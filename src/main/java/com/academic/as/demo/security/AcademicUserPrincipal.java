@@ -1,25 +1,34 @@
 package com.academic.as.demo.security;
 
+import com.academic.as.demo.models.AuthGroup;
 import com.academic.as.demo.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class AcademicUserPrincipal implements UserDetails {
 
     private User user;
+    private List<AuthGroup> authGroups;
 
-    public AcademicUserPrincipal(User user) {
+    public AcademicUserPrincipal(User user, List<AuthGroup> authGroups) {
         super();
         this.user = user;
+        this.authGroups = authGroups;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        if (authGroups == null) {
+            return Collections.emptySet();
+        }
+        Set<SimpleGrantedAuthority> grantedAuthoritySet = new HashSet<>();
+        authGroups.forEach(authGroup -> {
+            grantedAuthoritySet.add(new SimpleGrantedAuthority(authGroup.getAuthGroup()));
+        });
+        return grantedAuthoritySet;
     }
 
     @Override

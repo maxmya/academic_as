@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.2.16-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.16  Distrib 10.2.18-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: acadmic_as
 -- ------------------------------------------------------
--- Server version	10.2.16-MariaDB
+-- Server version	10.2.18-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,7 @@ CREATE TABLE `admin` (
   PRIMARY KEY (`id`),
   KEY `admin_user_id_fk` (`user_id`),
   CONSTRAINT `admin_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,6 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,1),(2,3),(5,8),(6,9),(7,24);
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,11 +49,8 @@ DROP TABLE IF EXISTS `assistant`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `assistant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `assist_user_id_fk` (`user_id`),
-  CONSTRAINT `assist_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,8 +59,33 @@ CREATE TABLE `assistant` (
 
 LOCK TABLES `assistant` WRITE;
 /*!40000 ALTER TABLE `assistant` DISABLE KEYS */;
-INSERT INTO `assistant` VALUES (1,25);
 /*!40000 ALTER TABLE `assistant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `auth_group` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `auth_group_user_id_fk` (`user_id`),
+  CONSTRAINT `auth_group_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -81,13 +102,11 @@ CREATE TABLE `course` (
   `department_id` int(11) DEFAULT NULL,
   `required_points` int(11) DEFAULT NULL,
   `awarded_points` int(11) DEFAULT NULL,
-  `lecture_hrs` float DEFAULT NULL,
-  `training_hrs` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `course_code_uindex` (`code`),
   KEY `course_department_id_fk` (`department_id`),
   CONSTRAINT `course_department_id_fk` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,8 +115,122 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (2,'general math','math 101',1,0,3,2,2);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `course_dependencies`
+--
+
+DROP TABLE IF EXISTS `course_dependencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `course_dependencies` (
+  `course_id` int(11) NOT NULL,
+  `dependency_id` int(11) NOT NULL,
+  PRIMARY KEY (`course_id`,`dependency_id`),
+  KEY `course_dependencies_course_id_fk_2` (`dependency_id`),
+  CONSTRAINT `course_dependencies_course_id_fk` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
+  CONSTRAINT `course_dependencies_course_id_fk_2` FOREIGN KEY (`dependency_id`) REFERENCES `course` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course_dependencies`
+--
+
+LOCK TABLES `course_dependencies` WRITE;
+/*!40000 ALTER TABLE `course_dependencies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course_dependencies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `course_instance`
+--
+
+DROP TABLE IF EXISTS `course_instance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `course_instance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `hall_id` int(11) DEFAULT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `specialization_id` int(11) DEFAULT NULL,
+  `type` enum('lecture','training','lab') DEFAULT NULL,
+  `semester_id` int(15) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `course_instance_hall_id_fk` (`hall_id`),
+  KEY `course_instance_course_id_fk` (`course_id`),
+  KEY `course_instance_specialization_id_fk` (`specialization_id`),
+  KEY `course_instance_semester_id_fk` (`semester_id`),
+  CONSTRAINT `course_instance_course_id_fk` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
+  CONSTRAINT `course_instance_hall_id_fk` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`),
+  CONSTRAINT `course_instance_semester_id_fk` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`id`),
+  CONSTRAINT `course_instance_specialization_id_fk` FOREIGN KEY (`specialization_id`) REFERENCES `specialization` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course_instance`
+--
+
+LOCK TABLES `course_instance` WRITE;
+/*!40000 ALTER TABLE `course_instance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course_instance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `course_registration`
+--
+
+DROP TABLE IF EXISTS `course_registration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `course_registration` (
+  `course_instance_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  PRIMARY KEY (`course_instance_id`,`student_id`),
+  KEY `course_regestration_student_id_fk` (`student_id`),
+  CONSTRAINT `course_regestration_course_instance_id_fk` FOREIGN KEY (`course_instance_id`) REFERENCES `course_instance` (`id`),
+  CONSTRAINT `course_regestration_student_id_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course_registration`
+--
+
+LOCK TABLES `course_registration` WRITE;
+/*!40000 ALTER TABLE `course_registration` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course_registration` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `course_responsibility`
+--
+
+DROP TABLE IF EXISTS `course_responsibility`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `course_responsibility` (
+  `course_instance_id` int(11) NOT NULL,
+  `instructor_id` int(11) NOT NULL,
+  PRIMARY KEY (`course_instance_id`,`instructor_id`),
+  KEY `course_responsibility_instructor_id_fk` (`instructor_id`),
+  CONSTRAINT `course_responsibility_course_instance_id_fk` FOREIGN KEY (`course_instance_id`) REFERENCES `course_instance` (`id`),
+  CONSTRAINT `course_responsibility_instructor_id_fk` FOREIGN KEY (`instructor_id`) REFERENCES `instructor` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course_responsibility`
+--
+
+LOCK TABLES `course_responsibility` WRITE;
+/*!40000 ALTER TABLE `course_responsibility` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course_responsibility` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -112,7 +245,7 @@ CREATE TABLE `department` (
   `depname` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `department_depname_uindex` (`depname`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +254,6 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'mathematics'),(2,'physics');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,8 +280,58 @@ CREATE TABLE `department_speciality` (
 
 LOCK TABLES `department_speciality` WRITE;
 /*!40000 ALTER TABLE `department_speciality` DISABLE KEYS */;
-INSERT INTO `department_speciality` VALUES (1,1),(1,2),(2,1);
 /*!40000 ALTER TABLE `department_speciality` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hall`
+--
+
+DROP TABLE IF EXISTS `hall`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hall` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hall`
+--
+
+LOCK TABLES `hall` WRITE;
+/*!40000 ALTER TABLE `hall` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hall` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `instructor`
+--
+
+DROP TABLE IF EXISTS `instructor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `instructor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `instructor_user_id_fk` (`user_id`),
+  CONSTRAINT `instructor_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `instructor`
+--
+
+LOCK TABLES `instructor` WRITE;
+/*!40000 ALTER TABLE `instructor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `instructor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -161,11 +343,8 @@ DROP TABLE IF EXISTS `professor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `professor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `prof_user_id_fk` (`user_id`),
-  CONSTRAINT `prof_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,8 +353,33 @@ CREATE TABLE `professor` (
 
 LOCK TABLES `professor` WRITE;
 /*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-INSERT INTO `professor` VALUES (1,2);
 /*!40000 ALTER TABLE `professor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `semester`
+--
+
+DROP TABLE IF EXISTS `semester`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `semester` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `semester_code` varchar(50) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `semester_semester_code_uindex` (`semester_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `semester`
+--
+
+LOCK TABLES `semester` WRITE;
+/*!40000 ALTER TABLE `semester` DISABLE KEYS */;
+/*!40000 ALTER TABLE `semester` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -190,7 +394,7 @@ CREATE TABLE `specialization` (
   `specialityname` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `specialization_specialityname_uindex` (`specialityname`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +403,6 @@ CREATE TABLE `specialization` (
 
 LOCK TABLES `specialization` WRITE;
 /*!40000 ALTER TABLE `specialization` DISABLE KEYS */;
-INSERT INTO `specialization` VALUES (1,'math_phys'),(2,'math_special');
 /*!40000 ALTER TABLE `specialization` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +421,7 @@ CREATE TABLE `student` (
   PRIMARY KEY (`id`),
   KEY `student_user_id_fk` (`user_id`),
   CONSTRAINT `student_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +430,6 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,4,0,1),(2,5,0,1),(3,30,0,1);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +446,7 @@ CREATE TABLE `supervisor` (
   PRIMARY KEY (`id`),
   KEY `supv_user_id_fk` (`user_id`),
   CONSTRAINT `supv_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,7 +476,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_email_uindex` (`email`),
   UNIQUE KEY `user_username_uindex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,7 +485,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'super','super','super','root','super','2018-08-19'),(2,'ahmed','mohamed','ahmed@as.com','test','ahmed','2018-08-19'),(3,'ahmed','ahmed','teste3','test','om32ar','2018-08-19'),(4,'mahmoud','aref','aref@as.com','test','aref','2018-08-19'),(5,'3awad','adel','mohanad@as.com','$2a$10$tU2pnQZI4uu4NY3gww9Rhe8wLAdaHH23keDXT/NwfA9C.Yv3AHuku','mohnad','2018-08-19'),(6,'mohanad','adel','mohanad_admin@as.com','$2a$10$45qzvAxEv3dd2C1Z3aVND.HoNvPii3fgm11IPP8z0Vn1XbDuGFKQu','mohnad_admin','2018-08-19'),(7,'mohanad','adel','1mohanad_admin@as.com','$2a$10$C2IR60mDsohn5Yf9viYOeeLZt.7OGRiETOSn3XqPAzFrnvmUiJFGy','mohnad_admin1','2018-08-19'),(8,'mohanad','mohanad','mohanad','$2a$10$pvNLYc8GO3BM73ZqoGpInuZg5jK4FTjbliNmo3yYuE81cjnkbTLqq','mohanad','2018-08-19'),(9,'omar','waeel','omar@as.com','$2a$10$Te7/OAZm1rCWk0NTBHu2uOH8V/t4kRkE89SqsziC1DSJIhjXzkrqW','omar','2018-08-21'),(10,'omar','waeel','omar@as.c4om','$2a$10$/6YdS1hIJ7343UH/3a7iWO1m1RsUfdtZ9N5ZLN5XUHiyeHb43uNny','omar4','2018-08-22'),(14,'qwer',NULL,'qwer','$2a$10$cY0lEnn/v66Ft1BmOybXGOCXMrA.WS2UKsNSxfHkNpBdS3b7Ai0jW','qwer','2018-08-22'),(16,'test',NULL,'test','$2a$10$3bo9.iEMR/95GVYanCXsTu4A6xKGNqJVgeOFMQGfLhaJo.7R4C8na','test','2018-08-22'),(20,'a','a','a','$2a$10$AiR9dilO2W9hnYkKo86hwe5SUy1TQRl4FTGtBt/bag8VU9.1scUXm','a','2018-08-22'),(22,'2','3','5','$2a$10$i.H7ioMzHTU34LS4HN36/e3ov1IoxodL4zott9YKz3fBsMX/b9UMC','4','2018-08-22'),(24,'ahmed','mohamed','mohameee','$2a$10$cfj.CwXeLjRTXdcjfMUuU.AS9H87ZM.HkAP8awJmRAOd3bv9NHUJy','moahmed','2018-08-22'),(25,'afasdf','asdfasdfasdf','asdfasdf','$2a$10$aR7TYWKYv2nPoRtZqUwBFe7F39Q14y1G8EKZe9Wvwf/fuMG86phEm','asdfasdf','2018-08-22'),(30,'mohamed','mahmoud','lll','$2a$10$yQpPWWdBDpNKKgo/fN/29O0zk79SvQU.Kt1rryLwLbwpvI2vI/eyC','ali','2018-08-28');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -296,4 +497,25 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-05 15:18:21
+
+ALTER TABLE user AUTO_INCREMENT = 1;
+ALTER TABLE admin AUTO_INCREMENT = 1;
+ALTER TABLE assistant AUTO_INCREMENT = 1;
+ALTER TABLE student AUTO_INCREMENT = 1;
+ALTER TABLE supervisor AUTO_INCREMENT = 1;
+ALTER TABLE professor AUTO_INCREMENT = 1;
+ALTER TABLE course AUTO_INCREMENT = 1;
+ALTER TABLE course_instance AUTO_INCREMENT = 1;
+ALTER TABLE course_registration AUTO_INCREMENT = 1;
+ALTER TABLE course_responsibility AUTO_INCREMENT = 1;
+ALTER TABLE course_dependencies AUTO_INCREMENT = 1;
+ALTER TABLE department AUTO_INCREMENT = 1;
+ALTER TABLE specialization AUTO_INCREMENT = 1;
+ALTER TABLE department_speciality AUTO_INCREMENT = 1;
+ALTER TABLE hall AUTO_INCREMENT = 1;
+ALTER TABLE semester AUTO_INCREMENT = 1;
+ALTER TABLE auth_group AUTO_INCREMENT = 1;
+ALTER TABLE instructor AUTO_INCREMENT = 1;
+
+
+-- Dump completed on 2018-10-28 14:28:50

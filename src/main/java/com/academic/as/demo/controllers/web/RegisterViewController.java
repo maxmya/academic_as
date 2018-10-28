@@ -6,6 +6,7 @@ import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.models.*;
 import com.academic.as.demo.services.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,13 @@ public class RegisterViewController {
     RegisterService registerService;
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String index(Model model) {
         return "index";
     }
 
     @GetMapping("/register")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String registerUserView(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", UserRoles.values());
@@ -32,6 +35,7 @@ public class RegisterViewController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String registerUser(@ModelAttribute("user") User user,
                                @ModelAttribute("role") UserRole role
             , Model model) {
