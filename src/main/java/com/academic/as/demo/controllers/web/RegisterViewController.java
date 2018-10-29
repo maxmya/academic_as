@@ -19,12 +19,6 @@ public class RegisterViewController {
     @Autowired
     RegisterService registerService;
 
-    @GetMapping("/")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String index(Model model) {
-        return "index";
-    }
-
     @GetMapping("/register")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String registerUserView(Model model) {
