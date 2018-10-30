@@ -51,8 +51,11 @@ public class RegisterViewController implements WebMvcConfigurer {
 
         //todo : this code should not be in the controller class , it should be hold by another service
 
-        System.out.print(bindingResult.hasErrors());
+        System.out.print(bindingResult.getAllErrors());
+
         if (bindingResult.hasErrors()) {
+            System.out.print("i am here");
+
             return "add_user";
         }
         switch (role.getRole()) {

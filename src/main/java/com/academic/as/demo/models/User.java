@@ -30,7 +30,6 @@ public class User implements Serializable {
     private String lastName;
 
     @NotNull
-    @Email
     @Column(name = "email")
     private String email;
 
