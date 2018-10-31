@@ -29,12 +29,13 @@ public class User implements Serializable {
     @Column(name = "lname")
     private String lastName;
 
+    @Email
     @NotNull
     @Column(name = "email")
     private String email;
 
+    @Min(6)
     @NotNull
-    @Min(8)
     @Column(name = "password")
     private String password;
 

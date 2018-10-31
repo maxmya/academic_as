@@ -1,6 +1,7 @@
 package com.academic.as.demo.controllers.web;
 
 
+import com.academic.as.demo.controllers.web.models.ConfirmPassword;
 import com.academic.as.demo.controllers.web.models.UserRole;
 import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.models.*;
@@ -41,21 +42,17 @@ public class RegisterViewController implements WebMvcConfigurer {
         model.addAttribute("user", new User());
         model.addAttribute("roles", UserRoles.values());
         model.addAttribute("role", new UserRole());
+        model.addAttribute("confrimPassword",new ConfirmPassword());
         return "add_user";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") @Valid User user,
-                               @ModelAttribute("role") UserRole role , BindingResult bindingResult
-            , Model model) {
+    public String registerUser(@ModelAttribute("user") @Valid User user,BindingResult bindingResult,
+                               @ModelAttribute("role") UserRole role , Model model) {
 
         //todo : this code should not be in the controller class , it should be hold by another service
 
-        System.out.print(bindingResult.getAllErrors());
-
         if (bindingResult.hasErrors()) {
-            System.out.print("i am here");
-
             return "add_user";
         }
         switch (role.getRole()) {
