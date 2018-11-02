@@ -5,6 +5,7 @@ import com.academic.as.demo.models.Department;
 import com.academic.as.demo.services.CoursesService;
 import com.academic.as.demo.services.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +27,7 @@ public class AddCourseViewController {
     SpecializationService specializationService;
 
     @GetMapping("/addcoursee")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addCourseView(Model model) {
         model.addAttribute(new Course());
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
@@ -33,6 +35,7 @@ public class AddCourseViewController {
     }
 
     @PostMapping("/addcoursee")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addCourse(@ModelAttribute("course") Course course, Model model) {
         model.addAttribute("response", coursesService.addCourseByDepName(course));
         return "home";
