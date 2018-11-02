@@ -15,31 +15,42 @@
         <div class="form-group">
             <label for="fname">First Name</label>
             <input type="text" class="form-control" th:field="*{firstName}" id="fname"
-                   placeholder="Enter First Name">
+                   placeholder="Enter First Name" required="required">
+            <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</td>
         </div>
         <div class="form-group">
             <label for="lname">Second Name</label>
             <input type="text" class="form-control" th:field="*{lastName}" id="lname"
-                   placeholder="Enter Second Name">
+                   placeholder="Enter Second Name" required="required">
+            <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</td>
+
         </div>
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" th:field="*{username}" id="username"
-                   placeholder="Enter Username">
+                   placeholder="Enter Username" required="required">
+            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username Error</td>
+
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Enter email">
+            <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Enter email" required="required">
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</td>
+
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Password">
+            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Password" required="required">
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</td>
+
         </div>
-        <!--<div class="form-group">-->
-        <!--<label for="cnfpassword">Confirm Password</label>-->
-        <!--<input type="password" class="form-control" id="cnfpassword" th:text="*{cnfpassword}"-->
-        <!--placeholder="Password">-->
-        <!--</div>-->
+        <div class="form-group">
+            <form th:action="@{/register}" th:object="${confrimPassword}" th:method="pst">
+                <label for="cnfpassword">Confirm Password</label>
+                <input type="password" class="form-control" id="cnfpassword" th:field="*{confirmPassword}"
+                placeholder="Confirm Password">
+            </form>
+        </div>
         <form th:action="@{/register}" th:object="${role}" th:method="pst">
             <select th:field="*{role}">
                 <option th:each="role : ${roles}"
@@ -49,7 +60,7 @@
             </select>
             <button type="submit" style="display: none" id="sub">submit</button>
         </form>
-        <div class="form-group">
+        <div c  lass="form-group">
 
             <br>
             <button type="submit" id="form" class="btn btn-primary">Submit</button>

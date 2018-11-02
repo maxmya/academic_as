@@ -1,6 +1,7 @@
 package com.academic.as.demo.controllers.web;
 
 
+import com.academic.as.demo.controllers.web.models.ConfirmPassword;
 import com.academic.as.demo.controllers.web.models.UserRole;
 import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.models.*;
@@ -9,15 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+
+import javax.validation.Valid;
 
 @Controller
-public class RegisterViewController {
+public class RegisterViewController implements WebMvcConfigurer {
+
+
 
     @Autowired
     RegisterService registerService;
+
+
 
     @GetMapping("/register")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -25,18 +36,22 @@ public class RegisterViewController {
         model.addAttribute("user", new User());
         model.addAttribute("roles", UserRoles.values());
         model.addAttribute("role", new UserRole());
+        model.addAttribute("confrimPassword",new ConfirmPassword());
         return "add_user";
     }
 
     @PostMapping("/register")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String registerUser(@ModelAttribute("user") User user,
+    public String registerUser(@ModelAttribute("user") @Valid User user,BindingResult bindingResult,
                                @ModelAttribute("role") UserRole role
             , Model model) {
         /*
         todo : this code should not be in the controller class , it should be hold by another service
          */
 
+        if (bindingResult.hasErrors()) {
+            return "add_user";
+        }
         switch (role.getRole()) {
             case "SYSTEM":
                 model.addAttribute("response", registerService.addUser(user));
