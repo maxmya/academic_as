@@ -2,8 +2,13 @@ package com.academic.as.demo.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,18 +21,25 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
     @Column(name = "fname")
     private String firstName;
 
+    @NotNull
     @Column(name = "lname")
     private String lastName;
 
+    @Email
+    @NotNull
     @Column(name = "email")
     private String email;
 
+    @Min(6)
+    @NotNull
     @Column(name = "password")
     private String password;
 
+    @NotNull
     @Column(name = "username")
     private String username;
 

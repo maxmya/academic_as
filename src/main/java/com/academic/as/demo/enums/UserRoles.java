@@ -1,6 +1,6 @@
 package com.academic.as.demo.enums;
 
-public enum UserRole {
+public enum UserRoles {
     ADMIN,
     STUDENT,
     SYSTEM,

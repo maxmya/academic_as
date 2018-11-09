@@ -4,6 +4,7 @@ import com.academic.as.demo.models.Course;
 import com.academic.as.demo.services.CoursesService;
 import com.academic.as.demo.services.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ public class AddCourseViewController implements WebMvcConfigurer {
     SpecializationService specializationService;
 
     @GetMapping("/add/course")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addCourseView(Model model) {
         model.addAttribute(new Course());
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
@@ -31,12 +33,12 @@ public class AddCourseViewController implements WebMvcConfigurer {
     }
 
     @PostMapping("/add/course")
+      @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addCourse(@ModelAttribute("course") @Valid Course course, BindingResult bindingResult , Model model) {
 
         if (bindingResult.hasErrors()) {
             return "add_course";
         }
-//TODO redirect to the same page
         model.addAttribute("response", coursesService.addCourseByDepName(course));
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
         return "add_course";
