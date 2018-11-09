@@ -3,8 +3,13 @@ package com.academic.as.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +24,23 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "name")
     private String name;
 
+
+    @NotEmpty
+    @NotNull
     @Column(name = "code")
     private String code;
 
+
+    @NotNull
     @Column(name = "required_points")
     private Integer requiredPoints;
 
+    @NotNull
     @Column(name = "awarded_points")
     private Integer awardedPoints;
 

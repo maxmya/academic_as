@@ -42,6 +42,7 @@ public class CoursesService {
 
     public BaseResponse addCourseByDepName(Course course) {
         BaseResponse response = new BaseResponse();
+        System.out.println("course "+course.getDepartment().getDepartmentName());
         try {
             Department dp = departmentRepository.
                     findDepartmentByDepartmentName(course.getDepartment().getDepartmentName());
