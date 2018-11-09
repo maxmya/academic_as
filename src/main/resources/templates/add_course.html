@@ -63,8 +63,9 @@
         </div>
     </form>
 
-
-    <!--<p th:text="${response.getMessage()}"/>-->
+  <div class="alert alert-warning" role="alert" th:if="${response}">
+      <p th:text="${response.getMessage()}"/>
+  </div>
 
 </div>
 

@@ -33,8 +33,6 @@ public class AddCourseViewController implements WebMvcConfigurer {
     @PostMapping("/add/course")
     public String addCourse(@ModelAttribute("course") @Valid Course course, BindingResult bindingResult , Model model) {
 
-        System.out.print("errors");
-        System.out.print(bindingResult.getAllErrors());
         if (bindingResult.hasErrors()) {
             return "add_course";
         }
