@@ -1,5 +1,6 @@
 package com.academic.as.demo.controllers.web;
 
+import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.services.CoursesService;
 import com.academic.as.demo.services.SpecializationService;
@@ -33,13 +34,21 @@ public class AddCourseViewController implements WebMvcConfigurer {
     }
 
     @PostMapping("/add/course")
-      @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String addCourse(@ModelAttribute("course") @Valid Course course, BindingResult bindingResult , Model model) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String addCourse(@ModelAttribute("course") @Valid Course course, BindingResult bindingResult,
+                            Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("departments", specializationService.getAllDepartments().getData());
             return "add_course";
         }
-        model.addAttribute("response", coursesService.addCourseByDepName(course));
+        BaseResponse response = coursesService.addCourseByDepName(course);
+        if (response.getCode().equalsIgnoreCase("400"))
+            model.addAttribute(course);
+        else
+            model.addAttribute(new Course());
+        model.addAttribute("response", response);
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
         return "add_course";
     }

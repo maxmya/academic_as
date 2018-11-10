@@ -1,7 +1,7 @@
 package com.academic.as.demo.controllers.web;
 
 
-import com.academic.as.demo.controllers.web.models.ConfirmPassword;
+import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.controllers.web.models.UserRole;
 import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.models.*;
@@ -14,9 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.validation.Valid;
 
@@ -24,10 +22,8 @@ import javax.validation.Valid;
 public class RegisterViewController implements WebMvcConfigurer {
 
 
-
     @Autowired
     RegisterService registerService;
-
 
 
     @GetMapping("/register")
@@ -36,22 +32,25 @@ public class RegisterViewController implements WebMvcConfigurer {
         model.addAttribute("user", new User());
         model.addAttribute("roles", UserRoles.values());
         model.addAttribute("role", new UserRole());
-        model.addAttribute("confrimPassword",new ConfirmPassword());
         return "add_user";
     }
 
     @PostMapping("/register")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String registerUser(@ModelAttribute("user") @Valid User user,BindingResult bindingResult,
-                               @ModelAttribute("role") UserRole role
-            , Model model) {
-        /*
-        todo : this code should not be in the controller class , it should be hold by another service
-         */
+    public String registerUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+                               @ModelAttribute("role") UserRole role, Model model) {
 
+        System.out.println("in post");
         if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("user", new User());
+            model.addAttribute("roles", UserRoles.values());
+            model.addAttribute("role", new UserRole());
             return "add_user";
         }
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", UserRoles.values());
+        model.addAttribute("role", new UserRole());
         switch (role.getRole()) {
             case "SYSTEM":
                 model.addAttribute("response", registerService.addUser(user));
@@ -59,7 +58,9 @@ public class RegisterViewController implements WebMvcConfigurer {
             case "ADMIN":
                 Admin admin = new Admin();
                 admin.setUser(user);
-                model.addAttribute("response", registerService.addAdmin(admin));
+                BaseResponse res = registerService.addAdmin(admin);
+                model.addAttribute("response", res);
+                System.out.println(res.getMessage());
                 break;
             case "STUDENT":
                 Student student = new Student();
@@ -82,7 +83,7 @@ public class RegisterViewController implements WebMvcConfigurer {
                 model.addAttribute("response", registerService.addSupervisor(supervisor));
                 break;
         }
-        return "home";
+        return "add_user";
     }
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,12 @@ public class Course implements Serializable {
 
 
     @NotNull
+    @Positive
     @Column(name = "required_points")
     private Integer requiredPoints;
 
     @NotNull
+    @Positive
     @Column(name = "awarded_points")
     private Integer awardedPoints;
 
