@@ -149,5 +149,16 @@ public class CoursesService {
 
         return response;
     }
-
+    public BaseResponse addHall(Hall hall) {
+        BaseResponse response = new BaseResponse();
+        try {
+            hallRepository.save(hall);
+            response.setCode("200");
+            response.setMessage("Success");
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
 }

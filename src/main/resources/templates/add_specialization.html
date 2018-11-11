@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=9">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h2>Add Specialization</h2>
+<form action="#" th:action="@{/add/specialization}" th:object="${specialization} " method="post">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="specialityname">Specialization Name</label>
+            <input type="text" class="form-control" th:field="*{specialityName}" id="specialityname"
+                   placeholder="Enter Specialization Name">
+            <td th:if="${#fields.hasErrors('specialityName')}" th:errors="*{specialityName}">specialityName Error</td>
+        </div>
+        <br>
+        <div class="form-row align-items-center">
+            <div class="col-auto my-3 col-md-6 table-row-cell">
+                <label class="mr-sm-6" for="department_id">Department Name:</label>
+                <select th:field="*{departments}" class="custom-select mr-sm-1" id="department_id">
+                    <div th:each=" dep : ${department} ">
+                        <option th:value="${dep.getId()}" th:text="${dep.getDepartmentName()}"></option>
+                    </div>
+                </select>
+            </div>
+            <div class="col-auto my-9 col-md-9">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning" role="alert" th:if="${response}">
+        <p th:text="${response.getMessage()}"/>
+    </div>
+</form>
+</div>
+</body>
+</html>

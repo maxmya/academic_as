@@ -33,6 +33,14 @@ public class SpecializationController {
         return specializationService.addDepartment(department);
     }
 
+    /**
+     * @param specialization "specialization":
+     *                       {"specialityName":"math_special"},
+     *                       "departments":[
+     *                       {"departmentName":"mathematics"}
+     *                       ]
+     * @return base response
+     */
     @PostMapping("/speciality/add")
     public BaseResponse addSpeciality(@RequestBody SpecializationRequest specialization) {
         return specializationService.addSpecialization(specialization);

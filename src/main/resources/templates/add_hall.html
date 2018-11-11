@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Course</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=9">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add Hall</h2>
+    <form action="#" th:action="@{/add/hall}" th:object="${hall} " method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Hall Name</label>
+                <input type="text" class="form-control" th:field="*{name}" id="name"
+                       placeholder="Enter Hall Name" required="required">
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name Error</td>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="latitude">Hall Latitude:</label>
+                <input type="number" class="form-control" th:field="*{latitude}" id="latitude"
+                       placeholder="Enter Hall Latitude" required="required">
+                <td th:if="${#fields.hasErrors('latitude')}" th:errors="*{latitude}">latitude Error</td>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="longitude">Hall Longitude:</label>
+                <input type="number" class="form-control" th:field="*{longitude}" id="longitude"
+                       placeholder="Enter Hall Longitude" required="required">
+                <td th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}">longitude Error</td>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="capacity">Hall Capacity:</label>
+                <input type="number" class="form-control" th:field="*{capacity}" id="capacity"
+                       placeholder="Enter Hall Capacity" required="required">
+                <td th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}">capacity Error</td>
+            </div>
+            <div class="form-row align-items-center">
+                <div class="col-auto my-9 col-md-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-warning" role="alert" th:if="${response}">
+            <p th:text="${response.getMessage()}"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

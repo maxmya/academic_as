@@ -12,12 +12,11 @@
 <h2>Add Department</h2>
 <form action="#" th:action="@{/add/department}" th:object="${department} " method="post">
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-5">
             <label for="depname">Department Name</label>
             <input type="text" class="form-control" th:field="*{departmentName}" id="depname"
                    placeholder="Enter Department Name">
             <td th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}">departmentName Error</td>
-
         </div>
         <div class="col-auto my-9 col-md-9">
             <button type="submit" class="btn btn-primary">Submit</button>

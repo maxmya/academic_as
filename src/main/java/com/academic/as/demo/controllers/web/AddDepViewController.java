@@ -25,16 +25,11 @@ public class AddDepViewController {
     }
 
     @PostMapping("/add/department")
-    public String addDep(@ModelAttribute("department")  @Valid Department department, BindingResult bindingResult , Model model) {
-
+    public String addDep(@ModelAttribute("department") @Valid Department department, BindingResult bindingResult , Model model) {
         if (bindingResult.hasErrors()) {
             return "add_dep";
         }
         model.addAttribute("response", specializationService.addDepartment(department));
         return "add_dep";
     }
-
-
-
-
 }

@@ -42,21 +42,15 @@
 
             </div>
             <div class="form-row align-items-center">
-                <div class="col-auto my-1 col-md-3 table-row-cell">
-                    <label class="mr-sm-2" for="department_id">Department ID:</label>
+                <div class="col-auto my-1 col-md-9 table-row-cell">
+                    <label class="mr-sm-2" for="department_id">Department Name:</label>
                     <select th:field="*{department}" class="custom-select mr-sm-1" id="department_id">
                         <div th:each=" dep : ${departments} ">
                             <option th:value="${dep.getId()}" th:text="${dep.getDepartmentName()}"></option>
                         </div>
                     </select>
                 </div>
-                <div class="col-auto my-1 table-row-cell">
-                    <div class="custom-control custom-checkbox mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                        <label class="custom-control-label" for="customControlAutosizing">Remember ID</label>
-                    </div>
-                </div>
-                <div class="col-auto my-9 col-md-3">
+                <div class="col-auto my-12 col-md-6">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>

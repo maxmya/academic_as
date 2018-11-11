@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +21,20 @@ public class Hall {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "name")
     private String name;
 
+    @NotNull
     @Column(name = "latitude")
     private Float latitude;
 
+    @NotNull
     @Column(name = "longitude")
     private Float longitude;
 
+    @NotNull
     @Column(name = "capacity")
     private Integer capacity;
 
