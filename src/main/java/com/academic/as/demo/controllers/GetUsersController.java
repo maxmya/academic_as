@@ -2,14 +2,11 @@ package com.academic.as.demo.controllers;
 
 
 import com.academic.as.demo.api.responses.UsersResponse;
-import com.academic.as.demo.models.Admin;
 import com.academic.as.demo.services.GetUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/users")
 @RestController
 public class GetUsersController {
