@@ -6,6 +6,7 @@ import com.academic.as.demo.controllers.web.models.UserRole;
 import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.models.*;
 import com.academic.as.demo.services.RegisterService;
+import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,6 @@ public class RegisterViewController implements WebMvcConfigurer {
     public String registerUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                                @ModelAttribute("role") UserRole role, Model model) {
 
-        System.out.println("in post");
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
             model.addAttribute("user", new User());
@@ -60,7 +60,6 @@ public class RegisterViewController implements WebMvcConfigurer {
                 admin.setUser(user);
                 BaseResponse res = registerService.addAdmin(admin);
                 model.addAttribute("response", res);
-                System.out.println(res.getMessage());
                 break;
             case "STUDENT":
                 Student student = new Student();
