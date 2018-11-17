@@ -5,6 +5,7 @@ import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.controllers.web.models.UserRole;
 import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.models.*;
+import com.academic.as.demo.services.GetUsersService;
 import com.academic.as.demo.services.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class RegisterViewController implements WebMvcConfigurer {
@@ -85,5 +87,4 @@ public class RegisterViewController implements WebMvcConfigurer {
         }
         return "add_user";
     }
-
 }

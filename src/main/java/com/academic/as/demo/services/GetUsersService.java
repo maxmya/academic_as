@@ -25,7 +25,17 @@ public class GetUsersService {
     private SupervisorRepository supervisorRepository;
 
     public UsersResponse getAdmins() {
-        return getAll(adminRepository);
+        UsersResponse response = new UsersResponse();
+        try {
+            List usersList = adminRepository.findAll();
+            response.setCode("200");
+            response.setMessage("SUCCESS");
+            response.setData(usersList);
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
     public UsersResponse getAdmin(Integer id) {
@@ -89,7 +99,7 @@ public class GetUsersService {
             if (repository.existsById(id)) {
                 response.setCode("200");
                 response.setMessage("SUCCESS");
-                response.setData(repository.getOne(id));
+                response.setData((List) repository.getOne(id));
             } else {
                 response.setCode("400");
                 response.setMessage("User with id : " + id + " not found");
