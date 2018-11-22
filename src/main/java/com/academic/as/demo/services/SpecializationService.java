@@ -4,6 +4,7 @@ import com.academic.as.demo.api.requests.SpecializationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.api.responses.DepartmentResponse;
 import com.academic.as.demo.api.responses.SpecializationResponse;
+import com.academic.as.demo.api.responses.DepartmentResponse;
 import com.academic.as.demo.models.Department;
 import com.academic.as.demo.models.Specialization;
 import com.academic.as.demo.repositories.DepartmentRepository;
@@ -81,6 +82,42 @@ public class SpecializationService {
             response.setCode("200");
             response.setMessage("SUCCESS");
             response.setData(Specializations);
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public DepartmentResponse getDepartment(int id) {
+        DepartmentResponse response = new DepartmentResponse();
+        try {
+            if (departmentRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                response.setData(departmentRepository.getOne(id));
+            } else {
+                response.setCode("400");
+                response.setMessage("Department with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public SpecializationResponse getSpecialization(int id) {
+        SpecializationResponse response = new SpecializationResponse();
+        try {
+            if (specializationRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                response.setData(specializationRepository.findById(id));
+            } else {
+                response.setCode("400");
+                response.setMessage("Specialization with id : " + id + " not found");
+            }
         } catch (Exception e) {
             response.setCode("400");
             response.setMessage(e.getMessage());

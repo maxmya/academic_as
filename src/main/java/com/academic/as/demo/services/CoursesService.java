@@ -150,4 +150,39 @@ public class CoursesService {
         return response;
     }
 
+    public CoursesResponse getCourse(int id) {
+        CoursesResponse response = new CoursesResponse();
+        try {
+            if (courseRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                response.setData(courseRepository.getOne(id));
+            } else {
+                response.setCode("400");
+                response.setMessage("Specialization with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public CourseInstanceResponse getCourseInstance(int id) {
+        CourseInstanceResponse response = new CourseInstanceResponse();
+        try {
+            if (courseInstanceRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                response.setData(courseInstanceRepository.getOne(id));
+            } else {
+                response.setCode("400");
+                response.setMessage("Specialization with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
 }

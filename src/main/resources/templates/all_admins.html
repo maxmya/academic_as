@@ -8,30 +8,22 @@
 <div th:include="commons::nav"></div>
 <div class="container">
 
-    <p th:text="${msg}"></p>
     <table class="table table-striped table-dark">
         <thead>
         <tr>
             <th scope="col">Id</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">User Name</th>
-            <th scope="col">Registered at</th>
+            <th scope="col">More</th>
         </tr>
         </thead>
         <tbody>
-        [[${admins}]]
-            <th th:each="admin : ${admins}">
-                <tr>
+            <tr th:each="admin : ${admins}">
                     <td th:text="${admin.getUser().getId()}"></td>
                     <td th:text="${admin.getUser().getFirstName()}"></td>
                     <td th:text="${admin.getUser().getLastName()}"></td>
-                    <td th:text="${admin.getUser().getEmail()}"></td>
-                    <td th:text="${admin.getUser().getUsername()}"></td>
-                    <td th:text="${admin.getUser().getCreateDate()}"></td>
-                  </tr>
-            </th>
+                    <td><a th:href="@{/user/} + ${admin.getUser().getId()}">View</a></td>
+            </tr>
         </tbody>
     </table>
 </div>

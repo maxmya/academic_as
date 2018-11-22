@@ -6,13 +6,13 @@ import java.util.List;
 
 public class SpecializationResponse extends BaseResponse {
 
-    private List<Specialization> data ;
+    private Object data ;
 
-    public void setData(List<Specialization> data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
-    public List<Specialization> getData() {
+    public Object getData() {
         return data;
     }
 }

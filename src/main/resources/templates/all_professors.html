@@ -18,11 +18,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="supervisor : ${supervisors}">
-            <td th:text="${supervisor.getUser().getId()}"></td>
-            <td th:text="${supervisor.getUser().getFirstName()}"></td>
-            <td th:text="${supervisor.getUser().getLastName()}"></td>
-            <td><a th:href="@{/user/} + ${supervisor.getUser().getId()}">View</a></td>
+        <tr th:each="professor : ${professors}">
+            <td th:text="${professor.getUser().getId()}"></td>
+            <td th:text="${professor.getUser().getFirstName()}"></td>
+            <td th:text="${professor.getUser().getLastName()}"></td>
+            <td><a th:href="@{/user/} + ${professor.getUser().getId()}">View</a></td>
         </tr>
         </tbody>
     </table>

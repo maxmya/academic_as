@@ -12,17 +12,15 @@
         <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
+            <th scope="col">Department Name</th>
             <th scope="col">More</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="supervisor : ${supervisors}">
-            <td th:text="${supervisor.getUser().getId()}"></td>
-            <td th:text="${supervisor.getUser().getFirstName()}"></td>
-            <td th:text="${supervisor.getUser().getLastName()}"></td>
-            <td><a th:href="@{/user/} + ${supervisor.getUser().getId()}">View</a></td>
+        <tr th:each="department : ${departments.getData()}">
+            <td th:text="${department.getId()}"></td>
+            <td th:text="${department.getDepartmentName()}"></td>
+            <td><a th:href="@{/department/} + ${department.getId()}">View</a></td>
         </tr>
         </tbody>
     </table>
