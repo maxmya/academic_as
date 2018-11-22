@@ -10,7 +10,7 @@
 </head>
 <style>
     th {
-        background-color: #164c64;
+        background-color: #132238;
         color: white;
     }
     .btn:hover{
@@ -37,7 +37,7 @@
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
-    <input style="background-image: url(static/css/ss.png)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Student by First Name.." title="Type in a name">
+    <input style="background-image: url(static/css/ss.png)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Course by First Name.." title="Type in a name">
 
     <table class="table table-striped table-dark table-hover table-condensed">
         <thead>
@@ -49,11 +49,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="student : ${students}" class="bg-info">
-            <td th:text="${student.getUser().getId()}"></td>
-            <td th:text="${student.getUser().getFirstName()}"></td>
-            <td th:text="${student.getUser().getLastName()}"></td>
-            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${student.getUser().getId()}" style="color: rgba(38,38,38,0.87);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View</a></td>
+        <tr th:each="course : ${courses.getData()}" class="bg-info">
+            <td th:text="${course}"></td>
         </tr>
         </tbody>
     </table>

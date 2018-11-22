@@ -6,13 +6,13 @@ import java.util.List;
 
 public class DepartmentResponse extends BaseResponse {
 
-    private List<Department> data;
+    private Object data;
 
-    public void setData(List<Department> data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
-    public List<Department> getData() {
+    public Object getData() {
         return data;
     }
 }

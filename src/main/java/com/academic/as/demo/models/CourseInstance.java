@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class CourseInstance {
     private Integer id;
 
     @Column(name = "start_time")
-    private Time startTime;
+    private Instant startTime;
 
     @Column(name = "end_time")
-    private Time endTime;
+    private Instant endTime;
 
     @Column(name = "type")
     private String type;
