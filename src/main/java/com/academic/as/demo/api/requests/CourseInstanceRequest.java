@@ -3,13 +3,14 @@ package com.academic.as.demo.api.requests;
 import lombok.Data;
 
 import java.sql.Time;
+import java.time.Instant;
 import java.util.List;
 
 @Data
 public class CourseInstanceRequest {
 
-    private Time startTime;
-    private Time endTime;
+    private Instant startTime;
+    private Instant endTime;
     private String type;
     private Integer courseId;
     private Integer hallId;

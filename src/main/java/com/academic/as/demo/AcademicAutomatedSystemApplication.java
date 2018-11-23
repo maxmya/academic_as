@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.ResourceUtils;
 
@@ -20,6 +21,7 @@ import java.io.IOException;
 
 
 @SpringBootApplication
+@EnableScheduling
 public class AcademicAutomatedSystemApplication {
 
     // init BCryptPasswordEncoder
