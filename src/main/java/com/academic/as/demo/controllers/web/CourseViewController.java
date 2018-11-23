@@ -2,6 +2,8 @@ package com.academic.as.demo.controllers.web;
 
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.models.Course;
+import com.academic.as.demo.models.Department;
+import com.academic.as.demo.repositories.CourseRepository;
 import com.academic.as.demo.services.CoursesService;
 import com.academic.as.demo.services.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +13,25 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
-public class AddCourseViewController implements WebMvcConfigurer {
+public class CourseViewController implements WebMvcConfigurer {
 
     @Autowired
     CoursesService coursesService;
 
     @Autowired
     SpecializationService specializationService;
+
+    @Autowired
+    CourseRepository courseRepository;
 
     @GetMapping("/add/course")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -52,6 +60,30 @@ public class AddCourseViewController implements WebMvcConfigurer {
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
         return "add_course";
     }
+    //Todo prevent user to put anyother type of id as integer
+    @GetMapping("/course/{ID}/edit")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String EditCourseView(@PathVariable(value="ID") int id,Model model) {
+        model.addAttribute("course",coursesService.getCourse(id).getData());
+        model.addAttribute("departments", specializationService.getAllDepartments().getData());
+        return "edit_course";
+    }
 
+    @PostMapping("/course/{ID}/edit")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String EditCourse(@ModelAttribute("course") @Valid Course course, BindingResult bindingResult,Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("departments", specializationService.getAllDepartments().getData());
+            return "edit_course";
+        }
+        BaseResponse response = coursesService.SaveCourse(course,course.getId());
+        if (response.getCode().equalsIgnoreCase("200"))
+            model.addAttribute(course);
+        model.addAttribute("response", response);
+        model.addAttribute("departments", specializationService.getAllDepartments().getData());
+        return "edit_course";
+    }
 
 }

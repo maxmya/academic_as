@@ -185,4 +185,23 @@ public class CoursesService {
         }
         return response;
     }
+
+    public CoursesResponse SaveCourse(Course course,int id) {
+        CoursesResponse response = new CoursesResponse();
+        try {
+            if (courseRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                courseRepository.save(course);
+            } else {
+                response.setCode("400");
+                response.setMessage("Course with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
 }
+

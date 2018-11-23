@@ -14,6 +14,7 @@
             <th scope="col">Id</th>
             <th scope="col">Department Name</th>
             <th scope="col">More</th>
+            <th scope="col">Edit</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@
             <td th:text="${department.getId()}"></td>
             <td th:text="${department.getDepartmentName()}"></td>
             <td><a th:href="@{/department/} + ${department.getId()}">View</a></td>
+            <td><a th:href="@{/department/} + ${department.getId()} +@{/edit}">Edit</a></td>
         </tr>
         </tbody>
     </table>

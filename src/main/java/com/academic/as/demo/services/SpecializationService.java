@@ -124,4 +124,22 @@ public class SpecializationService {
         }
         return response;
     }
+
+    public DepartmentResponse SaveDepartment(Department department,int id) {
+        DepartmentResponse response = new DepartmentResponse();
+        try {
+            if (departmentRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                departmentRepository.save(department);
+            } else {
+                response.setCode("400");
+                response.setMessage("Department with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
 }
