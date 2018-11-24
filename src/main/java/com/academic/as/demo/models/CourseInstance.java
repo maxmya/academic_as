@@ -9,8 +9,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@Entity
+ @Entity
 @Table(name = "course_instance")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CourseInstance {
@@ -89,4 +88,84 @@ public class CourseInstance {
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students = new ArrayList<>();
 
-}
+
+     public Integer getId() {
+         return id;
+     }
+
+     public void setId(Integer id) {
+         this.id = id;
+     }
+
+     public Time getStartTime() {
+         return startTime;
+     }
+
+     public void setStartTime(Time startTime) {
+         this.startTime = startTime;
+     }
+
+     public Time getEndTime() {
+         return endTime;
+     }
+
+     public void setEndTime(Time endTime) {
+         this.endTime = endTime;
+     }
+
+     public String getType() {
+         return type;
+     }
+
+     public void setType(String type) {
+         this.type = type;
+     }
+
+     public Course getCourse() {
+         return course;
+     }
+
+     public void setCourse(Course course) {
+         this.course = course;
+     }
+
+     public Hall getHall() {
+         return hall;
+     }
+
+     public void setHall(Hall hall) {
+         this.hall = hall;
+     }
+
+     public Specialization getSpecialization() {
+         return specialization;
+     }
+
+     public void setSpecialization(Specialization specialization) {
+         this.specialization = specialization;
+     }
+
+     public Semester getSemester() {
+         return semester;
+     }
+
+     public void setSemester(Semester semester) {
+         this.semester = semester;
+     }
+
+     public List<Instructor> getInstructors() {
+         return instructors;
+     }
+
+     public void setInstructors(List<Instructor> instructors) {
+         this.instructors = instructors;
+     }
+
+     public List<Student> getStudents() {
+         return students;
+     }
+
+     public void setStudents(List<Student> students) {
+         this.students = students;
+     }
+ }
