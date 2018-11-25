@@ -37,9 +37,14 @@
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
+<<<<<<< HEAD
     <input style="background-image: url(static/css/ss.png)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Supervisors by First Name.." title="Type in a name">
 
     <table class="table table-striped table-dark table-hover table-condensed">
+=======
+
+    <table class="table table-striped table-dark">
+>>>>>>> 37d83665e0ff34b26ace06999a74954c4ab00847
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -49,6 +54,7 @@
         </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
         <tr th:each="supervisor : ${supervisors}" class="bg-info">
             <td th:text="${supervisor.getUser().getId()}"></td>
             <td th:text="${supervisor.getUser().getFirstName()}"></td>
@@ -76,6 +82,16 @@
             }
         }
     </script>
+=======
+        <tr th:each="supervisor : ${supervisors}">
+            <td th:text="${supervisor.getUser().getId()}"></td>
+            <td th:text="${supervisor.getUser().getFirstName()}"></td>
+            <td th:text="${supervisor.getUser().getLastName()}"></td>
+            <td><a th:href="@{/user/} + ${supervisor.getUser().getId()}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+>>>>>>> 37d83665e0ff34b26ace06999a74954c4ab00847
 </div>
 </body>
 </html>

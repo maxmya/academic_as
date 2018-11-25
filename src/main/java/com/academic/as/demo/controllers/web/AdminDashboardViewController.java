@@ -111,6 +111,7 @@ public class AdminDashboardViewController {
             model.addAttribute("departmentData" , departmentData);
         }
         model.addAttribute("response" , response);
+<<<<<<< HEAD
         return "courses_specialization_dash";
     }
     @GetMapping("/department/{ID}/specialization")
@@ -134,6 +135,9 @@ public class AdminDashboardViewController {
         }
         model.addAttribute("response" , response);
         return "view_depatment_courses";
+=======
+        return "view_department";
+>>>>>>> 37d83665e0ff34b26ace06999a74954c4ab00847
     }
 
     @GetMapping("/specialization/{ID}/departments")

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:include="commons::nav"></div>
+
+<div th:if="${response.getCode() == '200'}">
+    <h2><data th:text="${departmentData.getDepartmentName()}"></data> Courses</h2>
+    <br><br>
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Course Id</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Course Code</th>
+            <th scope="col">Course AwardedPoints</th>
+            <th scope="col">View Course Instances</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${departmentData.getCourses()}">
+            <td th:text="${course.getId()}"></td>
+            <td th:text="${course.getName()}"></td>
+            <td th:text="${course.getCode()}"></td>
+            <td th:text="${course.getAwardedPoints()}"></td>
+            <td><a th:href="@{/course/} + ${course.getId()} + @{/instances}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <h2><data th:text="${departmentData.getDepartmentName()}"></data> Specializations</h2>
+    <br><br>
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Specialization Id</th>
+            <th scope="col">Specialization Name</th>
+            <th scope="col">Specialization Departments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="specialize : ${departmentData.getSpecializations()}">
+            <td th:text="${specialize.getId()}"></td>
+            <td th:text="${specialize.getSpecialityName()}"></td>
+            <td><a th:href="@{/specialization/} + ${specialize.getId()}+@{/departments}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div th:if="${response.getCode() == '400'}">
+    <div class="alert alert-warning">
+        <data th:text="${response.getMessage()}"></data>
+    </div>
+</div>
+</body>
+</html>

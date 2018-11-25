@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="commons::head">
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -39,6 +40,15 @@
 <div class="container">
     <input style="background-image: url(static/css/ss.png)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Department by Department Name.." title="Type in a name">
     <table class="table table-striped table-dark table-hover table-condensed">
+=======
+    <title>Title</title>
+</head>
+<body>
+<div th:include="commons::nav"></div>
+<div class="container">
+
+    <table class="table table-striped table-dark">
+>>>>>>> 37d83665e0ff34b26ace06999a74954c4ab00847
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -47,6 +57,7 @@
         </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
         <tr th:each="department : ${departments.getData()}" class="bg-info">
             <td th:text="${department.getId()}"></td>
             <td th:text="${department.getDepartmentName()}"></td>
@@ -73,6 +84,15 @@
             }
         }
     </script>
+=======
+        <tr th:each="department : ${departments.getData()}">
+            <td th:text="${department.getId()}"></td>
+            <td th:text="${department.getDepartmentName()}"></td>
+            <td><a th:href="@{/department/} + ${department.getId()}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+>>>>>>> 37d83665e0ff34b26ace06999a74954c4ab00847
 </div>
 </body>
 </html>
