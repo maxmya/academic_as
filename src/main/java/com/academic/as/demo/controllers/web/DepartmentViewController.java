@@ -1,6 +1,7 @@
 package com.academic.as.demo.controllers.web;
 
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.DepartmentResponse;
 import com.academic.as.demo.models.Department;
 import com.academic.as.demo.services.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +42,18 @@ public class DepartmentViewController {
      //Todo prevent user to put anyother type of id as integer
     @GetMapping("/department/{ID}/edit")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String EditDepartmentView(@PathVariable(value="ID") int id, Model model) {
-        model.addAttribute("department",specializationService.getDepartment(id).getData());
+    public String editDepartmentView(@PathVariable(value="ID") Integer id, Model model) {
+        DepartmentResponse departmentResponse = specializationService.getDepartment(id);
+        if(departmentResponse.getCode() == "400"){
+            return "404";
+        }
+        model.addAttribute("department",departmentResponse.getData());
         return "edit_department";
     }
 
     @PostMapping("/department/{ID}/edit")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String EditDepartment(@ModelAttribute("course") @Valid Department department, BindingResult bindingResult,Model model) {
+    public String editDepartment(@ModelAttribute("course") @Valid Department department, BindingResult bindingResult,Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());

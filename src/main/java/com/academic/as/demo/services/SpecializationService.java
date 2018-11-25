@@ -89,7 +89,7 @@ public class SpecializationService {
         return response;
     }
 
-    public DepartmentResponse getDepartment(int id) {
+    public DepartmentResponse getDepartment(Integer id) {
         DepartmentResponse response = new DepartmentResponse();
         try {
             if (departmentRepository.existsById(id)) {
@@ -107,7 +107,7 @@ public class SpecializationService {
         return response;
     }
 
-    public SpecializationResponse getSpecialization(int id) {
+    public SpecializationResponse getSpecialization(Integer id) {
         SpecializationResponse response = new SpecializationResponse();
         try {
             if (specializationRepository.existsById(id)) {
@@ -125,7 +125,7 @@ public class SpecializationService {
         return response;
     }
 
-    public DepartmentResponse SaveDepartment(Department department,int id) {
+    public DepartmentResponse SaveDepartment(Department department,Integer id) {
         DepartmentResponse response = new DepartmentResponse();
         try {
             if (departmentRepository.existsById(id)) {

@@ -5,6 +5,10 @@
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
+    <div class="alert alert-succes" role="alert" th:if="${response}">
+        <p th:text="${response.getMessage()}"/>
+    </div>
+    <br>
     <h2>Add Department</h2>
     <form action="#" th:action="@{/department/{ID}/edit}" th:object="${department} " method="post">
         <input type="hidden" th:value="${department.getId()}" th:field="*{id}" id="id">
@@ -12,7 +16,7 @@
             <div class="form-group col-md-6">
                 <label for="depname">Department Name</label>
                 <input type="text" class="form-control" th:field="*{departmentName}" id="depname"
-                       placeholder="Enter Department Name">
+                       placeholder="Enter Department Name" required="required">
                 <td th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}">departmentName Error
                 </td>
 
@@ -23,10 +27,6 @@
         </div>
 
     </form>
-
-    <div class="alert alert-warning" role="alert" th:if="${response}">
-        <p th:text="${response.getMessage()}"/>
-    </div>
 </div>
 </body>
 </html>

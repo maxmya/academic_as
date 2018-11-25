@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:include="commons::head">
+    </head>
+<body>
+<div th:include="commons::nav"></div>
+<div class="container" style="margin-top: 20px">
+    <form action="#" th:action="@{/user/{ID}/edit}" th:object="${user}" method="post">
+        <input type="hidden" th:value="${user.getId()}" th:field="*{id}" id="id">
+        <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" class="form-control" th:field="*{firstName}" id="fname"
+                   placeholder="Enter First Name">
+            <div th:if="${#fields.hasErrors('firstName')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{firstName}">firstName Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lname">Second Name</label>
+            <input type="text" class="form-control" th:field="*{lastName}" id="lname"
+                   placeholder="Enter Second Name">
+            <div th:if="${#fields.hasErrors('lastName')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{lastName}">lastName Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" th:field="*{username}" id="username"
+                   placeholder="Enter Username" required="required">
+            <div th:if="${#fields.hasErrors('username')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{username}">username Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Enter Email"
+                  >
+            <div th:if="${#fields.hasErrors('email')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{email}">email Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Password"
+                  >
+            <div th:if="${#fields.hasErrors('password')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{password}">password Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password"
+                   placeholder="Confirm Password">
+        </div>
+        <form  th:action="@{/register}" th:object="${role}" th:method="pst">
+            <div class="form-group">
+                <label for="confirm_password">System Role</label>
+                <br>
+                <input type="hidden" th:value="${role.getRole()}" th:field="*{role}" id="role">
+
+                <select th:field="*{role}" class="selectpicker" title="Select Role">
+                    <option th:each="role : ${roles}"
+                            th:value="${role}"
+                            th:text="${role}">Options
+                    </option>
+                </select>
+                <button type="submit" style="display: none" id="sub">submit</button>
+            </div>
+        </form>
+        <div c lass="form-group">
+
+            <br>
+            <button type="submit" id="form" class="btn btn-primary" style="float:right;">Submit</button>
+        </div>
+
+    </form>
+</div>
+<br>
+<div class="container" th:if="${response}">
+
+    <div class="alert alert-danger" role="alert" th:if='${response.getCode().equals("400")}'>
+        <p th:text="${response.getMessage()}"></p>
+    </div>
+
+    <div class="alert alert-success" role="alert" th:if='${response.getCode().equals("200")}'>
+        <p>User Updated Successfully</p>
+    </div>
+</div>
+
+<script>
+
+    document.getElementById("form").addEventListener("click", function (ev) {
+        document.getElementById("sub").click();
+    })
+
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+</script>
+
+</body>
+</html>

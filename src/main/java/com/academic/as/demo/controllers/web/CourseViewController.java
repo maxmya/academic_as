@@ -1,6 +1,7 @@
 package com.academic.as.demo.controllers.web;
 
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.Department;
 import com.academic.as.demo.repositories.CourseRepository;
@@ -63,15 +64,19 @@ public class CourseViewController implements WebMvcConfigurer {
     //Todo prevent user to put anyother type of id as integer
     @GetMapping("/course/{ID}/edit")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String EditCourseView(@PathVariable(value="ID") int id,Model model) {
-        model.addAttribute("course",coursesService.getCourse(id).getData());
+    public String editCourseView(@PathVariable(value="ID") Integer id,Model model) {
+        CoursesResponse coursesResponse = coursesService.getCourse(id);
+        if(coursesResponse.getCode() == "400") {
+            return "404";
+        }
+        model.addAttribute("course", coursesResponse.getData());
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
         return "edit_course";
     }
 
     @PostMapping("/course/{ID}/edit")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String EditCourse(@ModelAttribute("course") @Valid Course course, BindingResult bindingResult,Model model) {
+    public String editCourse(@ModelAttribute("course") @Valid Course course, BindingResult bindingResult,Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());

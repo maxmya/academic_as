@@ -150,7 +150,7 @@ public class CoursesService {
         return response;
     }
 
-    public CoursesResponse getCourse(int id) {
+    public CoursesResponse getCourse(Integer id) {
         CoursesResponse response = new CoursesResponse();
         try {
             if (courseRepository.existsById(id)) {
@@ -168,7 +168,7 @@ public class CoursesService {
         return response;
     }
 
-    public CourseInstanceResponse getCourseInstance(int id) {
+    public CourseInstanceResponse getCourseInstance(Integer id) {
         CourseInstanceResponse response = new CourseInstanceResponse();
         try {
             if (courseInstanceRepository.existsById(id)) {
@@ -186,7 +186,7 @@ public class CoursesService {
         return response;
     }
 
-    public CoursesResponse SaveCourse(Course course,int id) {
+    public CoursesResponse SaveCourse(Course course,Integer id) {
         CoursesResponse response = new CoursesResponse();
         try {
             if (courseRepository.existsById(id)) {
