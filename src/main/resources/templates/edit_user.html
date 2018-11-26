@@ -53,21 +53,6 @@
             <input type="password" class="form-control" id="confirm_password"
                    placeholder="Confirm Password">
         </div>
-        <form  th:action="@{/register}" th:object="${role}" th:method="pst">
-            <div class="form-group">
-                <label for="confirm_password">System Role</label>
-                <br>
-                <input type="hidden" th:value="${role.getRole()}" th:field="*{role}" id="role">
-
-                <select th:field="*{role}" class="selectpicker" title="Select Role">
-                    <option th:each="role : ${roles}"
-                            th:value="${role}"
-                            th:text="${role}">Options
-                    </option>
-                </select>
-                <button type="submit" style="display: none" id="sub">submit</button>
-            </div>
-        </form>
         <div c lass="form-group">
 
             <br>
