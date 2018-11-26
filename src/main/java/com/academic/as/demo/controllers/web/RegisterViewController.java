@@ -102,6 +102,16 @@ public class RegisterViewController implements WebMvcConfigurer {
         return "edit_user";
     }
 
+    @GetMapping("/user/{ID}/edit/password")
+    public String editUserPasswordView(@PathVariable(value="ID") Integer id, Model model) {
+        UsersResponse usersResponse = registerService.getUser(id);
+        if(usersResponse.getCode() != "200"){
+            return "404";
+        }
+        model.addAttribute("user", usersResponse.getData());
+        return "change_password";
+    }
+
    // it is just a Bridge
     @GetMapping("/user/{userName}/test")
     public RedirectView editProfile(@PathVariable(value="userName") String userName,
@@ -112,19 +122,33 @@ public class RegisterViewController implements WebMvcConfigurer {
     }
 
     @PostMapping("/user/{ID}/edit")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String editUser(@ModelAttribute("course") @Valid User user ,BindingResult bindingResult,Model model) {
 
-        System.out.println(bindingResult.getAllErrors());
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("user", user);
             return "edit_user";
         }
         BaseResponse response = registerService.saveUser(user,user.getId());
-        System.out.println(response.getCode());
         if (response.getCode().equalsIgnoreCase("200"))
             model.addAttribute(user);
         model.addAttribute("response", response);
         return "edit_user";
+    }
+
+
+    @PostMapping("/user/{ID}/edit/password")
+    public String editUserPassword(@ModelAttribute("course") @Valid User user ,BindingResult bindingResult,Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("user", user);
+            return "change_password";
+        }
+        BaseResponse response = registerService.saveUser(user,user.getId());
+        if (response.getCode().equalsIgnoreCase("200"))
+            model.addAttribute(user);
+        model.addAttribute("response", response);
+        return "change_password";
     }
 }

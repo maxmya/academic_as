@@ -114,6 +114,7 @@ public class RegisterService {
     }
 
     public UsersResponse saveUser(User user, Integer id) {
+       System.out.println("user "+user);
         UsersResponse response = new UsersResponse();
         try {
             if (userRepository.existsById(id)) {
