@@ -18,6 +18,7 @@
             <th scope="col">Course Code</th>
             <th scope="col">Course AwardedPoints</th>
             <th scope="col">View Course Instances</th>
+            <th scope="col">Edit Course</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
             <td th:text="${course.getCode()}"></td>
             <td th:text="${course.getAwardedPoints()}"></td>
             <td><a th:href="@{/course/} + ${course.getId()} + @{/instances}">View</a></td>
+            <td><a th:href="@{/course/} + ${course.getId()} + @{/edit}">Edit</a></td>
         </tr>
         </tbody>
     </table>

@@ -45,6 +45,7 @@
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">More</th>
+            <th scope="col">Edit</th>
         </tr>
         </thead>
         <tbody>
@@ -53,6 +54,7 @@
             <td th:text="${student.getUser().getFirstName()}"></td>
             <td th:text="${student.getUser().getLastName()}"></td>
             <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${student.getUser().getId()}" style="color: rgba(38,38,38,0.87);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View</a></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${student.getUser().getId()} +@{/edit}"> <span class="glyphicon glyphicon-edit" style="color:rgba(38,38,38,0.87)" ></span>Edit</a></td>
         </tr>
         </tbody>
     </table>

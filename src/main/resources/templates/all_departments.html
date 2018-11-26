@@ -44,6 +44,7 @@
             <th scope="col">Id</th>
             <th scope="col">Department Name</th>
             <th scope="col">More</th>
+            <th scope="col">Edit</th>
         </tr>
         </thead>
         <tbody>
@@ -51,6 +52,7 @@
             <td th:text="${department.getId()}"></td>
             <td th:text="${department.getDepartmentName()}"></td>
             <td><a type="button" class="btn btn-info" th:href="@{/department/} + ${department.getId()}" style="color:rgba(38,38,38,0.87);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.86)" ></span> View</a></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/department/} + ${department.getId()} +@{/edit}" style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-edit" style="color:rgba(38,38,38,0.85)"></span>Edit</a></td>
         </tr>
         </tbody>
     </table>

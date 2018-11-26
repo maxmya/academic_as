@@ -86,7 +86,7 @@ public class GetUsersService {
     generic method to get single user with id if it's existed
     passed repo should be in the generic form <Object , Integer>
     */
-    public UsersResponse getOne(int id) {
+    public UsersResponse getOne(Integer id) {
         UsersResponse response = new UsersResponse();
         try {
             if (userRepository.existsById(id)) {

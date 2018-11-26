@@ -5,12 +5,13 @@
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
-    <div class="alert alert-success" role="alert" th:if="${response}">
+    <div class="alert alert-succes" role="alert" th:if="${response}">
         <p th:text="${response.getMessage()}"/>
     </div>
     <br>
     <h2>Add Department</h2>
-    <form action="#" th:action="@{/add/department}" th:object="${department} " method="post">
+    <form action="#" th:action="@{/department/{ID}/edit}" th:object="${department} " method="post">
+        <input type="hidden" th:value="${department.getId()}" th:field="*{id}" id="id">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="depname">Department Name</label>
@@ -24,6 +25,7 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
+
     </form>
 </div>
 </body>
