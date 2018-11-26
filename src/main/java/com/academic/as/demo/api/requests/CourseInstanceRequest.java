@@ -8,15 +8,15 @@ import java.util.List;
 @Data
 public class CourseInstanceRequest {
 
-    private Time startTime;
-    private Time endTime;
-    private String type;
-    private Integer courseId;
-    private Integer hallId;
-    private Integer specializationId;
-    private Integer semesterId;
-    private List<Integer> instructorsIds;
-    private List<Integer> studentsIds;
+        private Long startTime;
+        private Long endTime;
+        private String type;
+        private Integer courseId;
+        private Integer hallId;
+        private Integer specializationId;
+        private Integer semesterId;
+        private List<Integer> instructorsIds;
+        private List<Integer> studentsIds;
 
 }
 

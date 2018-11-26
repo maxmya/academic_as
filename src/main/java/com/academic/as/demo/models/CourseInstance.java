@@ -6,10 +6,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
- @Entity
+@Entity
 @Table(name = "course_instance")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CourseInstance {
@@ -20,10 +21,10 @@ public class CourseInstance {
     private Integer id;
 
     @Column(name = "start_time")
-    private Time startTime;
+    private Instant startTime;
 
     @Column(name = "end_time")
-    private Time endTime;
+    private Instant endTime;
 
     @Column(name = "type")
     private String type;
@@ -89,83 +90,83 @@ public class CourseInstance {
     private List<Student> students = new ArrayList<>();
 
 
-     public Integer getId() {
-         return id;
-     }
+    public Integer getId() {
+        return id;
+    }
 
-     public void setId(Integer id) {
-         this.id = id;
-     }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-     public Time getStartTime() {
-         return startTime;
-     }
+    public Instant getStartTime() {
+        return startTime;
+    }
 
-     public void setStartTime(Time startTime) {
-         this.startTime = startTime;
-     }
+    public void setStartTime(Instant startTime) {
+        this.startTime = startTime;
+    }
 
-     public Time getEndTime() {
-         return endTime;
-     }
+    public Instant getEndTime() {
+        return endTime;
+    }
 
-     public void setEndTime(Time endTime) {
-         this.endTime = endTime;
-     }
+    public void setEndTime(Instant endTime) {
+        this.endTime = endTime;
+    }
 
-     public String getType() {
-         return type;
-     }
+    public String getType() {
+        return type;
+    }
 
-     public void setType(String type) {
-         this.type = type;
-     }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-     public Course getCourse() {
-         return course;
-     }
+    public Course getCourse() {
+        return course;
+    }
 
-     public void setCourse(Course course) {
-         this.course = course;
-     }
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
-     public Hall getHall() {
-         return hall;
-     }
+    public Hall getHall() {
+        return hall;
+    }
 
-     public void setHall(Hall hall) {
-         this.hall = hall;
-     }
+    public void setHall(Hall hall) {
+        this.hall = hall;
+    }
 
-     public Specialization getSpecialization() {
-         return specialization;
-     }
+    public Specialization getSpecialization() {
+        return specialization;
+    }
 
-     public void setSpecialization(Specialization specialization) {
-         this.specialization = specialization;
-     }
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
+    }
 
-     public Semester getSemester() {
-         return semester;
-     }
+    public Semester getSemester() {
+        return semester;
+    }
 
-     public void setSemester(Semester semester) {
-         this.semester = semester;
-     }
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
 
-     public List<Instructor> getInstructors() {
-         return instructors;
-     }
+    public List<Instructor> getInstructors() {
+        return instructors;
+    }
 
-     public void setInstructors(List<Instructor> instructors) {
-         this.instructors = instructors;
-     }
+    public void setInstructors(List<Instructor> instructors) {
+        this.instructors = instructors;
+    }
 
-     public List<Student> getStudents() {
-         return students;
-     }
+    public List<Student> getStudents() {
+        return students;
+    }
 
-     public void setStudents(List<Student> students) {
-         this.students = students;
-     }
- }
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+}

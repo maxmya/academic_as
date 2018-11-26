@@ -111,7 +111,30 @@ public class AdminDashboardViewController {
             model.addAttribute("departmentData" , departmentData);
         }
         model.addAttribute("response" , response);
-        return "view_department";
+        return "courses_specialization_dash";
+    }
+    @GetMapping("/department/{ID}/specialization")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String getDepartmentSpecialization(@PathVariable(value="ID") int id, Model model) {
+        DepartmentResponse response =  specializationService.getDepartment(id);
+        Department departmentData = (Department) response.getData();
+        if(response.getCode() == "200"){
+            model.addAttribute("departmentData" , departmentData);
+        }
+        model.addAttribute("response" , response);
+        return "view_department_specializatiom";
+    }
+    @GetMapping("/department/{ID}/course")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String getDepartmentCourses(@PathVariable(value="ID") int id, Model model) {
+        DepartmentResponse response =  specializationService.getDepartment(id);
+        Department departmentData = (Department) response.getData();
+        if(response.getCode() == "200"){
+            model.addAttribute("departmentData" , departmentData);
+        }
+        model.addAttribute("response" , response);
+        return "view_depatment_courses";
+
     }
 
     @GetMapping("/specialization/{ID}/departments")

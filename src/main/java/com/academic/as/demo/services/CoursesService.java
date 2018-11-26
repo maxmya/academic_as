@@ -10,6 +10,7 @@ import com.academic.as.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,8 +80,8 @@ public class CoursesService {
         BaseResponse response = new BaseResponse();
         try {
             CourseInstance newCourseInstance = new CourseInstance();
-            newCourseInstance.setStartTime(requestBody.getStartTime());
-            newCourseInstance.setEndTime(requestBody.getEndTime());
+            newCourseInstance.setStartTime(Instant.ofEpochMilli(requestBody.getStartTime()));
+            newCourseInstance.setEndTime(Instant.ofEpochMilli(requestBody.getEndTime()));
             newCourseInstance.setType(requestBody.getType());
             Hall courseHall = hallRepository.getOne(requestBody.getHallId());
             Course instanceImage = courseRepository.getOne(requestBody.getCourseId());
