@@ -25,7 +25,7 @@
             <td th:text="${instance.getId()}"></td>
             <td th:text="${instance.getStartTime()}"></td>
             <td th:text="${instance.getEndTime()}"></td>
-            <td th:text="${instance.getHall()}"></td>
+            <td th:text="${instance.getHall().getName()}"></td>
             <td><a th:href="@{/instance/} + ${instance.getId()} +@{'/instructors'}">View Instructors</a></td>
             <td><a th:href="@{/instance/} + ${instance.getId()} +@{'/students'}">View Students</a></td>
         </tr>

@@ -138,7 +138,7 @@ public class AdminDashboardViewController {
         return "view_course_intance";
     }
 
-    @GetMapping("/instance/{ID}/student")
+    @GetMapping("/instance/{ID}/students")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getCourseInstanceStudents(@PathVariable(value="ID") int id, Model model) {
         CourseInstanceResponse response =  coursesService.getCourseInstance(id);
@@ -150,7 +150,7 @@ public class AdminDashboardViewController {
         return "view_course_intance_students";
     }
 
-    @GetMapping("/instance/{ID}/instructor")
+    @GetMapping("/instance/{ID}/instructors")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getCourseInstanceInstructor(@PathVariable(value="ID") int id, Model model) {
         CourseInstanceResponse response =  coursesService.getCourseInstance(id);
