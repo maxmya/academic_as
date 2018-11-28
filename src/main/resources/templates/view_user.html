@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<style>
+    ul.list-group {
+        list-style-type: circle;
+        list-style-position: outside;
+    }
+</style>
+<body>
+<div th:include="commons::nav"></div>
+   <div th:if="${response.getCode() == '200'}">
+       <h3 style="color: #132238">User Data</h3>
+       <ul class="list-group">
+           <li class="list-group-item list-group-item-info"><strong style="color: #364e68">Email : </strong> <data th:text="${userData.getEmail()}" style="color: #612147"></data></li>
+           <li class="list-group-item list-group-item-info"><strong style="color: #364e68">User Name : </strong> <data th:text="${userData.getUsername()}"style="color: #612147"></data></li>
+           <li class="list-group-item list-group-item-info"><strong style="color: #364e68">Register At : </strong> <data th:text="${userData.getCreateDate()}"style="color: #612147"></data></li>
+       </ul>
+   </div>
+   <div th:if="${response.getCode() == '400'}">
+          <div class="alert alert-warning">
+              <data th:text="${response.getMessage()}"></data>
+          </div>
+   </div>
+</body>
+</html>
