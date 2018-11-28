@@ -98,7 +98,8 @@ public class RegisterViewController implements WebMvcConfigurer {
         if(usersResponse.getCode() != "200"){
             return "404";
         }
-        model.addAttribute("user", usersResponse.getData());
+        User user = (User) usersResponse.getData();
+        model.addAttribute("user", user);
         return "edit_user";
     }
 
@@ -122,13 +123,14 @@ public class RegisterViewController implements WebMvcConfigurer {
     }
 
     @PostMapping("/user/{ID}/edit")
-    public String editUser(@ModelAttribute("course") @Valid User user ,BindingResult bindingResult,Model model) {
+    public String editUserInfo(@ModelAttribute("user") @Valid User user ,BindingResult bindingResult,Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
             model.addAttribute("user", user);
             return "edit_user";
         }
+        user.setPassword("$2a$10$aQlgb43QkdC8XLoBSGBNT.5s4/07Z.syEjZKNM7ydoLtuewHYV7xa");
         BaseResponse response = registerService.saveUser(user,user.getId());
         if (response.getCode().equalsIgnoreCase("200"))
             model.addAttribute(user);
@@ -138,7 +140,7 @@ public class RegisterViewController implements WebMvcConfigurer {
 
 
     @PostMapping("/user/{ID}/edit/password")
-    public String editUserPassword(@ModelAttribute("course") @Valid User user ,BindingResult bindingResult,Model model) {
+    public String editUserPassword(@ModelAttribute("user") @Valid User user ,BindingResult bindingResult,Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
