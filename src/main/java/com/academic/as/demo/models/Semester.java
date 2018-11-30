@@ -3,7 +3,9 @@ package com.academic.as.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "semester")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@NoArgsConstructor
 public class Semester {
 
     @Id
@@ -29,17 +32,6 @@ public class Semester {
 
     @Column(name = "end_date")
     private Date endDate;
-
-    public Semester() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     @JsonBackReference(value = "courseInstances")
     @OneToMany(mappedBy = "semester",
