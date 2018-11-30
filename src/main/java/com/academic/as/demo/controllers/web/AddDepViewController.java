@@ -3,6 +3,7 @@ package com.academic.as.demo.controllers.web;
 import com.academic.as.demo.models.Department;
 import com.academic.as.demo.services.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,16 +17,18 @@ import javax.validation.Valid;
 public class AddDepViewController {
 
     @Autowired
-    SpecializationService specializationService ;
+    SpecializationService specializationService;
 
     @GetMapping("/add/department")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addDepView(Model model) {
         model.addAttribute(new Department());
         return "add_dep";
     }
 
     @PostMapping("/add/department")
-    public String addDep(@ModelAttribute("department")  @Valid Department department, BindingResult bindingResult , Model model) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String addDep(@ModelAttribute("department") @Valid Department department, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "add_dep";
@@ -33,8 +36,6 @@ public class AddDepViewController {
         model.addAttribute("response", specializationService.addDepartment(department));
         return "add_dep";
     }
-
-
 
 
 }
