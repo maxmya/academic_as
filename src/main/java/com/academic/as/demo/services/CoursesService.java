@@ -10,6 +10,7 @@ import com.academic.as.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +39,14 @@ public class CoursesService {
     private InstructorRepository instructorRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private StudentRepository studentRepository;
 
     public BaseResponse addCourseByDepName(Course course) {
         BaseResponse response = new BaseResponse();
-        System.out.println("course "+course.getDepartment().getDepartmentName());
+        System.out.println("course " + course.getDepartment().getDepartmentName());
         try {
             Department dp = departmentRepository.
                     findDepartmentByDepartmentName(course.getDepartment().getDepartmentName());
@@ -79,8 +83,8 @@ public class CoursesService {
         BaseResponse response = new BaseResponse();
         try {
             CourseInstance newCourseInstance = new CourseInstance();
-            newCourseInstance.setStartTime(requestBody.getStartTime());
-            newCourseInstance.setEndTime(requestBody.getEndTime());
+            newCourseInstance.setStartTime(Instant.ofEpochMilli(requestBody.getStartTime()));
+            newCourseInstance.setEndTime(Instant.ofEpochMilli(requestBody.getEndTime()));
             newCourseInstance.setType(requestBody.getType());
             Hall courseHall = hallRepository.getOne(requestBody.getHallId());
             Course instanceImage = courseRepository.getOne(requestBody.getCourseId());
@@ -136,7 +140,6 @@ public class CoursesService {
 
     public CourseInstanceResponse getRegisteredCourses(Integer studentId, Integer semesterId) {
         CourseInstanceResponse response = new CourseInstanceResponse();
-
         Student selectedStudent = studentRepository.getOne(studentId);
         ArrayList<CourseInstance> registeredCourseInstances = new ArrayList<>();
         for (CourseInstance course : selectedStudent.getCourseInstances()) {
@@ -199,6 +202,33 @@ public class CoursesService {
         return response;
     }
 
+    public CourseInstanceResponse ViewregisterCoursesToStudent(Integer studentId) {
+        CourseInstanceResponse response = new CourseInstanceResponse();
+        Student currentStudent = studentRepository.findByUserId(studentId);
+        try {
+            if (currentStudent != null) {
+                Specialization currentStudSpecialization = currentStudent.getSpecialization();
+                List<CourseInstance> courseInstancesOfSp = courseInstanceRepository.getCourseInstanceBySpecializationId(currentStudSpecialization.getId());
+                List<CourseInstance> courseInstancesOfSp2 = new ArrayList<>();
+
+                for (CourseInstance course : courseInstancesOfSp) {
+                    if (course.getCourse().getRequiredPoints()<= currentStudent.getCreditPoints())
+                        courseInstancesOfSp2.add(course);
+                }
+                response.setData(courseInstancesOfSp2);
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+            } else {
+                response.setCode("400");
+                response.setMessage("Student with id : " + studentId + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
     public CoursesResponse SaveCourse(Course course, Integer id) {
         CoursesResponse response = new CoursesResponse();
         try {
@@ -217,3 +247,4 @@ public class CoursesService {
         return response;
     }
 }
+

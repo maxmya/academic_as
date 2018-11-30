@@ -6,7 +6,6 @@ import com.academic.as.demo.services.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/register")
 @RestController
 public class RegisterController {

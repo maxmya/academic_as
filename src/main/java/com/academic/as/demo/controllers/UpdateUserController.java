@@ -6,7 +6,6 @@ import com.academic.as.demo.services.UpdateUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/update/")
 @RestController
 public class UpdateUserController {

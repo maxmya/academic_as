@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+    <title>edit profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" >
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:include="commons::nav"></div>
+<br>
+<div>
+    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+ </div>
+<br>
+<div class="container" style="margin-top: 20px">
+    <form class="form-horizontal" action="#" th:action="@{/user/{ID}/edit}" th:object="${user}" method="post">
+        <input type="hidden" th:value="${user.getId()}" th:field="*{id}" id="id">
+        <div class="form-group">
+            <label for="fname"  class="col-lg-2 control-label">First Name</label>
+            <div class="col-lg-5">
+                <input type="text" class="form-control" th:field="*{firstName}" id="fname"
+                       placeholder="Enter First Name">
+            </div>
+            <div th:if="${#fields.hasErrors('firstName')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{firstName}">firstName Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lname"  class="col-lg-2 control-label">Second Name</label>
+            <div class="col-lg-5">
+                 <input type="text" class="form-control" th:field="*{lastName}" id="lname"
+                   placeholder="Enter Second Name">
+            </div>
+            <div th:if="${#fields.hasErrors('lastName')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{lastName}">lastName Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username"  class="col-lg-2 control-label">Username</label>
+            <div class="col-lg-5">
+                <input type="text" class="form-control" th:field="*{username}" id="username"
+                   placeholder="Enter Username" required="required">
+            </div>
+            <div th:if="${#fields.hasErrors('username')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{username}">username Error</td>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email"  class="col-lg-2 control-label">Email Address</label>
+            <div class="col-lg-5">
+                 <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Enter Email"
+                  >
+            </div>
+            <div th:if="${#fields.hasErrors('email')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{email}">email Error</td>
+            </div>
+        </div>
+        <div class="form-group" style="display:none">
+            <label for="password"  class="col-lg-2 control-label">Password</label>
+            <div class="col-lg-5">
+                <input type="password" th:value="${user.getPassword()}" class="form-control" th:field="*{password}" id="password" placeholder="Password"
+                >
+            </div>
+            <div th:if="${#fields.hasErrors('password')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{password}">password Error</td>
+            </div>
+        </div>
+        <div class="form-group" style="display:none">
+            <label for="confirm_password"  class="col-lg-2 control-label">Confirm Password</label>
+            <div class="col-lg-5">
+                <input type="password" class="form-control" id="confirm_password"
+                       placeholder="Confirm Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+<br>
+<div class="container" th:if="${response}">
+
+    <div class="alert alert-danger" role="alert" th:if='${response.getCode().equals("400")}'>
+        <p th:text="${response.getMessage()}"></p>
+    </div>
+
+    <div class="alert alert-success" role="alert" th:if='${response.getCode().equals("200")}'>
+        <p>User Updated Successfully</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="commons::head">
+    <title>Home</title>
 </head>
 <body>
-<h1>Hello World</h1>
+<div th:include="commons::nav"></div>
+<div class="container" sec:authorize="isAuthenticated()"> Welcome <span sec:authentication="name"></span></div>
 </body>
 </html>

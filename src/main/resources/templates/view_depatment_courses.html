@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<style>
+    th {
+        background-color: #164c64;
+        color: white;
+    }
+    .btn:hover{
+        background-color: #199dd4;
+        color: #000000;
+    }
+    .btn{
+        border-radius: 50px;
+    }
+    * {
+        box-sizing: border-box;
+    }
+
+    #myInput {
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 13px;
+        padding: 8px 15px 8px 25px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+    }
+</style>
+<body>
+<div th:include="commons::nav"></div>
+<div class="container">
+    <div th:if="${response.getCode() == '200'}">
+        <input style="background-image: url(static/css/ss.png)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Course by Course Name.." title="Type in a name">
+        <table id="myTable" class="table table-striped table-dark table-hover table-condensed">
+            <thead>
+            <tr>
+                <th scope="col">Course Id</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Course Code</th>
+                <th scope="col">Course AwardedPoints</th>
+                <th scope="col">View Course Instances</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${departmentData.getCourses()}" class="bg-info">
+                <td th:text="${course.getId()}"></td>
+                <td th:text="${course.getName()}"></td>
+                <td th:text="${course.getCode()}"></td>
+                <td th:text="${course.getAwardedPoints()}"></td>
+                <td><a type="button" class="btn btn-info" th:href="@{/course/} + ${course.getId()} + @{/instances}"style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
+    </div>
+    <div th:if="${response.getCode() == '400'}">
+        <div class="alert alert-warning">
+            <data th:text="${response.getMessage()}"></data>
+        </div>
+</div>
+</div>
+</body>
+</html>

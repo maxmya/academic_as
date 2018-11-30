@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons::head">
+</head>
+<title>Add Course</title>
+<body>
+
+<div th:replace="commons::nav"></div>
+
+<div class="container">
+    <h2>Edit Course</h2>
+    <form action="#" th:action="@{/course/{ID}/edit}" th:object="${course} " method="post">
+        <div class="form-group ">
+            <input type="hidden" th:value="${course.getId()}" th:field="*{id}" id="id">
+            <label for="name">Course Name</label>
+            <input type="text" class="form-control" th:field="*{name}" id="name"
+                   placeholder="Enter Course Name" required="required">
+            <div th:if="${#fields.hasErrors('name')}" class="alert  alert-danger error" role="alert">
+                <td th:errors="*{name}">name Error</td>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="code">Course Code:</label>
+            <input type="number" class="form-control" th:field="*{code}" id="code"
+                   placeholder="Enter Code" required="required">
+            <div th:if="${#fields.hasErrors('code')}" class="alert alert-danger error" role="alert">
+                <td th:errors="*{code}">code Error</td>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="required_points">Required Point:</label>
+            <input type="number" class="form-control" min="0" th:field="*{requiredPoints}" id="required_points"
+                   placeholder="Enter Required Point" required="required">
+            <div th:if="${#fields.hasErrors('requiredPoints')}" class="alert alert-danger error" role="alert">
+                <td th:errors="*{requiredPoints}">requiredPoints Error</td>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="awarded_points">Awarded Point:</label>
+            <input type="number" class="form-control" th:field="*{awardedPoints}" id="awarded_points"
+                   placeholder="Enter Awarded Point" required="required">
+            <div th:if="${#fields.hasErrors('awardedPoints')}" class="alert alert-danger error" role="alert">
+                <td th:errors="*{awardedPoints}">awardedPoints Error</td>
+            </div>
+        </div>
+        <div class="form-group ">
+
+            <select title="Select Department" th:field="*{department}" class="selectpicker" id="department_id">
+                <div th:each=" dep : ${departments} ">
+                    <option th:value="${dep.getId()}" th:text="${dep.getDepartmentName()}"></option>
+                </div>
+            </select>
+        </div>
+
+        <button type="submit" style="float: right" class="btn btn-primary">Edit</button>
+    </form>
+    <br>
+
+
+</div>
+<br>
+<br>
+<div class="container" th:if="${response}">
+
+    <div class="alert alert-danger" role="alert" th:if='${response.getCode().equals("400")}'>
+        <p th:text="${response.getMessage()}"></p>
+    </div>
+
+    <div class="alert alert-success" role="alert" th:if='${response.getCode().equals("200")}'>
+        <p>Course Updated Successfully</p>
+    </div>
+</div>
+<br>
+
+</body>
+</html>
