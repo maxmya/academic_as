@@ -12,17 +12,11 @@ import com.academic.as.demo.repositories.CourseRepository;
 import com.academic.as.demo.repositories.HallRepository;
 import com.academic.as.demo.repositories.SemesterRepository;
 import com.academic.as.demo.services.CoursesService;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.cloud.FirestoreClient;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
-import java.time.Instant;
 import java.util.*;
 
 @Component
