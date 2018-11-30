@@ -1,15 +1,16 @@
 package com.academic.as.demo.models;
 
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "semester")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -52,35 +53,4 @@ public class Semester {
         courseInstances.add(courseInstance);
     }
 
-    public List<CourseInstance> getCourseInstances() {
-        return courseInstances;
-    }
-
-    public void setCourseInstances(List<CourseInstance> courseInstances) {
-        this.courseInstances = courseInstances;
-    }
-
-    public String getSemesterCode() {
-        return semesterCode;
-    }
-
-    public void setSemesterCode(String semesterCode) {
-        this.semesterCode = semesterCode;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
 }

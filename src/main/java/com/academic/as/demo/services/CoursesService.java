@@ -10,6 +10,7 @@ import com.academic.as.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class CoursesService {
 
     public BaseResponse addCourseByDepName(Course course) {
         BaseResponse response = new BaseResponse();
-        System.out.println("course "+course.getDepartment().getDepartmentName());
+        System.out.println("course " + course.getDepartment().getDepartmentName());
         try {
             Department dp = departmentRepository.
                     findDepartmentByDepartmentName(course.getDepartment().getDepartmentName());
@@ -79,8 +80,8 @@ public class CoursesService {
         BaseResponse response = new BaseResponse();
         try {
             CourseInstance newCourseInstance = new CourseInstance();
-            newCourseInstance.setStartTime(requestBody.getStartTime());
-            newCourseInstance.setEndTime(requestBody.getEndTime());
+            newCourseInstance.setStartTime(Instant.ofEpochMilli(requestBody.getStartTime()));
+            newCourseInstance.setEndTime(Instant.ofEpochMilli(requestBody.getEndTime()));
             newCourseInstance.setType(requestBody.getType());
             Hall courseHall = hallRepository.getOne(requestBody.getHallId());
             Course instanceImage = courseRepository.getOne(requestBody.getCourseId());
@@ -149,6 +150,7 @@ public class CoursesService {
 
         return response;
     }
+
     public BaseResponse addHall(Hall hall) {
         BaseResponse response = new BaseResponse();
         try {
@@ -161,4 +163,59 @@ public class CoursesService {
         }
         return response;
     }
+
+    public CoursesResponse getCourse(Integer id) {
+        CoursesResponse response = new CoursesResponse();
+        try {
+            if (courseRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                response.setData(courseRepository.getOne(id));
+            } else {
+                response.setCode("400");
+                response.setMessage("Specialization with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public CourseInstanceResponse getCourseInstance(Integer id) {
+        CourseInstanceResponse response = new CourseInstanceResponse();
+        try {
+            if (courseInstanceRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                response.setData(courseInstanceRepository.getOne(id));
+            } else {
+                response.setCode("400");
+                response.setMessage("Specialization with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public CoursesResponse SaveCourse(Course course, Integer id) {
+        CoursesResponse response = new CoursesResponse();
+        try {
+            if (courseRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                courseRepository.save(course);
+            } else {
+                response.setCode("400");
+                response.setMessage("Course with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
 }
+

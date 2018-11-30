@@ -1,11 +1,12 @@
 package com.academic.as.demo.models;
 
-import com.academic.as.demo.enums.CourseInstanceType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class CourseInstance {
     private Integer id;
 
     @Column(name = "start_time")
-    private Time startTime;
+    private Instant startTime;
 
     @Column(name = "end_time")
-    private Time endTime;
+    private Instant endTime;
 
     @Column(name = "type")
     private String type;
@@ -88,6 +89,7 @@ public class CourseInstance {
             inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students = new ArrayList<>();
 
+
     public Integer getId() {
         return id;
     }
@@ -96,19 +98,19 @@ public class CourseInstance {
         this.id = id;
     }
 
-    public Time getStartTime() {
+    public Instant getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(Instant startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public Instant getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(Instant endTime) {
         this.endTime = endTime;
     }
 

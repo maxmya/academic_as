@@ -1,18 +1,20 @@
 package com.academic.as.demo.api.responses;
 
 import com.academic.as.demo.models.Specialization;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class SpecializationResponse extends BaseResponse {
 
-    private List<Specialization> data ;
+    private Object data ;
 
-    public void setData(List<Specialization> data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
-    public List<Specialization> getData() {
+    public Object getData() {
         return data;
     }
 }
