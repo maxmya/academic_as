@@ -82,10 +82,10 @@ public class CoursesService {
             newCourseInstance.setStartTime(Instant.ofEpochMilli(requestBody.getStartTime()));
             newCourseInstance.setEndTime(Instant.ofEpochMilli(requestBody.getEndTime()));
             newCourseInstance.setType(requestBody.getType());
-            Hall courseHall = hallRepository.findById(requestBody.getHallId()).get();
-            Course instanceImage = courseRepository.findById(requestBody.getCourseId()).get();
-            Specialization specialization = specializationRepository.findById(requestBody.getSpecializationId()).get();
-            Semester courseSemester = semesterRepository.findById(requestBody.getSemesterId()).get();
+            Hall courseHall = hallRepository.getOne(requestBody.getHallId());
+            Course instanceImage = courseRepository.getOne(requestBody.getCourseId());
+            Specialization specialization = specializationRepository.getOne(requestBody.getSpecializationId());
+            Semester courseSemester = semesterRepository.getOne(requestBody.getSemesterId());
             List<Instructor> instructors = new ArrayList<>();
             for (int instructorId : requestBody.getInstructorsIds()) {
                 instructors.add(instructorRepository.getOne(instructorId));

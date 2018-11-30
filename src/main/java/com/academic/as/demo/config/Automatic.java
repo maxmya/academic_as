@@ -12,6 +12,7 @@ import com.academic.as.demo.services.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@Transactional
 public class Automatic {
 
     @Autowired
@@ -52,7 +54,7 @@ public class Automatic {
         currentFallSemester.setSemesterCode("fall-" + Calendar.getInstance().get(Calendar.YEAR));
         currentFallSemester.setStartDate(new Date());
 
-        //   semesterRepository.save(currentFallSemester);
+//           semesterRepository.save(currentFallSemester);
 
         createCourseInstanceForSemester(semesterRepository.findBySemesterCode(currentFallSemester.getSemesterCode()));
     }
