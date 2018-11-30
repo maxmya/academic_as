@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<style>
+.btn-huge{
+    padding-top:20px;
+    padding-bottom:20px;
+    background-color: #164c64;
+    font-size: 24px;
+    color: aliceblue;
+    border-radius: 18px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border: 2px solid #4b5052;
+}
+.btn-huge:hover{
+    background-color: #555555;
+    color: #888888;
+}
+</style>
+<body>
+<div th:include="commons::nav"></div>
+<div class="container">
+    <br><br>
+    <div class="row">
+        <div class="col-md-4">
+            <button  type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" onclick="location.href='/all/admins'" ><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> All Admins</button>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" onclick="location.href='/all/professors'" ><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> All Professors</button>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" onclick="location.href='/all/supervisors'" ><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> All Supervisors</button>
+        </div>
+    </div>
+    <br><br>
+    <br><br>
+    <div class="row">
+        <div class="col-md-4">
+            <button type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" onclick="location.href='/all/students'" ><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> All Students</button>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" onclick="location.href='/all/assistants'" ><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> All Assistants</button>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" onclick="location.href='/all/departments'" ><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> All Departments</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

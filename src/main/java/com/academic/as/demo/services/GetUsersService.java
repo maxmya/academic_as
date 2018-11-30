@@ -23,46 +23,49 @@ public class GetUsersService {
     private StudentRepository studentRepository;
     @Autowired
     private SupervisorRepository supervisorRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     public UsersResponse getAdmins() {
-        return getAll(adminRepository);
+       return getAll(adminRepository);
     }
 
-    public UsersResponse getAdmin(Integer id) {
-        return getOne(adminRepository, id);
-    }
+//    public UsersResponse getAdmin(Integer id) {
+//        return getOne(adminRepository, id);
+//    }
 
     public UsersResponse getProfessors() {
         return getAll(professorRepository);
     }
 
-    public UsersResponse getProfessor(Integer id) {
-        return getOne(professorRepository, id);
-    }
+//    public UsersResponse getProfessor(Integer id) {
+//        return getOne(professorRepository, id);
+//    }
 
     public UsersResponse getAssistants() {
         return getAll(assistantRepository);
     }
 
-    public UsersResponse getAssistant(Integer id) {
-        return getOne(assistantRepository, id);
-    }
+//    public UsersResponse getAssistant(Integer id) {
+//        return getOne(assistantRepository, id);
+//    }
 
     public UsersResponse getStudents() {
         return getAll(studentRepository);
     }
 
-    public UsersResponse getStudent(Integer id) {
-        return getOne(studentRepository, id);
-    }
+//    public UsersResponse getStudent(Integer id) {
+//        return getOne(studentRepository, id);
+//    }
 
     public UsersResponse getSupervisors() {
         return getAll(supervisorRepository);
     }
 
-    public UsersResponse getSupervisor(Integer id) {
-        return getOne(supervisorRepository, id);
-    }
+//    public UsersResponse getSupervisor(Integer id) {
+//        return getOne(supervisorRepository, id);
+//    }
 
     // generic method to get all users of any type
     private UsersResponse getAll(JpaRepository repository) {
@@ -83,13 +86,13 @@ public class GetUsersService {
     generic method to get single user with id if it's existed
     passed repo should be in the generic form <Object , Integer>
     */
-    private UsersResponse getOne(JpaRepository repository, Integer id) {
+    public UsersResponse getOne(Integer id) {
         UsersResponse response = new UsersResponse();
         try {
-            if (repository.existsById(id)) {
+            if (userRepository.existsById(id)) {
                 response.setCode("200");
                 response.setMessage("SUCCESS");
-                response.setData(repository.getOne(id));
+                response.setData(userRepository.getOne(id));
             } else {
                 response.setCode("400");
                 response.setMessage("User with id : " + id + " not found");

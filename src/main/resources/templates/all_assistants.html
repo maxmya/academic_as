@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<style>
+    th {
+        background-color: #164c64;
+        color: white;
+    }
+    .btn:hover{
+        background-color: #199dd4;
+        color: #000000;
+    }
+    .btn{
+        border-radius: 50px;
+    }
+    * {
+        box-sizing: border-box;
+    }
+
+    #myInput {
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 13px;
+        padding: 8px 15px 8px 25px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+    }
+</style>
+<body>
+<div th:include="commons::nav"></div>
+<div class="container">
+    <input style="background-image: url(static/css/ss.png)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Assistant by First Name.." title="Type in a name">
+    <table id="myTable" class="table table-striped table-dark table-hover table-condensed">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">More</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="assistant : ${assistants}" class="bg-info">
+            <td th:text="${assistant.getUser().getId()}"></td>
+            <td th:text="${assistant.getUser().getFirstName()}"></td>
+            <td th:text="${assistant.getUser().getLastName()}"></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${assistant.getUser().getId()}" style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.86)" ></span> View</a></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${assistant.getUser().getId()} +@{/edit}" style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-edit"></span>Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</div>
+</body>
+</html>
