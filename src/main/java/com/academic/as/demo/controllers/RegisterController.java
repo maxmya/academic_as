@@ -42,7 +42,6 @@ public class RegisterController {
 
     @PostMapping(value = "/user")
     public RegisterResponse registerUser(@RequestBody User user) {
-
         return registerService.addUser(user);
     }
 }

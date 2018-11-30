@@ -18,14 +18,14 @@ public class FirebaseHelper {
     public FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     public FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-    public void createUser(String username, String plainPassword) throws FirebaseAuthException {
+    public UserRecord createUser(String username, String plainPassword) throws FirebaseAuthException {
 
         UserRecord.CreateRequest createRequest = new UserRecord.CreateRequest();
         createRequest.setEmail(username + emailSuffix);
         createRequest.setEmailVerified(true);
         createRequest.setPassword(plainPassword);
 
-        firebaseAuth.createUser(createRequest);
+        return firebaseAuth.createUser(createRequest);
     }
 
 }

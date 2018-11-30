@@ -1,6 +1,7 @@
 package com.academic.as.demo.config;
 
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
+import com.academic.as.demo.firebase.FirebaseConstants;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.CourseInstance;
 import com.academic.as.demo.models.Semester;
@@ -9,16 +10,18 @@ import com.academic.as.demo.repositories.CourseRepository;
 import com.academic.as.demo.repositories.HallRepository;
 import com.academic.as.demo.repositories.SemesterRepository;
 import com.academic.as.demo.services.CoursesService;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Transactional
@@ -45,7 +48,7 @@ public class Automatic {
      * and creates its attributes of courses
      */
     //@Scheduled(cron = "0 0 12 1 9 ? *")
-    @Scheduled(fixedRate = 1000000000)
+    //@Scheduled(fixedRate = 1000000000)
     public void generateFallSemester() {
 
         System.out.println("generating instances fall-" + Calendar.getInstance().get(Calendar.YEAR));
@@ -83,6 +86,25 @@ public class Automatic {
         }
 
         return courseInstances;
+    }
+
+    @Scheduled(fixedRate = 1000000000)
+    public void createFirebaseGroup() {
+        Firestore db = FirestoreClient.getFirestore();
+        db.collection(FirebaseConstants.GROUPS_COLLECTION).document("mkey").set(new MGroup(Arrays.asList("z24ukUcSgYhOi6O1FlOg99M2EsV2"), new Metadata("group name")));
+    }
+
+    @AllArgsConstructor
+    @Data
+    class MGroup implements Serializable {
+        List<String> members;
+        Metadata metadata;
+    }
+
+    @AllArgsConstructor
+    @Data
+    class Metadata {
+        String name;
     }
 
 }

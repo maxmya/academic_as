@@ -44,6 +44,9 @@ public class User implements Serializable {
     @Column(name = "create_date")
     private Date createDate;
 
+    @Column(name = "firebase_id")
+    private String firebaseId;
+
     public void update(User user) {
         if (user.getFirstName() != null)
             this.firstName = user.getFirstName();
