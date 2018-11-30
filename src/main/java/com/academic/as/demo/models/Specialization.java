@@ -3,7 +3,6 @@ package com.academic.as.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
 
 
 import javax.persistence.*;
@@ -13,7 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "specialization")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -53,4 +51,38 @@ public class Specialization implements Serializable {
         courseInstances.add(courseInstance);
     }
 
+    public List<CourseInstance> getCourseInstances() {
+        return courseInstances;
+    }
+
+    public void setCourseInstances(List<CourseInstance> courseInstances) {
+        this.courseInstances = courseInstances;
+    }
+
+    public Specialization() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getSpecialityName() {
+        return specialityName;
+    }
+
+    public void setSpecialityName(String specialityName) {
+        this.specialityName = specialityName;
+    }
+
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
+    }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+Entered Data :
+<p th:text="' Name : ' + ${user.firstName}+  ' '  + ${user.lastName}"/>
+<p th:text="' Email: ' + ${user.email}"/>
+<p th:text="' User Name : ' + ${user.username}"/>
+<p th:text="' Password: ' + ${user.password}"/>
+<br><br>
+<p th:text="${response.getMessage()}"/>
+
+</body>
+</html>

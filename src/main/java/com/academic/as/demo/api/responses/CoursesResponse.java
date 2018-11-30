@@ -1,20 +1,18 @@
 package com.academic.as.demo.api.responses;
 
 import com.academic.as.demo.models.Course;
-import lombok.Data;
 
 import java.util.List;
 
-@Data
 public class CoursesResponse extends BaseResponse {
 
-    private Object data;
+    private List<Course> data;
 
-    public Object getData() {
+    public List<Course> getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(List<Course> data) {
         this.data = data;
     }
 }

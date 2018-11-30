@@ -1,6 +1,5 @@
 package com.academic.as.demo.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,12 +20,4 @@ public class AuthGroup {
     @Column(name = "username")
     String username;
 
-    public AuthGroup() {
-
-    }
-
-    public AuthGroup(String authGroup, String username) {
-        this.authGroup = authGroup;
-        this.username = username;
-    }
 }
