@@ -1,7 +1,9 @@
 package com.academic.as.demo.config;
 
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
+import com.academic.as.demo.controllers.web.models.Group;
 import com.academic.as.demo.firebase.FirebaseConstants;
+import com.academic.as.demo.firebase.FirebaseHelper;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.CourseInstance;
 import com.academic.as.demo.models.Semester;
@@ -42,6 +44,9 @@ public class Automatic {
 
     @Autowired
     CoursesService coursesService;
+
+    @Autowired
+    FirebaseHelper firebaseHelper;
 
     /**
      * this method runs every year in the beginning of month September to create Fall semester record
@@ -89,22 +94,8 @@ public class Automatic {
     }
 
     @Scheduled(fixedRate = 1000000000)
-    public void createFirebaseGroup() {
-        Firestore db = FirestoreClient.getFirestore();
-        db.collection(FirebaseConstants.GROUPS_COLLECTION).document("mkey").set(new MGroup(Arrays.asList("z24ukUcSgYhOi6O1FlOg99M2EsV2"), new Metadata("group name")));
-    }
-
-    @AllArgsConstructor
-    @Data
-    class MGroup implements Serializable {
-        List<String> members;
-        Metadata metadata;
-    }
-
-    @AllArgsConstructor
-    @Data
-    class Metadata {
-        String name;
+    public void createFirebaseGroupForCourseInstance(String groupId, Group group) {
+        firebaseHelper.db.collection(FirebaseConstants.GROUPS_COLLECTION).document(groupId).set(group);
     }
 
 }
