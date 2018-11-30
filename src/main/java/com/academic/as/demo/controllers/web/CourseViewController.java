@@ -3,7 +3,6 @@ package com.academic.as.demo.controllers.web;
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.Course;
-import com.academic.as.demo.models.Department;
 import com.academic.as.demo.repositories.CourseRepository;
 import com.academic.as.demo.services.CoursesService;
 import com.academic.as.demo.services.SpecializationService;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.logging.Logger;
 
 @Controller
 public class CourseViewController implements WebMvcConfigurer {
@@ -39,7 +36,7 @@ public class CourseViewController implements WebMvcConfigurer {
     public String addCourseView(Model model) {
         model.addAttribute(new Course());
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
-        return "add_course";
+        return "admin/add_course";
     }
 
     @PostMapping("/add/course")
