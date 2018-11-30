@@ -43,7 +43,6 @@ public class CoursesService {
 
     public BaseResponse addCourseByDepName(Course course) {
         BaseResponse response = new BaseResponse();
-        System.out.println("course "+course.getDepartment().getDepartmentName());
         try {
             Department dp = departmentRepository.
                     findDepartmentByDepartmentName(course.getDepartment().getDepartmentName());
@@ -83,10 +82,10 @@ public class CoursesService {
             newCourseInstance.setStartTime(Instant.ofEpochMilli(requestBody.getStartTime()));
             newCourseInstance.setEndTime(Instant.ofEpochMilli(requestBody.getEndTime()));
             newCourseInstance.setType(requestBody.getType());
-            Hall courseHall = hallRepository.getOne(requestBody.getHallId());
-            Course instanceImage = courseRepository.getOne(requestBody.getCourseId());
-            Specialization specialization = specializationRepository.getOne(requestBody.getSpecializationId());
-            Semester courseSemester = semesterRepository.getOne(requestBody.getSemesterId());
+            Hall courseHall = hallRepository.findById(requestBody.getHallId()).get();
+            Course instanceImage = courseRepository.findById(requestBody.getCourseId()).get();
+            Specialization specialization = specializationRepository.findById(requestBody.getSpecializationId()).get();
+            Semester courseSemester = semesterRepository.findById(requestBody.getSemesterId()).get();
             List<Instructor> instructors = new ArrayList<>();
             for (int instructorId : requestBody.getInstructorsIds()) {
                 instructors.add(instructorRepository.getOne(instructorId));

@@ -2,7 +2,10 @@ package com.academic.as.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -13,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "course_instance")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@NoArgsConstructor
 public class CourseInstance {
 
     @Id

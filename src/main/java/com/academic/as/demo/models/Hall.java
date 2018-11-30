@@ -1,14 +1,15 @@
 package com.academic.as.demo.models;
 
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -33,16 +34,18 @@ public class Hall {
     @Column(name = "capacity")
     private Integer capacity;
 
+
     @JsonBackReference(value = "courseInstances")
     @OneToMany(mappedBy = "hall",
             cascade = {CascadeType.MERGE,
                     CascadeType.PERSIST,
                     CascadeType.REFRESH,
-                    CascadeType.DETACH})
+                    CascadeType.DETACH},fetch = FetchType.EAGER)
     private List<CourseInstance> courseInstances = new ArrayList<>();
 
     public void addCourse(CourseInstance courseInstance) {
         courseInstances.add(courseInstance);
     }
+
 
 }
