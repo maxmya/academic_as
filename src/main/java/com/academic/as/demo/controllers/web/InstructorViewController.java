@@ -63,7 +63,6 @@ public class InstructorViewController {
 
 
     @GetMapping("/professor/instance/{ID}/students")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getCourseInstanceStudents(@PathVariable(value="ID") String id, Model model) {
         CourseInstanceResponse response =  coursesService.getCourseInstance(Integer.parseInt(id));
         CourseInstance  courseInstanceData = (CourseInstance) response.getData();
@@ -71,11 +70,10 @@ public class InstructorViewController {
             model.addAttribute("courseInstanceData" , courseInstanceData);
         }
         model.addAttribute("response" , response);
-        return "view_course_intance_students";
+        return "view_course_instance_students_for_professor";
     }
 
     @GetMapping("/professor/instance/{ID}/instructors")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getCourseInstanceInstructor(@PathVariable(value="ID") String id, Model model) {
         CourseInstanceResponse response =  coursesService.getCourseInstance(Integer.parseInt(id));
         CourseInstance  courseInstanceData = (CourseInstance) response.getData();
@@ -83,6 +81,21 @@ public class InstructorViewController {
             model.addAttribute("courseInstanceData" , courseInstanceData);
         }
         model.addAttribute("response" , response);
-        return "view_course_intance_intructors";
+        return "view_course_instance_intructors_for_professor";
+    }
+
+    @GetMapping("/student/{ID}/add/degree")
+    public String assignDegree(@PathVariable(value="ID") String id, Model model) {
+
+        /*
+        * degree id , course_instance_id ,
+        * student id
+        * id , student_id , quiz no
+        *reg agrriagate
+        *id 10% 30% 60% status repeation
+        *
+        * course_id , student_id , degree_id
+        */
+        return "assign_degree";
     }
 }

@@ -43,7 +43,7 @@ public class Automatic {
      * and creates its attributes of courses
      */
     //@Scheduled(cron = "0 0 12 1 9 ? *")
-    @Scheduled(fixedRate = 1000000000)
+  //  @Scheduled(fixedRate = 1000000000)
     public void generateFallSemester() {
 
         System.out.println("generating instances fall-" + Calendar.getInstance().get(Calendar.YEAR));
