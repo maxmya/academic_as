@@ -1,6 +1,7 @@
 package com.academic.as.demo.services;
 
 import com.academic.as.demo.api.responses.RegisterResponse;
+import com.academic.as.demo.api.responses.UsersResponse;
 import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.firebase.FirebaseHelper;
 import com.academic.as.demo.models.*;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 
 @Service
@@ -110,5 +112,40 @@ public class RegisterService {
         return response;
     }
 
+    public UsersResponse getUser(Integer id) {
+        UsersResponse response = new UsersResponse();
+        try {
+            if (userRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                response.setData(userRepository.getOne(id));
+            } else {
+                response.setCode("400");
+                response.setMessage("User with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    public UsersResponse saveUser(User user, Integer id) {
+        UsersResponse response = new UsersResponse();
+        try {
+            if (userRepository.existsById(id)) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                userRepository.save(user);
+            } else {
+                response.setCode("400");
+                response.setMessage("User with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
 
 }

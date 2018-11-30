@@ -2,9 +2,11 @@ package com.academic.as.demo.controllers.web;
 
 
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.UsersResponse;
 import com.academic.as.demo.controllers.web.models.UserRole;
 import com.academic.as.demo.enums.UserRoles;
 import com.academic.as.demo.models.*;
+import com.academic.as.demo.repositories.UserRepository;
 import com.academic.as.demo.services.RegisterService;
 import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class RegisterViewController implements WebMvcConfigurer {
@@ -26,6 +31,8 @@ public class RegisterViewController implements WebMvcConfigurer {
     @Autowired
     RegisterService registerService;
 
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/register")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -85,4 +92,65 @@ public class RegisterViewController implements WebMvcConfigurer {
         return "add_user";
     }
 
+    @GetMapping("/user/{ID}/edit")
+    public String editUserView(@PathVariable(value="ID") Integer id, Model model) {
+        UsersResponse usersResponse = registerService.getUser(id);
+        if(usersResponse.getCode() != "200"){
+            return "404";
+        }
+        User user = (User) usersResponse.getData();
+        model.addAttribute("user", user);
+        return "edit_user";
+    }
+
+    @GetMapping("/user/{ID}/edit/password")
+    public String editUserPasswordView(@PathVariable(value="ID") Integer id, Model model) {
+        UsersResponse usersResponse = registerService.getUser(id);
+        if(usersResponse.getCode() != "200"){
+            return "404";
+        }
+        model.addAttribute("user", usersResponse.getData());
+        return "change_password";
+    }
+
+   // it is just a Bridge
+    @GetMapping("/user/{userName}/test")
+    public RedirectView editProfile(@PathVariable(value="userName") String userName,
+                              Model model) {
+      User user =  userRepository.findByUsername(userName);
+      String url = "/user/"+user.getId()+"/edit";
+      return new RedirectView(url, true);
+    }
+
+    @PostMapping("/user/{ID}/edit")
+    public String editUserInfo(@ModelAttribute("user") @Valid User user ,BindingResult bindingResult,Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("user", user);
+            return "edit_user";
+        }
+        user.setPassword("$2a$10$aQlgb43QkdC8XLoBSGBNT.5s4/07Z.syEjZKNM7ydoLtuewHYV7xa");
+        BaseResponse response = registerService.saveUser(user,user.getId());
+        if (response.getCode().equalsIgnoreCase("200"))
+            model.addAttribute(user);
+        model.addAttribute("response", response);
+        return "edit_user";
+    }
+
+
+    @PostMapping("/user/{ID}/edit/password")
+    public String editUserPassword(@ModelAttribute("user") @Valid User user ,BindingResult bindingResult,Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("user", user);
+            return "change_password";
+        }
+        BaseResponse response = registerService.saveUser(user,user.getId());
+        if (response.getCode().equalsIgnoreCase("200"))
+            model.addAttribute(user);
+        model.addAttribute("response", response);
+        return "change_password";
+    }
 }
