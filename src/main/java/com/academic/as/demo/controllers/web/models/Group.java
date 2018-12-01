@@ -11,10 +11,12 @@ import java.util.List;
 public class Group implements Serializable {
     List<String> members;
     Metadata metadata;
+
+    @AllArgsConstructor
+    @Data
+    public static class Metadata {
+        String name;
+    }
+
 }
 
-@AllArgsConstructor
-@Data
-class Metadata {
-    String name;
-}

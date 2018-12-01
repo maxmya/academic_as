@@ -36,7 +36,7 @@ public class CourseViewController implements WebMvcConfigurer {
     public String addCourseView(Model model) {
         model.addAttribute(new Course());
         model.addAttribute("departments", specializationService.getAllDepartments().getData());
-        return "admin/add_course";
+        return "add_course";
     }
 
     @PostMapping("/add/course")

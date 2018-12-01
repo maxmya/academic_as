@@ -17,6 +17,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.*;
 
 @Component
@@ -47,7 +48,7 @@ public class Automatic {
      * and creates its attributes of courses
      */
     //@Scheduled(cron = "0 0 12 1 9 ? *")
-    //@Scheduled(fixedRate = 1000000000)
+    @Scheduled(fixedRate = 1000000000)
     public void generateFallSemester() {
 
         System.out.println("generating instances fall-" + Calendar.getInstance().get(Calendar.YEAR));
@@ -56,7 +57,7 @@ public class Automatic {
         currentFallSemester.setSemesterCode("fall-" + Calendar.getInstance().get(Calendar.YEAR));
         currentFallSemester.setStartDate(new Date());
 
-//           semesterRepository.save(currentFallSemester);
+       //    semesterRepository.save(currentFallSemester);
 
         createCourseInstanceForSemester(semesterRepository.findBySemesterCode(currentFallSemester.getSemesterCode()));
     }
@@ -65,8 +66,7 @@ public class Automatic {
      * @param semester generic for all semesters
      * @return list of course instances
      */
-    private List<CourseInstance> createCourseInstanceForSemester(Semester semester) {
-        List<CourseInstance> courseInstances = new ArrayList<>();
+    private void createCourseInstanceForSemester(Semester semester) {
 
         List<Course> courses = courseRepository.findAll();
         for (Course c : courses) {
@@ -74,20 +74,21 @@ public class Automatic {
             System.out.println(" course instance of " + c.getName() + " is generated");
 
             CourseInstanceRequest courseInstanceRequest = new CourseInstanceRequest();
+            courseInstanceRequest.setStartTime(0l);
+            courseInstanceRequest.setEndTime(Instant.now().toEpochMilli());
             courseInstanceRequest.setCourseId(c.getId());
             courseInstanceRequest.setSemesterId(semester.getId());
             courseInstanceRequest.setInstructorsIds(new ArrayList<>());
             courseInstanceRequest.setStudentsIds(new ArrayList<>());
-            courseInstanceRequest.setHallId(1);
-            courseInstanceRequest.setSpecializationId(1);
-            coursesService.addCourseInstance(courseInstanceRequest);
+            courseInstanceRequest.setHallId(3);
+            courseInstanceRequest.setSpecializationId(4);
+            CourseInstance createdInstance = coursesService.addCourseInstance(courseInstanceRequest).getCourseInstance();
 
+            createFirebaseGroupForCourseInstance(createdInstance.getId() + "", new Group(new ArrayList<>(), new Group.Metadata(createdInstance.getCourse().getName() + " " + semester.getSemesterCode())));
         }
 
-        return courseInstances;
     }
 
-    @Scheduled(fixedRate = 1000000000)
     public void createFirebaseGroupForCourseInstance(String groupId, Group group) {
         firebaseHelper.db.collection(FirebaseConstants.GROUPS_COLLECTION).document(groupId).set(group);
     }
