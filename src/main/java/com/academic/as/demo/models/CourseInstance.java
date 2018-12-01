@@ -12,6 +12,7 @@ import java.sql.Time;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "course_instance")
@@ -173,4 +174,8 @@ public class CourseInstance {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    @OneToMany(mappedBy = "courseInstance", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<CourseStudentDegreeTernaryRelation> courseStudentDegreeTernaryRelations;
+
 }

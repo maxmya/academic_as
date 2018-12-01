@@ -5,6 +5,7 @@ import com.academic.as.demo.api.requests.CourseRegistrationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.api.responses.CourseInstanceResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
+import com.academic.as.demo.controllers.web.models.AssignDegreeFormRequest;
 import com.academic.as.demo.models.*;
 import com.academic.as.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,13 @@ public class CoursesService {
 
     @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private CourseStudentDegreeTernaryRelationRepository courseStudentDegreeTernaryRelationRepository;
+
+    @Autowired
+    private DegreeRepository degreeRepository;
+
 
     @Autowired
     private CourseInstanceRepository courseInstanceRepository;
@@ -196,6 +204,37 @@ public class CoursesService {
             } else {
                 response.setCode("400");
                 response.setMessage("Course with id : " + id + " not found");
+            }
+        } catch (Exception e) {
+            response.setCode("400");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+    public CoursesResponse SaveDegree(AssignDegreeFormRequest assignDegreeFormRequest) {
+        CoursesResponse response = new CoursesResponse();
+        try {
+            if (courseInstanceRepository.existsById(assignDegreeFormRequest.getCourseInstanceId()) && studentRepository.existsById(assignDegreeFormRequest.getStudentId())) {
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+                Degree degree = new Degree();
+                degree.setRepetition(1);
+                if(assignDegreeFormRequest.getDegreeType().equalsIgnoreCase("quiz")){
+                   degree.setQuizDegree(assignDegreeFormRequest.getDegree());
+                }else if(assignDegreeFormRequest.getDegreeType().equalsIgnoreCase("lab")){
+                   degree.setLabDegree(assignDegreeFormRequest.getDegree());
+                }else{
+                   degree.setFinalDegree(assignDegreeFormRequest.getDegree());
+                }
+                degreeRepository.save(degree);
+                CourseStudentDegreeTernaryRelation csdr = new CourseStudentDegreeTernaryRelation();
+                csdr.setStudent(studentRepository.getOne(assignDegreeFormRequest.getStudentId()));
+                csdr.setCourseInstance(courseInstanceRepository.getOne(assignDegreeFormRequest.getCourseInstanceId()));
+                csdr.setDegree(degree);
+                courseStudentDegreeTernaryRelationRepository.save(csdr);
+            } else {
+                response.setCode("400");
+                response.setMessage("Something went wrong");
             }
         } catch (Exception e) {
             response.setCode("400");

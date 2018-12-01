@@ -58,7 +58,7 @@
             <td th:text="${student.getUser().getLastName()}"></td>
             <td th:text="${student.getGpa()}"></td>
             <td th:text="${student.getLevel()}"></td>
-            <td><a type="button" class="btn btn-info" th:href="@{/student/} + ${student.getUser().getId()} + @{/add/degree}" style="color: rgba(38,38,38,0.87);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View</a></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/instance/}+ ${courseInstanceData.getId()}  + @{/student/} + ${student.getId()} + @{/add/degree}" style="color: rgba(38,38,38,0.87);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View</a></td>
         </tr>
         </tbody>
     </table>

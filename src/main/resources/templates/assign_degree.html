@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+</head>
+<body>
+<div th:include="commons::nav"></div>
+<div class="container">
+    <div class="alert alert-success" th:if="${response}">
+        <p th:text="${response.getMessage()}"/>
+    </div>
+    <br>
+    <h2>Assign Degree to <strong th:text="${student.getUser().getUsername()}"></strong></h2>
+    <br>
+    <h4>In Course <strong th:text="${courseInstance.getCourse().getName()}"></strong></h4>
+    <br>
+    <form action="#" th:action="@{'/instance/'+${courseInstance.getId()}+'/student/'+${student.getId()}+'/add/degree'}"
+          th:object="${assignDegree} " method="post">
+        <input type="hidden" th:value="${student.getId()}" th:field="*{studentId}">
+        <input type="hidden" th:field="*{courseInstanceId}" th:value="${courseInstance.getId()}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="degree">Degree</label>
+                <input type="text" class="form-control" th:field="*{degree}" id="degree"
+                       placeholder="Enter Degree" required="required">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="degree">Degree Type</label>
+                <select class="form-control" th:field="*{degreeType}">
+                    <option th:value="quiz">quiz</option>
+                    <option th:value="lab">lab</option>
+                    <option th:value="final">final</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-auto my-9 col-md-9">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

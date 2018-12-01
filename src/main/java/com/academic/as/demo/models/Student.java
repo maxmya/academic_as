@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -44,5 +45,9 @@ public class Student implements Serializable {
     public void registerCourse(CourseInstance courseInstance) {
         courseInstances.add(courseInstance);
     }
+
+
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<CourseStudentDegreeTernaryRelation> courseStudentDegreeTernaryRelations;
 
 }
