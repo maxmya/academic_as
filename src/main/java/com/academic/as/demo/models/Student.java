@@ -52,8 +52,6 @@ public class Student implements Serializable {
     @JoinColumn(name = "specialization_id")
     Specialization specialization;
 
-
-
     public void registerCourse(CourseInstance courseInstance) {
         courseInstances.add(courseInstance);
     }

@@ -3,6 +3,7 @@ package com.academic.as.demo.controllers.web;
 import com.academic.as.demo.api.responses.BaseResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.Course;
+
 import com.academic.as.demo.models.CourseInstance;
 import com.academic.as.demo.models.Department;
 import com.academic.as.demo.repositories.CourseRepository;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,8 @@ public class CourseViewController implements WebMvcConfigurer {
             model.addAttribute("departments", specializationService.getAllDepartments().getData());
             return "edit_course";
         }
-        BaseResponse response = coursesService.SaveCourse(course, course.getId());
+
+        BaseResponse response = coursesService.SaveCourse(course,course.getId());
         if (response.getCode().equalsIgnoreCase("200"))
             model.addAttribute(course);
         model.addAttribute("response", response);
@@ -106,5 +107,3 @@ public class CourseViewController implements WebMvcConfigurer {
         return "registe_course";
     }
 }
-
-
