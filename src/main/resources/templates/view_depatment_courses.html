@@ -46,6 +46,7 @@
                 <th scope="col">Course Name</th>
                 <th scope="col">Course Code</th>
                 <th scope="col">Course AwardedPoints</th>
+                <th scope="col">Edit Course</th>
                 <th scope="col">View Course Instances</th>
             </tr>
             </thead>
@@ -56,6 +57,7 @@
                 <td th:text="${course.getCode()}"></td>
                 <td th:text="${course.getAwardedPoints()}"></td>
                 <td><a type="button" class="btn btn-info" th:href="@{/course/} + ${course.getId()} + @{/instances}"style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View</a></td>
+                <td><a type="button" class="btn btn-info" th:href="@{/course/} + ${course.getId()} + @{/edit}">Edit</a></td>
             </tr>
             </tbody>
         </table>
