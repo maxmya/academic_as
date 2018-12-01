@@ -25,14 +25,15 @@ public class CourseInstance {
     private Integer id;
 
     @Column(name = "start_time")
-    private Instant startTime;
+    private int startTime;
 
     @Column(name = "end_time")
-    private Instant endTime;
+    private int endTime;
 
     @Column(name = "type")
     private String type;
-
+    
+    private String day;
     @JsonBackReference(value = "course")
     @ManyToOne(cascade = {
             CascadeType.MERGE,
@@ -102,19 +103,19 @@ public class CourseInstance {
         this.id = id;
     }
 
-    public Instant getStartTime() {
+    public int getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Instant startTime) {
+    public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
 
-    public Instant getEndTime() {
+    public int getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Instant endTime) {
+    public void setEndTime(int endTime) {
         this.endTime = endTime;
     }
 
@@ -173,4 +174,12 @@ public class CourseInstance {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
 }

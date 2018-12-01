@@ -4,6 +4,8 @@ package com.academic.as.demo.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+
+import org.assertj.core.error.ShouldAccept;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -19,7 +21,7 @@ import java.util.List;
 @Entity
 @Table(name = "course")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Course implements Serializable {
+public class Course implements Serializable, Comparable<Course> {
 
     @Id
     @Column(name = "id")
@@ -125,4 +127,21 @@ public class Course implements Serializable {
      public void setCourseInstances(List<CourseInstance> courseInstances) {
          this.courseInstances = courseInstances;
      }
+     // should be implemented 
+     public int getLevel() {
+    	 return 0;
+     }
+
+	@Override
+	public int compareTo(Course o) {
+		if(o.getDepartment().getId() == getDepartment().getId()) {
+			if(o.getLevel() == getLevel()) {
+				return 0;
+			}else if(o.getLevel() < getLevel()) {
+				return 1;
+			}else return -1;
+		}else if(o.getDepartment().getId() < getDepartment().getId()) {
+			return 1;
+		}else return -1;
+	}
  }
