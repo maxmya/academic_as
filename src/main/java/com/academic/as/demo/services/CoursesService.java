@@ -202,9 +202,9 @@ public class CoursesService {
         return response;
     }
 
-    public CourseInstanceResponse ViewregisterCoursesToStudent(Integer studentId) {
+    public CourseInstanceResponse ViewregisterCoursesToStudent(String userName) {
         CourseInstanceResponse response = new CourseInstanceResponse();
-        Student currentStudent = studentRepository.findByUserId(studentId);
+        Student currentStudent = studentRepository.findByName(userName);
         try {
             if (currentStudent != null) {
                 Specialization currentStudSpecialization = currentStudent.getSpecialization();
@@ -220,7 +220,7 @@ public class CoursesService {
                 response.setMessage("SUCCESS");
             } else {
                 response.setCode("400");
-                response.setMessage("Student with id : " + studentId + " not found");
+                response.setMessage("Student with userName : " + userName + " not found");
             }
         } catch (Exception e) {
             response.setCode("400");

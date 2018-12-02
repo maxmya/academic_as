@@ -1,6 +1,7 @@
 package com.academic.as.demo.controllers.web;
 
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.CourseInstanceResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.Course;
 
@@ -34,8 +35,6 @@ public class CourseViewController implements WebMvcConfigurer {
     @Autowired
     SpecializationService specializationService;
 
-    @Autowired
-    CourseRepository courseRepository;
 
     @GetMapping("/add/course")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -88,7 +87,7 @@ public class CourseViewController implements WebMvcConfigurer {
             return "edit_course";
         }
 
-        BaseResponse response = coursesService.SaveCourse(course,course.getId());
+        BaseResponse response = coursesService.SaveCourse(course, course.getId());
         if (response.getCode().equalsIgnoreCase("200"))
             model.addAttribute(course);
         model.addAttribute("response", response);
@@ -96,14 +95,19 @@ public class CourseViewController implements WebMvcConfigurer {
         return "edit_course";
     }
 
-    @GetMapping("courses/view")
-    public String getviewcourse( Model model) {
-        // coursesService.ViewregisterCoursesToStudent(2).getData();
-        ArrayList<CourseInstance> courseData = (ArrayList<CourseInstance>) coursesService.ViewregisterCoursesToStudent(2).getData();
-        if(coursesService.ViewregisterCoursesToStudent(2).getCode() == "200"){
-            model.addAttribute("courseData" , courseData);
+    @GetMapping("courses/{userName}/register")
+    public String getRegistercoursesView(@PathVariable(value = "userName") String userName, Model model) {
+        CourseInstanceResponse courseData = coursesService.ViewregisterCoursesToStudent(userName);
+        if (courseData.getCode().equalsIgnoreCase("200")) {
+            model.addAttribute("courseData", courseData);
         }
-        model.addAttribute("response" , coursesService.ViewregisterCoursesToStudent(2).getData());
+        model.addAttribute("response", courseData.getData());
         return "registe_course";
+    }
+
+    @PostMapping("courses/{userName}/register")
+    public String getRegisterCourses(@PathVariable(value = "userName") String userName, Model model) {
+
+        return  "waiting";
     }
 }

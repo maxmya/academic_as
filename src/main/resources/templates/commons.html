@@ -35,6 +35,7 @@
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add/department">Add Department</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add/hall">Add Hall</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add/specialization">Add Specialization</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{'/courses/'+${#authentication.name}+'/register'}">register course</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{'/user/'+${#authentication.name}+'/test'}">My Profile</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/out">Logout</a></li>
 
