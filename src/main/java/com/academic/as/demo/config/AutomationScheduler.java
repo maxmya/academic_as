@@ -1,5 +1,6 @@
 package com.academic.as.demo.config;
 
+import com.academic.as.demo.firebase.FirebaseHelper;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.CourseInstance;
 import com.academic.as.demo.models.Hall;
@@ -21,7 +22,7 @@ import java.util.*;
 
 @Component
 @Transactional
-public class Automatic {
+public class AutomationScheduler {
 
     @Autowired
     CourseRepository courseRepository;
@@ -36,47 +37,66 @@ public class Automatic {
     HallRepository hallRepository;
 
 
-    @Autowired
-    CoursesService coursesService;
-
     /**
      * this method runs every year in the beginning of month September to create Fall semester record
      * and creates its attributes of courses
      */
-    //@Scheduled(cron = "0 0 12 1 9 ? *")
-    @Scheduled(fixedRate = 1000000000)
+    @Scheduled(cron = "0 0 12 1 9 ? *")
     public void generateFallSemester() {
-
         System.out.println("generating instances fall-" + Calendar.getInstance().get(Calendar.YEAR));
         // generate semester record
         Semester currentFallSemester = new Semester();
         currentFallSemester.setSemesterCode("fall-" + Calendar.getInstance().get(Calendar.YEAR));
         currentFallSemester.setStartDate(new Date());
         semesterRepository.save(currentFallSemester);
-        List<CourseInstance> courseInstances = generateAutomatedTimeTable(courseRepository.findAll(), hallRepository.findAll(), currentFallSemester);
-        System.out.println("size of instances created = " + courseInstances.size());
-        courseInstanceRepository.saveAll(courseInstances);
+        generateAutomatedTimeTable(courseRepository.findAllBySemester("fall"), hallRepository.findAll(), currentFallSemester);
     }
 
+    @Scheduled(cron = "0 0 12 1 3 ? *")
+    public void generateSpringSemester() {
+        System.out.println("generating instances spring-" + Calendar.getInstance().get(Calendar.YEAR));
+        // generate semester record
+        Semester currentFallSemester = new Semester();
+        currentFallSemester.setSemesterCode("spring-" + Calendar.getInstance().get(Calendar.YEAR));
+        currentFallSemester.setStartDate(new Date());
+        semesterRepository.save(currentFallSemester);
+        generateAutomatedTimeTable(courseRepository.findAllBySemester("spring"), hallRepository.findAll(), currentFallSemester);
+    }
+
+    @Scheduled(cron = "0 0 12 1 7 ? *")
+    public void generateSummerSemester() {
+        System.out.println("generating instances summer-" + Calendar.getInstance().get(Calendar.YEAR));
+        // generate semester record
+        Semester currentFallSemester = new Semester();
+        currentFallSemester.setSemesterCode("summer-" + Calendar.getInstance().get(Calendar.YEAR));
+        currentFallSemester.setStartDate(new Date());
+        semesterRepository.save(currentFallSemester);
+        generateAutomatedTimeTable(courseRepository.findAllBySemester("summer"), hallRepository.findAll(), currentFallSemester);
+    }
 
     private List<CourseInstance> generateAutomatedTimeTable(List<Course> c, List<Hall> h, Semester semester) {
         Collections.sort(c);
         List<CourseInstance> courseInstances = InstantiateCourses(c, semester);
-
-        PriorityQueue<Timing> queue = new PriorityQueue<>();
-        Timing timing = new Timing();
+        PriorityQueue<Timing> queue = new PriorityQueue<Timing>();
+        Timing[] timings = new Timing[h.size() * 6];
+        for (int i = 0; i < timings.length; i++) {
+            timings[i] = new Timing();
+        }
+        int idx = 0;
         for (int i = 0; i < h.size(); i++) {
             for (int j = 0; j < 6; j++) {
-                timing.setDay(j);
-                timing.setHallIdx(i);
-                timing.setRemainTime(12);
-                queue.add(timing);
+                timings[idx].setDay(j);
+                timings[idx].setHallIdx(i);
+                timings[idx].setRemainTime(12);
+                queue.add(timings[idx]);
+                idx++;
             }
         }
+        Timing timing = new Timing();
         for (int i = 0; i < courseInstances.size(); i++) {
             if (queue.isEmpty()) return new ArrayList<CourseInstance>();
             timing = queue.poll();
-            courseInstances.get(i).setDay(getTheDayByIndex(timing.getDay()));
+            courseInstances.get(i).setDay(getDayByIndex(timing.getDay()));
             courseInstances.get(i).setStartTime(8 + (12 - timing.getRemainTime()));
             courseInstances.get(i).setEndTime(courseInstances.get(i).getStartTime() + 2);
             timing.setRemainTime(timing.getRemainTime() - 2);
@@ -84,19 +104,20 @@ public class Automatic {
             if (timing.getRemainTime() >= 2) {
                 queue.add(timing);
             }
-            System.out.println(" filled instance of " + courseInstances.get(i).getCourse().getName() + " is created");
+            courseInstanceRepository.save(courseInstances.get(i));
         }
+
         return courseInstances;
     }
 
-    private String getTheDayByIndex(int idx) {
+    private String getDayByIndex(int idx) {
         if (idx == 0) return "saturday";
         else if (idx == 1) return "sunday";
         else if (idx == 2) return "monday";
         else if (idx == 3) return "tuesday";
         else if (idx == 4) return "wednesday";
         else if (idx == 5) return "thursday";
-        return "";
+        else return "";
     }
 
     private List<CourseInstance> InstantiateCourses(List<Course> courses, Semester semester) {

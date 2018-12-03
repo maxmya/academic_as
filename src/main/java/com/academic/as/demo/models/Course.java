@@ -50,6 +50,10 @@ public class Course implements Serializable, Comparable<Course> {
     private Integer awardedPoints;
 
 
+    @Column(name = "semester")
+    private String semester;
+
+
     @JsonBackReference(value = "department")
     @ManyToOne(cascade = {CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -117,6 +121,14 @@ public class Course implements Serializable, Comparable<Course> {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
 
     public List<CourseInstance> getCourseInstances() {
