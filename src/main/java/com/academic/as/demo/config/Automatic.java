@@ -77,6 +77,7 @@ public class Automatic {
             courseInstanceRequest.setInstructorsIds(new ArrayList<>());
             courseInstanceRequest.setStudentsIds(new ArrayList<>());
             courseInstanceRequest.setHallId(1);
+
             courseInstanceRequest.setSpecializationId(1);
             coursesService.addCourseInstance(courseInstanceRequest);
 
