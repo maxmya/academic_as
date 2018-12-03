@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import org.assertj.core.error.ShouldAccept;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -72,76 +71,79 @@ public class Course implements Serializable, Comparable<Course> {
         courseInstances.add(courseInstance);
     }
 
-     public Integer getId() {
-         return id;
-     }
+    public Integer getId() {
+        return id;
+    }
 
-     public void setId(Integer id) {
-         this.id = id;
-     }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-     public String getName() {
-         return name;
-     }
+    public String getName() {
+        return name;
+    }
 
-     public void setName(String name) {
-         this.name = name;
-     }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-     public String getCode() {
-         return code;
-     }
+    public String getCode() {
+        return code;
+    }
 
-     public void setCode(String code) {
-         this.code = code;
-     }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-     public Integer getRequiredPoints() {
-         return requiredPoints;
-     }
+    public Integer getRequiredPoints() {
+        return requiredPoints;
+    }
 
-     public void setRequiredPoints(Integer requiredPoints) {
-         this.requiredPoints = requiredPoints;
-     }
+    public void setRequiredPoints(Integer requiredPoints) {
+        this.requiredPoints = requiredPoints;
+    }
 
-     public Integer getAwardedPoints() {
-         return awardedPoints;
-     }
+    public Integer getAwardedPoints() {
+        return awardedPoints;
+    }
 
-     public void setAwardedPoints(Integer awardedPoints) {
-         this.awardedPoints = awardedPoints;
-     }
+    public void setAwardedPoints(Integer awardedPoints) {
+        this.awardedPoints = awardedPoints;
+    }
 
-     public Department getDepartment() {
-         return department;
-     }
+    public Department getDepartment() {
+        return department;
+    }
 
-     public void setDepartment(Department department) {
-         this.department = department;
-     }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
-     public List<CourseInstance> getCourseInstances() {
-         return courseInstances;
-     }
+    public List<CourseInstance> getCourseInstances() {
+        return courseInstances;
+    }
 
-     public void setCourseInstances(List<CourseInstance> courseInstances) {
-         this.courseInstances = courseInstances;
-     }
-     // should be implemented 
-     public int getLevel() {
-    	 return 0;
-     }
+    public void setCourseInstances(List<CourseInstance> courseInstances) {
+        this.courseInstances = courseInstances;
+    }
 
-	@Override
-	public int compareTo(Course o) {
-		if(o.getDepartment().getId() == getDepartment().getId()) {
-			if(o.getLevel() == getLevel()) {
-				return 0;
-			}else if(o.getLevel() < getLevel()) {
-				return 1;
-			}else return -1;
-		}else if(o.getDepartment().getId() < getDepartment().getId()) {
-			return 1;
-		}else return -1;
-	}
- }
+    public int getLevel() {
+        if (requiredPoints >= 100) return 4;
+        else if (requiredPoints >= 80) return 3;
+        else if (requiredPoints >= 60) return 2;
+        else return 1;
+    }
+
+    @Override
+    public int compareTo(Course o) {
+        if (o.getDepartment().getId().equals(getDepartment().getId())) {
+            if (o.getLevel() == getLevel()) {
+                return 0;
+            } else if (o.getLevel() < getLevel()) {
+                return 1;
+            } else return -1;
+        } else if (o.getDepartment().getId() < getDepartment().getId()) {
+            return 1;
+        } else return -1;
+    }
+}

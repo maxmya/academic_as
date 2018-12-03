@@ -32,8 +32,11 @@ public class CourseInstance {
 
     @Column(name = "type")
     private String type;
-    
+
+    @Column(name = "day")
     private String day;
+
+
     @JsonBackReference(value = "course")
     @ManyToOne(cascade = {
             CascadeType.MERGE,

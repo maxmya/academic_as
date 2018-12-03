@@ -1,7 +1,6 @@
-
+package com.academic.as.demo.config;
 
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
-import com.academic.as.demo.config.models.Timing;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.CourseInstance;
 import com.academic.as.demo.models.Hall;
@@ -22,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -51,6 +49,7 @@ public class Automatic {
 
     @Autowired
     CoursesService coursesService;
+
     /**
      * this method runs every year in the beginning of month September to create Fall semester record
      * and creates its attributes of courses
@@ -67,48 +66,49 @@ public class Automatic {
 
 //           semesterRepository.save(currentFallSemester);
 
-       
-    }
-    
 
-    private List<CourseInstance> AutomatedTimeTable(List<Course> c, List<Hall> h, Semester semester){
-    	Collections.sort(c);
-    	ArrayList<CourseInstance> courseInstances = (ArrayList<CourseInstance>) InstantiateCourses(c, semester);
-    	
-    	PriorityQueue<Timing> queue = (PriorityQueue<Timing>) new LinkedList();
-    	Timing timing = new Timing();
-    	for(int i = 0; i < h.size(); i++) {
-    		for(int j = 0; j < 6; j++) {
-    			timing.setDay(j);
-    			timing.setHallIdx(i);
-    			timing.setRemainTime(12);
-    			queue.add(timing);
-    		} 
-    	}
-    	for(int i = 0; i < courseInstances.size(); i++) {
-    		if(queue.isEmpty())return new ArrayList<CourseInstance>();
-    		timing = queue.poll();
-    		courseInstances.get(i).setDay(getTheDayByIndex(timing.getDay()));
-    		courseInstances.get(i).setStartTime(8 + (12  - timing.getRemainTime()));
-    		courseInstances.get(i).setEndTime(courseInstances.get(i).getStartTime() + 2);
-    		timing.setRemainTime(timing.getRemainTime() - 2);
-    		courseInstances.get(i).setHall(h.get(timing.getHallIdx()));
-    		if(timing.getRemainTime() >= 2) {
-    			queue.add(timing);
-    		}
-    	}
-    	return courseInstances;
     }
+
+
+    private List<CourseInstance> AutomatedTimeTable(List<Course> c, List<Hall> h, Semester semester) {
+        Collections.sort(c);
+        List<CourseInstance> courseInstances = InstantiateCourses(c, semester);
+
+        PriorityQueue<Timing> queue = (PriorityQueue<Timing>) new LinkedList();
+        Timing timing = new Timing();
+        for (int i = 0; i < h.size(); i++) {
+            for (int j = 0; j < 6; j++) {
+                timing.setDay(j);
+                timing.setHallIdx(i);
+                timing.setRemainTime(12);
+                queue.add(timing);
+            }
+        }
+        for (int i = 0; i < courseInstances.size(); i++) {
+            if (queue.isEmpty()) return new ArrayList<CourseInstance>();
+            timing = queue.poll();
+            courseInstances.get(i).setDay(getTheDayByIndex(timing.getDay()));
+            courseInstances.get(i).setStartTime(8 + (12 - timing.getRemainTime()));
+            courseInstances.get(i).setEndTime(courseInstances.get(i).getStartTime() + 2);
+            timing.setRemainTime(timing.getRemainTime() - 2);
+            courseInstances.get(i).setHall(h.get(timing.getHallIdx()));
+            if (timing.getRemainTime() >= 2) {
+                queue.add(timing);
+            }
+        }
+        return courseInstances;
+    }
+
     private String getTheDayByIndex(int idx) {
-    	if(idx == 0)return "saturday";
-    	else if(idx == 1) return "sunday";
-    	else if(idx == 2) return "monday";
-    	else if(idx == 3) return "tuesday";
-    	else if(idx == 4) return "wednesday";
-    	else if(idx == 5) return "thursday";
-    	return "";
+        if (idx == 0) return "saturday";
+        else if (idx == 1) return "sunday";
+        else if (idx == 2) return "monday";
+        else if (idx == 3) return "tuesday";
+        else if (idx == 4) return "wednesday";
+        else if (idx == 5) return "thursday";
+        return "";
     }
-    
+
     private List<CourseInstance> InstantiateCourses(List<Course> courses, Semester semester) {
         List<CourseInstance> courseInstances = new ArrayList<>();
 
@@ -121,7 +121,7 @@ public class Automatic {
             train.setCourse(c);
             courseInstances.add(lecture);
             courseInstances.add(train);
-            
+
         }
 
         return courseInstances;
