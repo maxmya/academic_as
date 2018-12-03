@@ -1,5 +1,6 @@
 package com.academic.as.demo.config;
 
+import com.academic.as.demo.controllers.web.models.Group;
 import com.academic.as.demo.firebase.FirebaseHelper;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.CourseInstance;
@@ -36,12 +37,26 @@ public class AutomationScheduler {
     @Autowired
     HallRepository hallRepository;
 
+    @Autowired
+    FirebaseHelper firebaseHelper;
+
 
     /**
      * this method runs every year in the beginning of month September to create Fall semester record
      * and creates its attributes of courses
      */
-    @Scheduled(cron = "0 0 12 1 9 ? *")
+    @Scheduled(fixedRate = 1000000000)
+    public void generateAll() {
+        System.out.println("generating instances test-" + Calendar.getInstance().get(Calendar.YEAR));
+        // generate semester record
+        Semester currentFallSemester = new Semester();
+        currentFallSemester.setSemesterCode("test-" + UUID.randomUUID() + "-" + Calendar.getInstance().get(Calendar.YEAR));
+        currentFallSemester.setStartDate(new Date());
+        semesterRepository.save(currentFallSemester);
+        generateAutomatedTimeTable(courseRepository.findAll(), hallRepository.findAll(), currentFallSemester);
+    }
+
+    @Scheduled(cron = "0 12 1 9 12 ?")
     public void generateFallSemester() {
         System.out.println("generating instances fall-" + Calendar.getInstance().get(Calendar.YEAR));
         // generate semester record
@@ -52,7 +67,7 @@ public class AutomationScheduler {
         generateAutomatedTimeTable(courseRepository.findAllBySemester("fall"), hallRepository.findAll(), currentFallSemester);
     }
 
-    @Scheduled(cron = "0 0 12 1 3 ? *")
+    @Scheduled(cron = "0 12 1 3 12 ?")
     public void generateSpringSemester() {
         System.out.println("generating instances spring-" + Calendar.getInstance().get(Calendar.YEAR));
         // generate semester record
@@ -63,7 +78,7 @@ public class AutomationScheduler {
         generateAutomatedTimeTable(courseRepository.findAllBySemester("spring"), hallRepository.findAll(), currentFallSemester);
     }
 
-    @Scheduled(cron = "0 0 12 1 7 ? *")
+    @Scheduled(cron = "0 12 1 7 12 ?")
     public void generateSummerSemester() {
         System.out.println("generating instances summer-" + Calendar.getInstance().get(Calendar.YEAR));
         // generate semester record
@@ -105,6 +120,10 @@ public class AutomationScheduler {
                 queue.add(timing);
             }
             courseInstanceRepository.save(courseInstances.get(i));
+            firebaseHelper.createFirebaseGroupForCourseInstance(
+                    courseInstances.get(i).getId() + "",
+                    new Group(new ArrayList<>(), new Group.Metadata(courseInstances.get(i).getCourse().getName() + " " + semester.getSemesterCode()))
+            );
         }
 
         return courseInstances;
