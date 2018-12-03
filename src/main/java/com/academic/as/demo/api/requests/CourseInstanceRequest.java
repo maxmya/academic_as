@@ -9,8 +9,8 @@ import java.util.List;
 @Data
 public class CourseInstanceRequest {
 
-        private Long startTime;
-        private Long endTime;
+        private int startTime;
+        private int endTime;
         private String type;
         private Integer courseId;
         private Integer hallId;

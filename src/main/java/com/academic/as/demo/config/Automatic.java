@@ -1,6 +1,5 @@
 package com.academic.as.demo.config;
 
-import com.academic.as.demo.api.requests.CourseInstanceRequest;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.CourseInstance;
 import com.academic.as.demo.models.Hall;
@@ -11,24 +10,14 @@ import com.academic.as.demo.repositories.HallRepository;
 import com.academic.as.demo.repositories.SemesterRepository;
 import com.academic.as.demo.services.CoursesService;
 
-import io.grpc.netty.shaded.io.netty.util.internal.PriorityQueue;
 
-import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Transactional
@@ -63,18 +52,18 @@ public class Automatic {
         Semester currentFallSemester = new Semester();
         currentFallSemester.setSemesterCode("fall-" + Calendar.getInstance().get(Calendar.YEAR));
         currentFallSemester.setStartDate(new Date());
-
-//           semesterRepository.save(currentFallSemester);
-
-
+        semesterRepository.save(currentFallSemester);
+        List<CourseInstance> courseInstances = generateAutomatedTimeTable(courseRepository.findAll(), hallRepository.findAll(), currentFallSemester);
+        System.out.println("size of instances created = " + courseInstances.size());
+        courseInstanceRepository.saveAll(courseInstances);
     }
 
 
-    private List<CourseInstance> AutomatedTimeTable(List<Course> c, List<Hall> h, Semester semester) {
+    private List<CourseInstance> generateAutomatedTimeTable(List<Course> c, List<Hall> h, Semester semester) {
         Collections.sort(c);
         List<CourseInstance> courseInstances = InstantiateCourses(c, semester);
 
-        PriorityQueue<Timing> queue = (PriorityQueue<Timing>) new LinkedList();
+        PriorityQueue<Timing> queue = new PriorityQueue<>();
         Timing timing = new Timing();
         for (int i = 0; i < h.size(); i++) {
             for (int j = 0; j < 6; j++) {
@@ -95,6 +84,7 @@ public class Automatic {
             if (timing.getRemainTime() >= 2) {
                 queue.add(timing);
             }
+            System.out.println(" filled instance of " + courseInstances.get(i).getCourse().getName() + " is created");
         }
         return courseInstances;
     }
@@ -113,10 +103,13 @@ public class Automatic {
         List<CourseInstance> courseInstances = new ArrayList<>();
 
         for (Course c : courses) {
+            System.out.println(" create empty instance of " + c.getName());
             CourseInstance lecture = new CourseInstance();
             CourseInstance train = new CourseInstance();
             lecture.setSemester(semester);
             train.setSemester(semester);
+            lecture.setType("lecture");
+            train.setType("training");
             lecture.setCourse(c);
             train.setCourse(c);
             courseInstances.add(lecture);
