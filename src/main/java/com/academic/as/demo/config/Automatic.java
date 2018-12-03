@@ -80,10 +80,6 @@ public class Automatic {
             courseInstanceRequest.setSemesterId(semester.getId());
             courseInstanceRequest.setInstructorsIds(new ArrayList<>());
             courseInstanceRequest.setStudentsIds(new ArrayList<>());
-            courseInstanceRequest.setHallId(3);
-            courseInstanceRequest.setSpecializationId(4);
-            CourseInstance createdInstance = coursesService.addCourseInstance(courseInstanceRequest).getCourseInstance();
-
            firebaseHelper.createFirebaseGroupForCourseInstance(createdInstance.getId() + "", new Group(new ArrayList<>(), new Group.Metadata(createdInstance.getCourse().getName() + " " + semester.getSemesterCode())));
         }
 
