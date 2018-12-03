@@ -80,8 +80,8 @@ public class CoursesService {
         CourseInstanceCreationResponse response = new CourseInstanceCreationResponse();
         try {
             CourseInstance newCourseInstance = new CourseInstance();
-            newCourseInstance.setStartTime(Instant.ofEpochMilli(requestBody.getStartTime()));
-            newCourseInstance.setEndTime(Instant.ofEpochMilli(requestBody.getEndTime()));
+            newCourseInstance.setStartTime(requestBody.getStartTime());
+            newCourseInstance.setEndTime(requestBody.getEndTime());
             newCourseInstance.setType(requestBody.getType());
             Hall courseHall = hallRepository.getOne(requestBody.getHallId());
             Course instanceImage = courseRepository.getOne(requestBody.getCourseId());

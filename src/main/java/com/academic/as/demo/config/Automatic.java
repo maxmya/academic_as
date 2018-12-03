@@ -48,7 +48,7 @@ public class Automatic {
      * and creates its attributes of courses
      */
     //@Scheduled(cron = "0 0 12 1 9 ? *")
-    @Scheduled(fixedRate = 1000000000)
+//    @Scheduled(fixedRate = 1000000000)
     public void generateFallSemester() {
 
         System.out.println("generating instances fall-" + Calendar.getInstance().get(Calendar.YEAR));
@@ -74,8 +74,8 @@ public class Automatic {
             System.out.println(" course instance of " + c.getName() + " is generated");
 
             CourseInstanceRequest courseInstanceRequest = new CourseInstanceRequest();
-            courseInstanceRequest.setStartTime(0l);
-            courseInstanceRequest.setEndTime(Instant.now().toEpochMilli());
+//            courseInstanceRequest.setStartTime(0l);
+//            courseInstanceRequest.setEndTime(Instant.now().toEpochMilli());
             courseInstanceRequest.setCourseId(c.getId());
             courseInstanceRequest.setSemesterId(semester.getId());
             courseInstanceRequest.setInstructorsIds(new ArrayList<>());
@@ -84,13 +84,11 @@ public class Automatic {
             courseInstanceRequest.setSpecializationId(4);
             CourseInstance createdInstance = coursesService.addCourseInstance(courseInstanceRequest).getCourseInstance();
 
-            createFirebaseGroupForCourseInstance(createdInstance.getId() + "", new Group(new ArrayList<>(), new Group.Metadata(createdInstance.getCourse().getName() + " " + semester.getSemesterCode())));
+           firebaseHelper.createFirebaseGroupForCourseInstance(createdInstance.getId() + "", new Group(new ArrayList<>(), new Group.Metadata(createdInstance.getCourse().getName() + " " + semester.getSemesterCode())));
         }
 
     }
 
-    public void createFirebaseGroupForCourseInstance(String groupId, Group group) {
-        firebaseHelper.db.collection(FirebaseConstants.GROUPS_COLLECTION).document(groupId).set(group);
-    }
+
 
 }

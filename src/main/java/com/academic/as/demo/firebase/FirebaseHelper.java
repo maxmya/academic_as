@@ -1,5 +1,6 @@
 package com.academic.as.demo.firebase;
 
+import com.academic.as.demo.controllers.web.models.Group;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -30,5 +31,10 @@ public class FirebaseHelper {
 
         return firebaseAuth.createUser(createRequest);
     }
+
+    public void createFirebaseGroupForCourseInstance(String groupId, Group group) {
+        db.collection(FirebaseConstants.GROUPS_COLLECTION).document(groupId).set(group);
+    }
+
 
 }
