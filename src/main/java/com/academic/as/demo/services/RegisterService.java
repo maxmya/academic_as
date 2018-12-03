@@ -7,6 +7,7 @@ import com.academic.as.demo.firebase.FirebaseHelper;
 import com.academic.as.demo.models.*;
 import com.academic.as.demo.repositories.*;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -99,8 +100,36 @@ public class RegisterService {
     private RegisterResponse add(JpaRepository repository, Object data, String username, String plainPassword, UserRoles role) {
         RegisterResponse response = new RegisterResponse();
         try {
-            firebaseHelper.createUser(username, plainPassword);
-            repository.save(data);
+            if (repository instanceof AdminRepository) {
+                UserRecord adminFbRecord = firebaseHelper.createUser(username, plainPassword);
+                Admin adminEaRecord = (Admin) data;
+                adminEaRecord.getUser().setFirebaseId(adminFbRecord.getUid());
+                repository.save(adminEaRecord);
+
+            } else if (repository instanceof StudentRepository) {
+                UserRecord studentFbRecord = firebaseHelper.createUser(username, plainPassword);
+                Student studentEaRecord = (Student) data;
+                studentEaRecord.getUser().setFirebaseId(studentFbRecord.getUid());
+                repository.save(studentEaRecord);
+            } else if (repository instanceof ProfessorRepository) {
+                UserRecord professorFbRecord = firebaseHelper.createUser(username, plainPassword);
+                Professor professorEaRecord = (Professor) data;
+                professorEaRecord.getUser().setFirebaseId(professorFbRecord.getUid());
+                repository.save(professorEaRecord);
+            } else if (repository instanceof AssistantRepository) {
+                UserRecord professorFbRecord = firebaseHelper.createUser(username, plainPassword);
+                Assistant professorEaRecord = (Assistant) data;
+                professorEaRecord.getUser().setFirebaseId(professorFbRecord.getUid());
+                repository.save(professorEaRecord);
+            } else if (repository instanceof SupervisorRepository) {
+                UserRecord professorFbRecord = firebaseHelper.createUser(username, plainPassword);
+                Supervisor professorEaRecord = (Supervisor) data;
+                professorEaRecord.getUser().setFirebaseId(professorFbRecord.getUid());
+                repository.save(professorEaRecord);
+            } else {
+                System.err.println("warning : this user  " + username + " has no firebase account");
+                repository.save(data);
+            }
             authGroupRepository.save(new AuthGroup(role.name(), username));
             response.setCode("200");
             response.setMessage("SUCCESS");

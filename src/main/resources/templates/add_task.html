@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+</head>
+<body>
+<div th:include="commons::nav"></div>
+<form action="#" th:action="@{'/tasks/'+${group}+'/add'}" th:object="${task}" method="post">
+    <div class="form-group">
+        <label for="fname">Task Title</label>
+        <input type="text" class="form-control" th:field="*{name}" id="fname"
+               placeholder="" required="required">
+    </div>
+    <div class="form-group">
+        <label for="lname">Task Body</label>
+        <input type="text" class="form-control" th:field="*{body}" id="lname"
+               placeholder="" required="required">
+    </div>
+    <div c lass="form-group">
+        <br>
+        <button type="submit" id="form" class="btn btn-primary" style="float:right;">Submit</button>
+    </div>
+
+</form>
+
+</body>
+</html>

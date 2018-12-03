@@ -3,6 +3,7 @@ package com.academic.as.demo.services;
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
 import com.academic.as.demo.api.requests.CourseRegistrationRequest;
 import com.academic.as.demo.api.responses.BaseResponse;
+import com.academic.as.demo.api.responses.CourseInstanceCreationResponse;
 import com.academic.as.demo.api.responses.CourseInstanceResponse;
 import com.academic.as.demo.api.responses.CoursesResponse;
 import com.academic.as.demo.models.*;
@@ -75,8 +76,8 @@ public class CoursesService {
         return response;
     }
 
-    public BaseResponse addCourseInstance(CourseInstanceRequest requestBody) {
-        BaseResponse response = new BaseResponse();
+    public CourseInstanceCreationResponse addCourseInstance(CourseInstanceRequest requestBody) {
+        CourseInstanceCreationResponse response = new CourseInstanceCreationResponse();
         try {
             CourseInstance newCourseInstance = new CourseInstance();
             newCourseInstance.setStartTime(requestBody.getStartTime());
@@ -104,7 +105,7 @@ public class CoursesService {
             instanceImage.addCourse(newCourseInstance);
             specialization.addCourse(newCourseInstance);
             courseSemester.addCourse(newCourseInstance);
-            courseInstanceRepository.save(newCourseInstance);
+            response.setCourseInstance(courseInstanceRepository.save(newCourseInstance));
             response.setCode("200");
             response.setMessage("SUCCESSES");
         } catch (Exception e) {
@@ -186,7 +187,7 @@ public class CoursesService {
         return response;
     }
 
-    public CoursesResponse SaveCourse(Course course,Integer id) {
+    public CoursesResponse SaveCourse(Course course, Integer id) {
         CoursesResponse response = new CoursesResponse();
         try {
             if (courseRepository.existsById(id)) {

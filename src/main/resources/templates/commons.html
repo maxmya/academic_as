@@ -10,6 +10,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/i18n/defaults-*.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <style>
         .error {
             margin-bottom: 1px;
@@ -17,6 +19,8 @@
             line-height: 30px;
             padding: 0 15px;
         }
+
+
     </style>
 </head>
 <body>
@@ -33,9 +37,11 @@
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/register">Add User</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add/course">Add Course</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add/department">Add Department</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{'/user/'+${#authentication.name}+'/test'}">My Profile</a></li>
+                <li sec:authorize="hasRole('ROLE_PROFESSOR') or hasRole('ROLE_ASSISTENT')"><a
+                        th:href="@{'/get/'+${#authentication.name}+'/courses'}">My Courses</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{'/user/'+${#authentication.name}+'/test'}">My
+                    Profile</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/out">Logout</a></li>
-
             </ul>
         </div>
     </nav>
