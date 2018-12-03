@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons::head">
+    <style>
+        .mcard {
+            margin: 20px;
+            border: #4b5052;
+            border-radius: 2px;
+        }
+
+    </style>
+</head>
+<body>
+<div th:include="commons::nav"></div>
+<a th:href="@{'/tasks/'+${group}+'/add'}" class="card-link">link</a>
+<div class="py-5">
+    <div class="container">
+        <div class="row hidden-md-up">
+            <div class="col-md-4" th:each="task : ${tasks}">
+                <div class="mcard">
+                    <div class="card-block">
+                        <h4 class="card-title" th:text="${task.getName()}"></h4>
+                        <!--<h6 class="card-subtitle text-muted">Support card subtitle</h6>-->
+                        <p class="card-text p-y-1 " th:text="${task.getBody()}"></p>
+                        <!--<a href="#" class="card-link">link</a>-->
+                        <!--<a href="#" class="card-link">Second link</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

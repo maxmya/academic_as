@@ -155,10 +155,10 @@ public class AdminDashboardViewController {
         CoursesResponse response =  coursesService.getCourse(id);
         Course  courseData = (Course) response.getData();
         if(response.getCode() == "200"){
-            model.addAttribute("courseData" , courseData);
+            model.addAttribute("courseInstances" , courseData.getCourseInstances());
         }
         model.addAttribute("response" , response);
-        return "view_course_intance";
+        return "view_course_intance_admin";
     }
 
     @GetMapping("/instance/{ID}/students")

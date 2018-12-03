@@ -1,6 +1,9 @@
 package com.academic.as.demo.config;
 
 import com.academic.as.demo.api.requests.CourseInstanceRequest;
+import com.academic.as.demo.controllers.web.models.Group;
+import com.academic.as.demo.firebase.FirebaseConstants;
+import com.academic.as.demo.firebase.FirebaseHelper;
 import com.academic.as.demo.models.Course;
 import com.academic.as.demo.models.CourseInstance;
 import com.academic.as.demo.models.Semester;
@@ -15,10 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Transactional
@@ -40,12 +40,15 @@ public class Automatic {
     @Autowired
     CoursesService coursesService;
 
+    @Autowired
+    FirebaseHelper firebaseHelper;
+
     /**
      * this method runs every year in the beginning of month September to create Fall semester record
      * and creates its attributes of courses
      */
     //@Scheduled(cron = "0 0 12 1 9 ? *")
-    @Scheduled(fixedRate = 1000000000)
+//    @Scheduled(fixedRate = 1000000000)
     public void generateFallSemester() {
 
         System.out.println("generating instances fall-" + Calendar.getInstance().get(Calendar.YEAR));
@@ -54,7 +57,7 @@ public class Automatic {
         currentFallSemester.setSemesterCode("fall-" + Calendar.getInstance().get(Calendar.YEAR));
         currentFallSemester.setStartDate(new Date());
 
-//           semesterRepository.save(currentFallSemester);
+       //    semesterRepository.save(currentFallSemester);
 
         createCourseInstanceForSemester(semesterRepository.findBySemesterCode(currentFallSemester.getSemesterCode()));
     }
@@ -63,8 +66,7 @@ public class Automatic {
      * @param semester generic for all semesters
      * @return list of course instances
      */
-    private List<CourseInstance> createCourseInstanceForSemester(Semester semester) {
-        List<CourseInstance> courseInstances = new ArrayList<>();
+    private void createCourseInstanceForSemester(Semester semester) {
 
         List<Course> courses = courseRepository.findAll();
         for (Course c : courses) {
@@ -72,18 +74,17 @@ public class Automatic {
             System.out.println(" course instance of " + c.getName() + " is generated");
 
             CourseInstanceRequest courseInstanceRequest = new CourseInstanceRequest();
+//            courseInstanceRequest.setStartTime(0l);
+//            courseInstanceRequest.setEndTime(Instant.now().toEpochMilli());
             courseInstanceRequest.setCourseId(c.getId());
             courseInstanceRequest.setSemesterId(semester.getId());
             courseInstanceRequest.setInstructorsIds(new ArrayList<>());
             courseInstanceRequest.setStudentsIds(new ArrayList<>());
-            courseInstanceRequest.setHallId(1);
-
-            courseInstanceRequest.setSpecializationId(1);
-            coursesService.addCourseInstance(courseInstanceRequest);
-
+           firebaseHelper.createFirebaseGroupForCourseInstance(createdInstance.getId() + "", new Group(new ArrayList<>(), new Group.Metadata(createdInstance.getCourse().getName() + " " + semester.getSemesterCode())));
         }
 
-        return courseInstances;
     }
+
+
 
 }
