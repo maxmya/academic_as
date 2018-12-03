@@ -4,6 +4,7 @@ package com.academic.as.demo.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "course")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Course implements Serializable {
+public class Course implements Serializable, Comparable<Course> {
 
     @Id
     @Column(name = "id")
@@ -49,6 +50,10 @@ public class Course implements Serializable {
     private Integer awardedPoints;
 
 
+    @Column(name = "semester")
+    private String semester;
+
+
     @JsonBackReference(value = "department")
     @ManyToOne(cascade = {CascadeType.MERGE,
             CascadeType.PERSIST,
@@ -70,59 +75,87 @@ public class Course implements Serializable {
         courseInstances.add(courseInstance);
     }
 
-     public Integer getId() {
-         return id;
-     }
+    public Integer getId() {
+        return id;
+    }
 
-     public void setId(Integer id) {
-         this.id = id;
-     }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-     public String getName() {
-         return name;
-     }
+    public String getName() {
+        return name;
+    }
 
-     public void setName(String name) {
-         this.name = name;
-     }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-     public String getCode() {
-         return code;
-     }
+    public String getCode() {
+        return code;
+    }
 
-     public void setCode(String code) {
-         this.code = code;
-     }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-     public Integer getRequiredPoints() {
-         return requiredPoints;
-     }
+    public Integer getRequiredPoints() {
+        return requiredPoints;
+    }
 
-     public void setRequiredPoints(Integer requiredPoints) {
-         this.requiredPoints = requiredPoints;
-     }
+    public void setRequiredPoints(Integer requiredPoints) {
+        this.requiredPoints = requiredPoints;
+    }
 
-     public Integer getAwardedPoints() {
-         return awardedPoints;
-     }
+    public Integer getAwardedPoints() {
+        return awardedPoints;
+    }
 
-     public void setAwardedPoints(Integer awardedPoints) {
-         this.awardedPoints = awardedPoints;
-     }
+    public void setAwardedPoints(Integer awardedPoints) {
+        this.awardedPoints = awardedPoints;
+    }
 
-     public Department getDepartment() {
-         return department;
-     }
+    public Department getDepartment() {
+        return department;
+    }
 
-     public void setDepartment(Department department) {
-         this.department = department;
-     }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
-     public List<CourseInstance> getCourseInstances() {
-         return courseInstances;
-     }
+    public String getSemester() {
+        return semester;
+    }
 
-     public void setCourseInstances(List<CourseInstance> courseInstances) {
-         this.courseInstances = courseInstances;
-     }
- }
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+
+    public List<CourseInstance> getCourseInstances() {
+        return courseInstances;
+    }
+
+    public void setCourseInstances(List<CourseInstance> courseInstances) {
+        this.courseInstances = courseInstances;
+    }
+
+    public int getLevel() {
+        if (requiredPoints >= 100) return 4;
+        else if (requiredPoints >= 80) return 3;
+        else if (requiredPoints >= 60) return 2;
+        else return 1;
+    }
+
+    @Override
+    public int compareTo(Course o) {
+        if (o.getDepartment().getId().equals(getDepartment().getId())) {
+            if (o.getLevel() == getLevel()) {
+                return 0;
+            } else if (o.getLevel() < getLevel()) {
+                return 1;
+            } else return -1;
+        } else if (o.getDepartment().getId() < getDepartment().getId()) {
+            return 1;
+        } else return -1;
+    }
+}
