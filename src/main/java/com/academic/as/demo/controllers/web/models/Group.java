@@ -1,15 +1,22 @@
 package com.academic.as.demo.controllers.web.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
+@AllArgsConstructor
 @Data
-public class Group {
+public class Group implements Serializable {
+    List<String> members;
+    Metadata metadata;
 
-    String groupName;
-    String groupImageUrl;
-    List<Member> memberList;
-    List<Task> tasks;
+    @AllArgsConstructor
+    @Data
+    public static class Metadata {
+        String name;
+    }
 
 }
+

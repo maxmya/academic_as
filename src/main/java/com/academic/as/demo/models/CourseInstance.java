@@ -25,10 +25,10 @@ public class CourseInstance {
     private Integer id;
 
     @Column(name = "start_time")
-    private Instant startTime;
+    private Integer startTime;
 
     @Column(name = "end_time")
-    private Instant endTime;
+    private Integer endTime;
 
     @Column(name = "type")
     private String type;
@@ -102,19 +102,19 @@ public class CourseInstance {
         this.id = id;
     }
 
-    public Instant getStartTime() {
+    public Integer getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Instant startTime) {
+    public void setStartTime(Integer startTime) {
         this.startTime = startTime;
     }
 
-    public Instant getEndTime() {
+    public Integer getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Instant endTime) {
+    public void setEndTime(Integer endTime) {
         this.endTime = endTime;
     }
 

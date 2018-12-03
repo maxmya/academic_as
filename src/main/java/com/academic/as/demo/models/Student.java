@@ -20,6 +20,12 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "gpa")
+    private Float gpa;
+
+    @Column(name = "level")
+    private Integer level;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
