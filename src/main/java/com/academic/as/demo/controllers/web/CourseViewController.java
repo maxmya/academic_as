@@ -95,19 +95,40 @@ public class CourseViewController implements WebMvcConfigurer {
         return "edit_course";
     }
 
-    @GetMapping("courses/{userName}/register")
+    @GetMapping("/courses/{userName}/register")
     public String getRegistercoursesView(@PathVariable(value = "userName") String userName, Model model) {
         CourseInstanceResponse courseData = coursesService.ViewregisterCoursesToStudent(userName);
+        List<CourseInstance> courseInstancesdata = (List<CourseInstance>) courseData.getData();
+        List<CourseInstance> courseList = new ArrayList<>();
         if (courseData.getCode().equalsIgnoreCase("200")) {
-            model.addAttribute("courseData", courseData);
+            model.addAttribute(new CourseInstance());
+            model.addAttribute("courseData", courseInstancesdata);
+            model.addAttribute("listcourses", courseList);
         }
         model.addAttribute("response", courseData.getData());
         return "registe_course";
     }
 
-    @PostMapping("courses/{userName}/register")
-    public String getRegisterCourses(@PathVariable(value = "userName") String userName, Model model) {
-
-        return  "waiting";
-    }
+//    @PostMapping("/courses/{userName}/register")
+//    public String getRegisterCourses(@ModelAttribute("course") @PathVariable(value = "userName") @Valid CourseInstance courseInstance, String userName, BindingResult bindingResult, Model model) {
+//        CourseInstanceResponse courseData = coursesService.ViewregisterCoursesToStudent(userName);
+//        CourseInstanceResponse response = coursesService.ViewregisterCoursesToStudent(userName);
+//
+//        List<CourseInstance> courseInstancesdata = (List<CourseInstance>) courseData.getData();
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("errors", bindingResult.getAllErrors());
+//            model.addAttribute("courses", coursesService.ViewregisterCoursesToStudent(userName).getData());
+//            return "registe_course";
+//        }else if (response.getCode().equalsIgnoreCase("200")) {
+//            model.addAttribute("courseData", courseInstancesdata);
+//
+//
+//        } else {
+//            model.addAttribute(new CourseInstance());
+//            model.addAttribute("response", response);
+//            model.addAttribute("courseData", courseInstancesdata);
+//            return "registe_course";
+//        }
+//        return "registe_course" ;
+//    }
 }

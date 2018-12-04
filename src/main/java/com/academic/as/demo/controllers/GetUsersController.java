@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 public class GetUsersController {
 
     @Autowired
-    GetUsersService usersService;
+    GetUsersService getUsersService;
 
     @GetMapping(value = "/admins")
     public UsersResponse getAdmins() {
-        return usersService.getAdmins();
+        return getUsersService.getAdmins();
     }
 
 //    @GetMapping(value = "admin/{id}")
@@ -27,7 +27,7 @@ public class GetUsersController {
 
     @GetMapping(value = "/students")
     public UsersResponse getStudents() {
-        return usersService.getStudents();
+        return getUsersService.getStudents();
     }
 
 //    @GetMapping(value = "student/{id}")
@@ -37,7 +37,7 @@ public class GetUsersController {
 
     @GetMapping(value = "/assistants")
     public UsersResponse getAssistants() {
-        return usersService.getAssistants();
+        return getUsersService.getAssistants();
     }
 
 //    @GetMapping(value = "assistant/{id}")
@@ -47,7 +47,7 @@ public class GetUsersController {
 
     @GetMapping(value = "/supervisors")
     public UsersResponse getSupervisors() {
-        return usersService.getSupervisors();
+        return getUsersService.getSupervisors();
     }
 
 //    @GetMapping(value = "supervisor/{id}")
@@ -57,7 +57,7 @@ public class GetUsersController {
 
     @GetMapping(value = "/professors")
     public UsersResponse getProfessors() {
-        return usersService.getProfessors();
+        return getUsersService.getProfessors();
     }
 
 //    @GetMapping(value = "professor/{id}")

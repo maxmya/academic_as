@@ -204,7 +204,8 @@ public class CoursesService {
 
     public CourseInstanceResponse ViewregisterCoursesToStudent(String userName) {
         CourseInstanceResponse response = new CourseInstanceResponse();
-        Student currentStudent = studentRepository.findByName(userName);
+        User user = userRepository.findByUsername(userName);
+        Student currentStudent = studentRepository.findByUserId(user.getId());
         try {
             if (currentStudent != null) {
                 Specialization currentStudSpecialization = currentStudent.getSpecialization();
