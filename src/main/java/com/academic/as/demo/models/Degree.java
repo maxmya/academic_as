@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -72,35 +74,26 @@ public class Degree implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty
-    @NotNull
-    @Column(name = "10%")
+    @Column(name = "10degree")
     private Integer quizDegree;
 
 
-    @NotEmpty
-    @NotNull
-    @Column(name = "30%")
+    @Column(name = "30degree")
     private Integer labDegree;
 
-    @NotEmpty
-    @NotNull
-    @Column(name = "60%")
+    @Column(name = "60degree")
     private Integer finalDegree;
 
 
-    @NotEmpty
-    @NotNull
     @Column(name = "status")
     private String status;
 
 
-    @NotEmpty
-    @NotNull
     @Column(name = "repetition")
     private Integer repetition;
 
     @OneToMany(mappedBy = "degree", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<CourseStudentDegreeTernaryRelation> courseStudentDegreeTernaryRelations;
+    //private List<CourseStudentDegreeTernaryRelation> courseStudentDegreeTernaryRelations = new ArrayList<>();
 
 }

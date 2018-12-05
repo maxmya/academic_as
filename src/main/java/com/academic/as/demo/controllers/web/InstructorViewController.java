@@ -113,17 +113,26 @@ public class InstructorViewController {
 
         assignDegreeFormRequest.setStudentId(Integer.parseInt(id));
         assignDegreeFormRequest.setCourseInstanceId(Integer.parseInt(instanceId));
-        System.out.println(assignDegreeFormRequest);
         CoursesResponse coursesResponse = coursesService.SaveDegree(assignDegreeFormRequest);
         if(coursesResponse.getCode().equalsIgnoreCase("200")){
             return "404";
         }
         model.addAttribute("response", coursesResponse);
-        System.out.println(studentRepository.existsById(assignDegreeFormRequest.getStudentId()));
-        System.out.println(courseInstanceRepository.existsById(assignDegreeFormRequest.getCourseInstanceId()));
         model.addAttribute("student", studentRepository.getOne(assignDegreeFormRequest.getStudentId()));
         model.addAttribute("courseInstance", courseInstanceRepository.getOne(assignDegreeFormRequest.getCourseInstanceId()));
 
         return "assign_degree";
+    }
+
+    @GetMapping("/instance/{InstanceId}/all/degrees")
+    public String getDegreeOfOneCourseInstance(@PathVariable(value="InstanceId") String instanceId , Model model) {
+
+        CoursesResponse coursesResponse = coursesService.getAllDegrees(Integer.parseInt(instanceId));
+        List<Degree> degrees = (List <Degree>)coursesResponse.getData();
+        if(coursesResponse.getCode().equalsIgnoreCase("200")){
+            model.addAttribute("degrees",degrees.get(0).getCourseStudentDegreeTernaryRelations());
+        }
+        model.addAttribute("response",degrees);
+        return "text";
     }
 }

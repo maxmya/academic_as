@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CoursesService {
@@ -215,23 +214,35 @@ public class CoursesService {
         CoursesResponse response = new CoursesResponse();
         try {
             if (courseInstanceRepository.existsById(assignDegreeFormRequest.getCourseInstanceId()) && studentRepository.existsById(assignDegreeFormRequest.getStudentId())) {
-                response.setCode("200");
-                response.setMessage("SUCCESS");
                 Degree degree = new Degree();
-                degree.setRepetition(1);
                 if(assignDegreeFormRequest.getDegreeType().equalsIgnoreCase("quiz")){
-                   degree.setQuizDegree(assignDegreeFormRequest.getDegree());
+                    degree.setQuizDegree(assignDegreeFormRequest.getDegree());
+                    degree.setLabDegree(0);
+                    degree.setFinalDegree(0);
                 }else if(assignDegreeFormRequest.getDegreeType().equalsIgnoreCase("lab")){
-                   degree.setLabDegree(assignDegreeFormRequest.getDegree());
+                    degree.setQuizDegree(0);
+                    degree.setLabDegree(assignDegreeFormRequest.getDegree());
+                    degree.setFinalDegree(0);
                 }else{
-                   degree.setFinalDegree(assignDegreeFormRequest.getDegree());
+                    degree.setQuizDegree(0);
+                    degree.setLabDegree(0);
+                    degree.setFinalDegree(assignDegreeFormRequest.getDegree());
                 }
-                degreeRepository.save(degree);
+               // System.out.println(degreeRepository.save(degree));
+                degree.setRepetition(1);
+                degree.setStatus("studying");
                 CourseStudentDegreeTernaryRelation csdr = new CourseStudentDegreeTernaryRelation();
                 csdr.setStudent(studentRepository.getOne(assignDegreeFormRequest.getStudentId()));
                 csdr.setCourseInstance(courseInstanceRepository.getOne(assignDegreeFormRequest.getCourseInstanceId()));
                 csdr.setDegree(degree);
+                Set<CourseStudentDegreeTernaryRelation> s = new HashSet<>();
+                s.add(csdr);
+                degree.setCourseStudentDegreeTernaryRelations(s);
+                degreeRepository.save(degree);
                 courseStudentDegreeTernaryRelationRepository.save(csdr);
+                response.setCode("200");
+                response.setMessage("SUCCESS");
+
             } else {
                 response.setCode("400");
                 response.setMessage("Something went wrong");
@@ -241,6 +252,14 @@ public class CoursesService {
             response.setMessage(e.getMessage());
         }
         return response;
+    }
+
+    public CoursesResponse getAllDegrees(Integer courseInstanceId){
+
+         CoursesResponse coursesResponse = new CoursesResponse();
+         List<Degree> degrees = degreeRepository.getAllDegreeOfCourseInstance(courseInstanceId);
+         coursesResponse.setData(degrees);
+         return coursesResponse;
     }
 }
 
