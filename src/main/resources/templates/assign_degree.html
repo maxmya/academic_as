@@ -5,8 +5,13 @@
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
-    <div class="alert alert-success" th:if="${response}">
-        <p th:text="${response.getMessage()}"/>
+    <div  th:if="${response}">
+        <div class="alert alert-success" role="alert" th:if='${response.getCode().equals("200")}'>
+            <p th:text="${response.getMessage()}"></p>
+        </div>
+        <div class="alert alert-danger" role="alert" th:if='${response.getCode().equals("401")}'>
+            <p th:text="${response.getMessage()}"></p>
+        </div>
     </div>
     <br>
     <h2>Assign Degree to <strong th:text="${student.getUser().getUsername()}"></strong></h2>

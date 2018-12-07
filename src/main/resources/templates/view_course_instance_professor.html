@@ -48,6 +48,7 @@
             <th scope="col">Instance Instructors</th>
             <th scope="col">Instance Students</th>
             <th scope="col">Instance Tasks</th>
+            <th scope="col">Instance Degrees</th>
         </tr>
         </thead>
         <tbody>
@@ -58,6 +59,8 @@
             <td th:text="${instance.getHall().getName()}"></td>
             <td><a type="button" class="btn btn-info" th:href="@{/professor/instance/} + ${instance.getId()} +@{'/instructors'}"style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View Instructors</a></td>
             <td><a type="button" class="btn btn-info" th:href="@{/professor/instance/} + ${instance.getId()} +@{'/students'}"style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View Students</a></td>
+            <td></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/professor/instance/} + ${instance.getId()} +@{'/all/degrees'}"style="color: rgba(38,38,38,0.86);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.87)" ></span> View Degrees</a></td>
         </tr>
         </tbody>
     </table>

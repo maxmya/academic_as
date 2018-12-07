@@ -12,8 +12,8 @@ import java.util.List;
 public interface DegreeRepository extends JpaRepository<Degree, Integer> {
 
     @Query(nativeQuery = true,
-            value = "SELECT * FROM registration_info ri" +
+            value = "SELECT ri.* ,csd.* FROM registration_info ri" +
             " LEFT JOIN course_student_degrees csd ON ri.id = csd.degree_id" +
-            " WHERE csd.course_instance_id = :#{#instanceId}")
+            " WHERE csd.course_instance_id = :#{#instanceId }")
     List<Degree> getAllDegreeOfCourseInstance(@Param("instanceId") Integer instanceId);
 }

@@ -216,14 +216,29 @@ public class CoursesService {
             if (courseInstanceRepository.existsById(assignDegreeFormRequest.getCourseInstanceId()) && studentRepository.existsById(assignDegreeFormRequest.getStudentId())) {
                 Degree degree = new Degree();
                 if(assignDegreeFormRequest.getDegreeType().equalsIgnoreCase("quiz")){
+                    if(assignDegreeFormRequest.getDegree() > 11 ){
+                        response.setCode("401");
+                        response.setMessage("degree must be <= 10");
+                        return response;
+                    }
                     degree.setQuizDegree(assignDegreeFormRequest.getDegree());
                     degree.setLabDegree(0);
                     degree.setFinalDegree(0);
                 }else if(assignDegreeFormRequest.getDegreeType().equalsIgnoreCase("lab")){
+                    if(assignDegreeFormRequest.getDegree() > 31 ){
+                        response.setCode("401");
+                        response.setMessage("degree must be <= 30");
+                        return response;
+                    }
                     degree.setQuizDegree(0);
                     degree.setLabDegree(assignDegreeFormRequest.getDegree());
                     degree.setFinalDegree(0);
                 }else{
+                    if(assignDegreeFormRequest.getDegree() > 61 ){
+                        response.setCode("401");
+                        response.setMessage("degree must be <= 60");
+                        return response;
+                    }
                     degree.setQuizDegree(0);
                     degree.setLabDegree(0);
                     degree.setFinalDegree(assignDegreeFormRequest.getDegree());
@@ -256,10 +271,17 @@ public class CoursesService {
 
     public CoursesResponse getAllDegrees(Integer courseInstanceId){
 
-         CoursesResponse coursesResponse = new CoursesResponse();
-         List<Degree> degrees = degreeRepository.getAllDegreeOfCourseInstance(courseInstanceId);
-         coursesResponse.setData(degrees);
-         return coursesResponse;
+        CoursesResponse coursesResponse = new CoursesResponse();
+        List<Degree> degrees = degreeRepository.getAllDegreeOfCourseInstance(courseInstanceId);
+        if(degrees.size() != 0) {
+            coursesResponse.setData(degrees);
+            coursesResponse.setCode("200");
+            coursesResponse.setMessage("sucess");
+        }else{
+            coursesResponse.setCode("400");
+            coursesResponse.setMessage("failed");
+        }
+        return coursesResponse;
     }
 }
 

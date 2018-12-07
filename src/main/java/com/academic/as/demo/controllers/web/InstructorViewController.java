@@ -114,8 +114,15 @@ public class InstructorViewController {
         assignDegreeFormRequest.setStudentId(Integer.parseInt(id));
         assignDegreeFormRequest.setCourseInstanceId(Integer.parseInt(instanceId));
         CoursesResponse coursesResponse = coursesService.SaveDegree(assignDegreeFormRequest);
-        if(coursesResponse.getCode().equalsIgnoreCase("200")){
+        if(coursesResponse.getCode().equalsIgnoreCase("400")){
             return "404";
+        }
+        System.out.println("code" + coursesResponse.getCode());
+        if(coursesResponse.getCode().equalsIgnoreCase("401")){
+            model.addAttribute("response", coursesResponse);
+            model.addAttribute("student", studentRepository.getOne(assignDegreeFormRequest.getStudentId()));
+            model.addAttribute("courseInstance", courseInstanceRepository.getOne(assignDegreeFormRequest.getCourseInstanceId()));
+            return "assign_degree";
         }
         model.addAttribute("response", coursesResponse);
         model.addAttribute("student", studentRepository.getOne(assignDegreeFormRequest.getStudentId()));
@@ -124,15 +131,15 @@ public class InstructorViewController {
         return "assign_degree";
     }
 
-    @GetMapping("/instance/{InstanceId}/all/degrees")
+    @GetMapping("/professor/instance/{InstanceId}/all/degrees")
     public String getDegreeOfOneCourseInstance(@PathVariable(value="InstanceId") String instanceId , Model model) {
 
         CoursesResponse coursesResponse = coursesService.getAllDegrees(Integer.parseInt(instanceId));
         List<Degree> degrees = (List <Degree>)coursesResponse.getData();
         if(coursesResponse.getCode().equalsIgnoreCase("200")){
-            model.addAttribute("degrees",degrees.get(0).getCourseStudentDegreeTernaryRelations());
+            model.addAttribute("degrees",degrees);
         }
         model.addAttribute("response",degrees);
-        return "text";
+        return "all_degrees";
     }
 }
