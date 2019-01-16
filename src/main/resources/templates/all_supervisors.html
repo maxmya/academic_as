@@ -16,6 +16,8 @@
     .btn:hover{
         background-color: #199dd4;
         color: #000000;
+        font-size: 14px;
+
     }
     .btn{
         border-radius: 50px;
@@ -33,28 +35,29 @@
         border: 1px solid #ddd;
         margin-bottom: 12px;
     }
+    body {background-color: rgba(59, 88, 121, 0.92);}
 </style>
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
-    <input style="background-image: url(static/css/ss.png)" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Supervisors by First Name.." title="Type in a name">
+    <input style="background-image: url(static/css/ss.png);padding: 20px 20px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Supervisors by First Name.." title="Type in a name">
     <table id="myTable" class="table table-striped table-dark table-hover table-condensed">
         <thead>
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">More</th>
-            <th scope="col">Edit</th>
+            <th scope="col"style="font-size: 18px">Id</th>
+            <th scope="col"style="font-size: 18px">First Name</th>
+            <th scope="col"style="font-size: 18px">Last Name</th>
+            <th scope="col"style="font-size: 18px">More</th>
+            <th scope="col"style="font-size: 18px">Edit</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="supervisor : ${supervisors}" class="bg-info">
-            <td th:text="${supervisor.getUser().getId()}"></td>
-            <td th:text="${supervisor.getUser().getFirstName()}"></td>
-            <td th:text="${supervisor.getUser().getLastName()}"></td>
-            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${supervisor.getUser().getId()}" style="color: rgba(38,38,38,0.87);background-color:#26baee"><span class="glyphicon glyphicon-eye-open" style="color:rgba(38,38,38,0.86)" ></span> View</a></td>
-            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${supervisor.getUser().getId()} +@{/edit}"><span class="glyphicon glyphicon-edit" style="color:rgba(38,38,38,0.86)" ></span>Edit</a></td>
+            <td th:text="${supervisor.getUser().getId()}"style="font-size: 18px"></td>
+            <td th:text="${supervisor.getUser().getFirstName()}"style="font-size: 18px"></td>
+            <td th:text="${supervisor.getUser().getLastName()}"style="font-size: 18px"></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${supervisor.getUser().getId()}" style="color: #364e68;background-color:#00B0FF;border:#00B0FF;font-size: 15px"><span class="glyphicon glyphicon-eye-open" style="color:#364e68" ></span> View</a></td>
+            <td><a type="button" class="btn btn-info" th:href="@{/user/} + ${supervisor.getUser().getId()} +@{/edit}"style="color: #364e68;background-color:#00B0FF;border:#00B0FF;font-size: 15px"><span class="glyphicon glyphicon-edit" style="color:#364e68" ></span> Edit</a></td>
         </tr>
         </tbody>
     </table>

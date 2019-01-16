@@ -8,35 +8,31 @@
 </head>
 <style>
     .btn-huge{
-        padding-top:20px;
-        padding-bottom:20px;
-        background-color: #164c64;
+        padding: 50px 40px;
+        background-color: #364e68;
         font-size: 30px;
         color: aliceblue;
-        border-radius: 40px;
+        border-radius: 25px;
         -webkit-transition-duration: 0.4s;
         transition-duration: 0.4s;
         border: 2px solid #4b5052;
     }
     .btn-huge:hover{
-        background-color: #555555;
+        background-color: rgba(0, 170, 255, 0.71);
         color: #888888;
     }
+    body {background-color: #ebf0f6;}
 </style>
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
-    <br><br>
+    <br><br><br><br><br><br><br>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6" style="margin-left: 10%">
             <a type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" th:href="@{/department/} + ${departmentData.getId()}+@{/course}"> <span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> <data th:text="${departmentData.getDepartmentName()}"> </data> Courses</a>
         </div>
-    </div>
-    <br><br>
-    <br><br>
-    <div class="row">
     <div class="col-md-4">
-        <a type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" th:href="@{/department/} + ${departmentData.getId()}+ @{/specialization}"><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> <data th:text="${departmentData.getDepartmentName()}"> </data>Specializations </a>
+        <a type="button" class="btn-huge btn btn-outline-secondary btn-lg btn-huge" th:href="@{/department/} + ${departmentData.getId()}+ @{/specialization}"><span class="glyphicon glyphicon-th-list" style="color: aliceblue" ></span> <data th:text="${departmentData.getDepartmentName()}"> </data> Specializations </a>
     </div>
     </div>
 </div>

@@ -2,26 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="commons::head">
 </head>
+<style>
+    body {background-color: #ebf0f6;}
+</style>
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
     <div class="alert alert-success" role="alert" th:if="${response}">
         <p th:text="${response.getMessage()}"/>
     </div>
-    <br>
     <h2>Add Department</h2>
+    <br><br>
     <form action="#" th:action="@{/add/department}" th:object="${department} " method="post">
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 <label for="depname">Department Name</label>
                 <input type="text" class="form-control" th:field="*{departmentName}" id="depname"
                        placeholder="Enter Department Name" required="required">
                 <td th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}">departmentName Error
                 </td>
-
             </div>
-            <div class="col-auto my-9 col-md-9">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <br><br><br><br><br>
+            <div class="form-group col-md-5">
+                <button style="margin-left: 84%;background-color:#00b0ff;" type="submit" class="btn">Submit</button>
             </div>
         </div>
     </form>

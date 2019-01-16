@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="commons::head">
 </head>
+<style>
+    body {background-color: #ebf0f6;}
+</style>
 <body>
 <div th:include="commons::nav"></div>
 <div class="container">
@@ -10,10 +13,11 @@
     </div>
     <br>
     <h2>Add Department</h2>
+    <br><br>
     <form action="#" th:action="@{/department/{ID}/edit}" th:object="${department} " method="post">
         <input type="hidden" th:value="${department.getId()}" th:field="*{id}" id="id">
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 <label for="depname">Department Name</label>
                 <input type="text" class="form-control" th:field="*{departmentName}" id="depname"
                        placeholder="Enter Department Name" required="required">
@@ -21,8 +25,9 @@
                 </td>
 
             </div>
-            <div class="col-auto my-9 col-md-9">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <br><br><br><br><br>
+            <div class="form-group col-md-5">
+                <button type="submit" class="btn" style="margin-left: 84%;background-color:#00b0ff;">Submit</button>
             </div>
         </div>
 

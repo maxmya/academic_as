@@ -19,29 +19,45 @@
             line-height: 30px;
             padding: 0 15px;
         }
+        .button {
+            background-color: #132238;
+            border-radius: 12px;
+            color: white;
+            padding: 15px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 6px 6px;
+            cursor: pointer;
+            border: 2px solid #132238;
+
+        }
+        .button:hover {
+            background-color: #00b0ff;
+            color: white;
+        }
 
 
     </style>
 </head>
 <body>
 <div th:fragment="nav">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" style="background-color: #132238;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">EduActive</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/dashboard">Dashboard</a></li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/register">Add User</a></li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add/course">Add Course</a></li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/add/department">Add Department</a></li>
-                <li sec:authorize="hasRole('ROLE_PROFESSOR') or hasRole('ROLE_ASSISTENT')"><a
-                        th:href="@{'/get/'+${#authentication.name}+'/courses'}">My Courses</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{'/user/'+${#authentication.name}+'/test'}">My
-                    Profile</a></li>
-                <li sec:authorize="isAuthenticated()"><a href="/out">Logout</a></li>
+                <li><button class="button button2" onclick="location.href='/'" >Home</button></li>
+                <li sec:authorize="isAnonymous()"><button class="button button2" onclick="location.href='/login'" >Login</button></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/dashboard'" >Dashboard</button></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/register'" >Add User</button></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/add/course'" >Add Course</button></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/add/department'" >Add Department</button></li>
+                <li sec:authorize="hasRole('ROLE_PROFESSOR') or hasRole('ROLE_ASSISTENT')"><a style="font-size: 16px;color: white" th:href="@{'/get/'+${#authentication.name}+'/courses'}">My Courses</a></li>
+                <li sec:authorize="isAuthenticated()"><a type="button" style="hover:background-color#00b0ff;font-size: 16px;color: white;padding: 15px 22px;text-align: center;margin: 6px 6px;border: 2px solid #132238;border-radius: 12px;"  th:href="@{'/user/'+${#authentication.name}+'/test'}">My Profile</a></li>
+                <li sec:authorize="isAuthenticated()"><button  class="button button2" onclick="location.href='/out'" >Logout</button></li>
             </ul>
         </div>
     </nav>

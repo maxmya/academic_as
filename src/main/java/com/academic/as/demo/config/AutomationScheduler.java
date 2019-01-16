@@ -53,7 +53,7 @@ public class AutomationScheduler {
         currentFallSemester.setSemesterCode("test-" + UUID.randomUUID() + "-" + Calendar.getInstance().get(Calendar.YEAR));
         currentFallSemester.setStartDate(new Date());
         semesterRepository.save(currentFallSemester);
-        generateAutomatedTimeTable(courseRepository.findAll(), hallRepository.findAll(), currentFallSemester);
+       // generateAutomatedTimeTable(courseRepository.findAll(), hallRepository.findAll(), currentFallSemester);
     }
 
     @Scheduled(cron = "0 12 1 9 12 ?")
