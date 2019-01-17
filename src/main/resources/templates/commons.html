@@ -55,8 +55,10 @@
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/register'" >Add User</button></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/add/course'" >Add Course</button></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/add/department'" >Add Department</button></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><button class="button button2" onclick="location.href='/add/department'" >Add Specialization</button></li>
                 <li sec:authorize="hasRole('ROLE_PROFESSOR') or hasRole('ROLE_ASSISTENT')"><a style="font-size: 16px;color: white" th:href="@{'/get/'+${#authentication.name}+'/courses'}">My Courses</a></li>
-                <li sec:authorize="isAuthenticated()"><a type="button" style="hover:background-color#00b0ff;font-size: 16px;color: white;padding: 15px 22px;text-align: center;margin: 6px 6px;border: 2px solid #132238;border-radius: 12px;"  th:href="@{'/user/'+${#authentication.name}+'/test'}">My Profile</a></li>
+              <!--؟  <li sec:authorize="isAuthenticated()"><button class="button button2" th:href="@{'/user/'+${#authentication.name}+'/test'}">My Profile</button></li>-->
+                <li sec:authorize="isAuthenticated()"><a type="button" class="button button2"  th:href="@{'/user/'+${#authentication.name}+'/test'}">My Profile</a></li>
                 <li sec:authorize="isAuthenticated()"><button  class="button button2" onclick="location.href='/out'" >Logout</button></li>
             </ul>
         </div>
